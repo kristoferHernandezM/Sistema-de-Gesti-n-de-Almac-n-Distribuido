@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;700;800&amp;family=Inter:wght@400;500;600&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="/frontend/config/tailwind.config.js"></script>
+<link rel="stylesheet" href="/frontend/assets/css/inventario.css">
+
+</head>
+<body class="bg-surface text-on-surface min-h-screen flex flex-col">
+<!-- TopNavBar -->
+<header class="w-full h-16 border-b border-gray-200/15 dark:border-white/5 flex justify-between items-center px-8 w-full z-40 sticky top-0 backdrop-blur-md bg-[#f8f9ff] dark:bg-[#0a182e]">
+<div class="flex items-center gap-4">
+<span class="text-xl font-extrabold text-[#0a182e] dark:text-white tracking-tighter">Logística Distribuida</span>
+</div>
+<div class="flex items-center gap-6">
+<div class="relative hidden md:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-primary-container text-sm">search</span>
+<input class="bg-surface-container-low border-none rounded-full py-2 pl-10 pr-4 text-xs font-['Inter'] focus:ring-1 focus:ring-on-tertiary-container w-64" placeholder="Buscar productos..." type="text"/>
+</div>
+<div class="flex items-center gap-3">
+<button class="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-white/5 transition-colors text-[#545e76] dark:text-gray-400">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-white/5 transition-colors text-[#545e76] dark:text-gray-400">
+<span class="material-symbols-outlined" data-icon="account_circle">account_circle</span>
+</button>
+</div>
+</div>
+</header>
+<div class="flex flex-1">
+<!-- SideNavBar -->
+<aside class="fixed left-0 top-0 flex flex-col p-4 z-50 h-screen w-64 border-r border-gray-200/15 dark:border-white/5 bg-[#eceef3] dark:bg-[#0a182e] shadow-2xl shadow-blue-900/5 hidden md:flex">
+<div class="mb-10 mt-2 px-4">
+<h2 class="font-['Manrope'] font-black text-[#0a182e] dark:text-white text-xl tracking-tight">Ironclad Logistics</h2>
+</div>
+<nav class="flex flex-col gap-2 flex-1">
+<a class="flex items-center gap-3 text-[#545e76] dark:text-gray-400 px-4 py-3 hover:translate-x-1 transition-transform duration-200 font-['Inter'] text-sm font-medium" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+                    Dashboard
+                </a>
+<a class="flex items-center gap-3 bg-[#0a182e] dark:bg-white text-white dark:text-[#0a182e] rounded-full px-4 py-3 shadow-lg hover:translate-x-1 transition-transform duration-200 font-['Inter'] text-sm font-medium" href="#">
+<span class="material-symbols-outlined" data-icon="inventory_2" style="font-variation-settings: 'FILL' 1;">inventory_2</span>
+                    Inventario
+                </a>
+<a class="flex items-center gap-3 text-[#545e76] dark:text-gray-400 px-4 py-3 hover:translate-x-1 transition-transform duration-200 font-['Inter'] text-sm font-medium" href="#">
+<span class="material-symbols-outlined" data-icon="hub">hub</span>
+                    Nodos
+                </a>
+<a class="flex items-center gap-3 text-[#545e76] dark:text-gray-400 px-4 py-3 hover:translate-x-1 transition-transform duration-200 font-['Inter'] text-sm font-medium" href="#">
+<span class="material-symbols-outlined" data-icon="local_shipping">local_shipping</span>
+                    Envíos
+                </a>
+<a class="flex items-center gap-3 text-[#545e76] dark:text-gray-400 px-4 py-3 hover:translate-x-1 transition-transform duration-200 font-['Inter'] text-sm font-medium" href="#">
+<span class="material-symbols-outlined" data-icon="analytics">analytics</span>
+                    Reportes
+                </a>
+</nav>
+<div class="mt-auto p-4 bg-surface-container-low rounded-2xl">
+<div class="flex items-center gap-3 mb-4">
+<div class="w-10 h-10 rounded-full bg-primary-fixed overflow-hidden">
+<img alt="Usuario Logística" data-alt="professional male logistics operator portrait with blurred office background soft studio lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCemYI3GOkgSVPiLsbh2wd-ndDjMNCdGQTa0HLbe45_uJHVE-O1dYRKKPmj1gDOkKakbAEXPLRn2ZSFcZBAr7R00EK5aB-DctbQC4I9kx3VBxZQHudmsDcXq0mAnZamcJoiuwrZk14BTounPozpRD9jiANmAwnXy1N1TYL7HJB4gWHTEwRTqugEta88-GQP10Jb6EjNB4JSBkWuWaa21wPok40g-Ma7F45VgNWsULU6Xp2vYbmNOoBq9CcaY7ly6xfI8kRmnaxcHvj9"/>
+</div>
+<div>
+<p class="text-xs font-bold text-on-surface">Operador Senior</p>
+<p class="text-[10px] text-secondary">ID: 4421-LOG</p>
+</div>
+</div>
+<button class="w-full bg-on-tertiary-container text-white py-2 rounded-full text-xs font-bold shadow-lg shadow-tertiary-container/20 hover:scale-[1.02] transition-transform">
+                    Nuevo Envío
+                </button>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 md:ml-64 p-8">
+<!-- Header Section -->
+<div class="flex justify-between items-end mb-10">
+<div>
+<span class="text-on-tertiary-container font-bold text-xs tracking-widest uppercase mb-2 block">Panel de Control</span>
+<h1 class="text-4xl font-extrabold tracking-tighter text-on-surface leading-none">Gestión de Inventario</h1>
+</div>
+<div class="flex gap-3">
+<button class="flex items-center gap-2 px-6 py-2.5 rounded-full border border-outline-variant text-sm font-semibold hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined text-sm" data-icon="filter_list">filter_list</span>
+                        Filtrar
+                    </button>
+<button class="flex items-center gap-2 px-6 py-2.5 rounded-full border border-outline-variant text-sm font-semibold hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined text-sm" data-icon="download">download</span>
+                        Exportar
+                    </button>
+</div>
+</div>
+<!-- Top Metrics Bento Grid -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+<div class="bg-surface-container-lowest p-6 rounded-2xl shadow-2xl shadow-blue-900/5 relative overflow-hidden group">
+<div class="flex justify-between items-start mb-4">
+<div class="p-3 rounded-2xl bg-primary-fixed text-primary">
+<span class="material-symbols-outlined" data-icon="inventory">inventory</span>
+</div>
+<span class="text-[10px] font-bold text-green-600 bg-green-50 px-2 py-1 rounded">+12% este mes</span>
+</div>
+<p class="text-secondary text-sm font-medium">Stock Total</p>
+<h3 class="text-3xl font-black mt-1">42,850</h3>
+<div class="absolute -right-4 -bottom-4 opacity-5 group-hover:scale-110 transition-transform duration-500">
+<span class="material-symbols-outlined text-8xl" data-icon="inventory">inventory</span>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-2xl shadow-2xl shadow-blue-900/5 border-l-4 border-on-tertiary-container relative overflow-hidden group">
+<div class="flex justify-between items-start mb-4">
+<div class="p-3 rounded-2xl bg-tertiary-fixed text-on-tertiary-fixed-variant">
+<span class="material-symbols-outlined" data-icon="warning" style="font-variation-settings: 'FILL' 1;">warning</span>
+</div>
+<span class="text-[10px] font-bold text-on-tertiary-container bg-tertiary-fixed px-2 py-1 rounded">Atención Requerida</span>
+</div>
+<p class="text-secondary text-sm font-medium">Alertas de Stock Bajo</p>
+<h3 class="text-3xl font-black mt-1 text-on-tertiary-container">24</h3>
+<div class="absolute -right-4 -bottom-4 opacity-5 group-hover:scale-110 transition-transform duration-500">
+<span class="material-symbols-outlined text-8xl" data-icon="warning">warning</span>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-2xl shadow-2xl shadow-blue-900/5 relative overflow-hidden group">
+<div class="flex justify-between items-start mb-4">
+<div class="p-3 rounded-2xl bg-secondary-container text-on-secondary-container">
+<span class="material-symbols-outlined" data-icon="router">router</span>
+</div>
+</div>
+<p class="text-secondary text-sm font-medium">Nodos Activos</p>
+<h3 class="text-3xl font-black mt-1">15</h3>
+<div class="absolute -right-4 -bottom-4 opacity-5 group-hover:scale-110 transition-transform duration-500 text-on-secondary-container">
+<span class="material-symbols-outlined text-8xl" data-icon="router">router</span>
+</div>
+</div>
+</div>
+<!-- Central Table Section -->
+<div class="bg-surface-container-lowest rounded-2xl shadow-2xl shadow-blue-900/5 overflow-hidden">
+<div class="p-6 flex justify-between items-center bg-surface-container-low/50">
+<h2 class="text-xl font-bold tracking-tight">Control de Inventario</h2>
+<div class="flex items-center gap-2 text-xs font-medium text-secondary">
+<span class="w-2 h-2 rounded-full bg-green-500"></span>
+                        Sincronización en tiempo real activa
+                    </div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left">
+<thead>
+<tr class="text-secondary text-xs uppercase tracking-widest border-b border-surface-container">
+<th class="px-8 py-4 font-bold">SKU</th>
+<th class="px-6 py-4 font-bold">Nombre del Producto</th>
+<th class="px-6 py-4 font-bold text-center">Stock Actual</th>
+<th class="px-6 py-4 font-bold">Nodo de Origen</th>
+<th class="px-6 py-4 font-bold">Última Sincronización</th>
+<th class="px-8 py-4 font-bold text-right">Estado</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-surface-container">
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="px-8 py-5 text-sm font-mono text-on-surface-variant font-medium">#IC-9921</td>
+<td class="px-6 py-5">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-lg bg-surface-container overflow-hidden">
+<img alt="Pieza" data-alt="close up of metallic industrial components on a clean workshop surface sharp focus technical detail" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA_idENgmDxUkiyFOxKwnDzcByKAgbSOfVcalSEoSuQjvSfP2WsUYNEg6Yn12oDGFJsTbZfGTIMOd65ipecsMV3OKbkyD8ThtoC7tIVNCMw4YfErxdK4YHr1Cut7cPURVJE_z62ppBk4yIq9bBEmrcp5zAMs8jpSuqGuCV2sP1bA0NqYTy516ROt55D68gEqwIYAh07MC2Mi8O847yVFVgC5Z_H3YznQgIHvL9TRsp6y8VIG4VCnBA5o-8gF6a43w-ZWYX0aPFDCmFI"/>
+</div>
+<span class="text-sm font-bold">Rodamientos de Precisión X1</span>
+</div>
+</td>
+<td class="px-6 py-5 text-center font-bold">1,240</td>
+<td class="px-6 py-5 text-sm text-secondary">Hub Central Madrid</td>
+<td class="px-6 py-5 text-sm text-secondary">Hace 2 min</td>
+<td class="px-8 py-5 text-right">
+<span class="px-3 py-1 rounded-full text-[10px] font-bold bg-green-100 text-green-700">ÓPTIMO</span>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="px-8 py-5 text-sm font-mono text-on-surface-variant font-medium">#IC-4822</td>
+<td class="px-6 py-5">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-lg bg-surface-container overflow-hidden">
+<img alt="Cable" data-alt="abstract industrial macro photo of wires and cables with cool blue and grey tones professional photography" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC-rLEs6zt7RELxKNZ1J4gXRzBw9BejkMq1lLXmyFLVwpiXEjdPVCZTNaMU-kY7iaeD4CDQaFvgg_K_e8nfkJKIOMB19s85M8TXcRfEuvE_o8O4gfoLmtqDgJgygtI7rD8TrSlUDKmk_4US-v_YxEGUM9UbJXw3w9lXGN9EZIe00KS_Nsbzww7eYqgIFeo4_i4S0lO_qh1c6HfUTbrvGEsn3n1WsiErzavvYijhld6k7e5fUSGf8KlhqtYnsB-6M_6HBrNryJpDEmlO"/>
+</div>
+<span class="text-sm font-bold">Cableado Fibra Blindado</span>
+</div>
+</td>
+<td class="px-6 py-5 text-center font-bold text-on-tertiary-container">12</td>
+<td class="px-6 py-5 text-sm text-secondary">Nodo Periférico BC-4</td>
+<td class="px-6 py-5 text-sm text-secondary">Hace 15 min</td>
+<td class="px-8 py-5 text-right">
+<span class="px-3 py-1 rounded-full text-[10px] font-bold bg-tertiary-fixed text-on-tertiary-fixed-variant">CRÍTICO</span>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="px-8 py-5 text-sm font-mono text-on-surface-variant font-medium">#IC-1029</td>
+<td class="px-6 py-5">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-lg bg-surface-container overflow-hidden">
+<img alt="Motor" data-alt="clean manufacturing robots and machinery parts in a high tech factory setting bright diffused lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDproJQjKe74hZBk1s2geWq4ihlFlNXJWiWyiVBbWL_yXPYUnXsRYirPq49yZzYZoWGvFug6-PWI0ZLZlynm1A1TsCjLn8XWz_LbLRBSDa1ZOzDfq60MB2egnzg7kxROwE6vJ2OEfeIDW3-rdgiHrgaxVBVO_Aj-ZXy4cllk0Vs5uvjlYRiiVgSuH24Y2wuf0DtY5EURdbP6St-P-wiu1K-oST3q56XxFC4xra_Ig0WV3ZzHVqx5dyXrNE_ejUdbtbJNjvsZZTba_yF"/>
+</div>
+<span class="text-sm font-bold">Motores Paso a Paso NEMA</span>
+</div>
+</td>
+<td class="px-6 py-5 text-center font-bold">450</td>
+<td class="px-6 py-5 text-sm text-secondary">Hub Logístico Valencia</td>
+<td class="px-6 py-5 text-sm text-secondary">Hace 1 h</td>
+<td class="px-8 py-5 text-right">
+<span class="px-3 py-1 rounded-full text-[10px] font-bold bg-green-100 text-green-700">ÓPTIMO</span>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="px-8 py-5 text-sm font-mono text-on-surface-variant font-medium">#IC-5512</td>
+<td class="px-6 py-5">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-lg bg-surface-container overflow-hidden">
+<img alt="Cilindro" data-alt="stack of industrial metallic cylinders with brushed steel finish and dramatic lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAbwZHs964Jgbq6GQMyFFe0sHMflUp9dxAJy2Xqcj5-UJgbVFPG0oxsLeOX_7DSHFanD4dnQm2K-p3PlwM1GX1jDLP2DttrC9VnX40YcTsTSEqn12A6c7y_SCSW0tyJVN-r5tfMDXyH9TIJd3RECoTleSy14R7x_cv9ERv6s7JBDxSU9cNZW-WumrSdXTaP0n9Sb0jNTwEdpnI1VUkmnhwQKeQA_S2RP3M7HyZAxIqCIiDv4YF49hNxzLbkMECtlj6KtQSpTdUmLNs4"/>
+</div>
+<span class="text-sm font-bold">Cilindros Hidráulicos L200</span>
+</div>
+</td>
+<td class="px-6 py-5 text-center font-bold">85</td>
+<td class="px-6 py-5 text-sm text-secondary">Almacén Norte Bilbao</td>
+<td class="px-6 py-5 text-sm text-secondary">Hace 42 min</td>
+<td class="px-8 py-5 text-right">
+<span class="px-3 py-1 rounded-full text-[10px] font-bold bg-yellow-100 text-yellow-700 uppercase">REVISIÓN</span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="p-6 border-t border-surface-container flex items-center justify-between">
+<p class="text-xs text-secondary font-medium uppercase tracking-widest">Mostrando 4 de 1,245 referencias</p>
+<div class="flex gap-2">
+<button class="p-2 rounded-lg hover:bg-surface-container transition-colors text-secondary">
+<span class="material-symbols-outlined" data-icon="chevron_left">chevron_left</span>
+</button>
+<button class="px-3 py-1 rounded-lg bg-primary-container text-white text-sm font-bold">1</button>
+<button class="px-3 py-1 rounded-lg hover:bg-surface-container text-sm font-bold">2</button>
+<button class="px-3 py-1 rounded-lg hover:bg-surface-container text-sm font-bold">3</button>
+<button class="p-2 rounded-lg hover:bg-surface-container transition-colors text-secondary">
+<span class="material-symbols-outlined" data-icon="chevron_right">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</main>
+</div>
+<!-- Footer -->
+<footer class="flex justify-between items-center px-12 w-full border-t border-gray-200/10 py-6 mt-auto bg-transparent">
+<div class="flex items-center gap-6">
+<p class="font-['Inter'] text-xs uppercase tracking-widest text-[#545e76] dark:text-gray-500">© 2024 La Armadura Digital - Logística</p>
+</div>
+<div class="flex gap-8">
+<a class="font-['Inter'] text-xs uppercase tracking-widest text-[#545e76] hover:text-[#0a182e] dark:hover:text-white underline-offset-4 transition-colors" href="#">Legal</a>
+<a class="font-['Inter'] text-xs uppercase tracking-widest text-[#545e76] hover:text-[#0a182e] dark:hover:text-white underline-offset-4 transition-colors" href="#">Privacidad</a>
+<a class="font-['Inter'] text-xs uppercase tracking-widest text-[#545e76] hover:text-[#0a182e] dark:hover:text-white underline-offset-4 transition-colors" href="#">Estado del Sistema</a>
+</div>
+</footer>
+</body></html>
