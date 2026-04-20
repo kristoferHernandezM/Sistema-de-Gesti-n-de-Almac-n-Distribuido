@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Manrope:wght@700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script src="/frontend/config/tailwind.config.js"></script>
+<link rel="stylesheet" href="/frontend/assets/css/reportes.css">
+
+</head>
+<body class="bg-surface font-body text-on-surface">
+<!-- SideNavBar Shell -->
+<aside class="h-screen w-64 fixed left-0 top-0 border-r border-slate-100 bg-white dark:bg-[#0a182e] flex flex-col p-4 space-y-2 z-50">
+<div class="mb-8 px-4">
+<h1 class="text-lg font-black text-[#0a182e] dark:text-white tracking-tighter">Precisión Cinética</h1>
+<p class="text-[10px] text-slate-400 font-bold uppercase tracking-widest mt-1">Control Center</p>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center space-x-3 p-3 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-xl transition-all duration-200 ease-in-out font-['Inter'] text-sm font-medium" href="/frontend/dashboard.html">
+<span class="material-symbols-outlined">dashboard</span>
+<span>Dashboard</span>
+</a>
+<a class="flex items-center space-x-3 p-3 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-xl transition-all duration-200 ease-in-out font-['Inter'] text-sm font-medium" href="/frontend/inventario.html">
+<span class="material-symbols-outlined">inventory_2</span>
+<span>Inventory</span>
+</a>
+<a class="flex items-center space-x-3 p-3 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-xl transition-all duration-200 ease-in-out font-['Inter'] text-sm font-medium" href="/frontend/monitoreo.html">
+<span class="material-symbols-outlined">hub</span>
+<span>Nodes</span>
+</a>
+<a class="flex items-center space-x-3 p-3 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-xl transition-all duration-200 ease-in-out font-['Inter'] text-sm font-medium" href="/frontend/envios.html">
+<span class="material-symbols-outlined">local_shipping</span>
+<span>Shipments</span>
+</a>
+<!-- Active State: Reports -->
+<a class="flex items-center space-x-3 p-3 bg-slate-100 dark:bg-slate-800/50 text-[#dc5d00] rounded-xl transition-all duration-200 ease-in-out font-['Inter'] text-sm font-bold" href="/frontend/reportes.html">
+<span class="material-symbols-outlined">analytics</span>
+<span>Reports</span>
+</a>
+</nav>
+<div class="mt-auto pt-4 border-t border-slate-50">
+<div class="flex items-center space-x-3 p-3 mb-4">
+<img class="w-10 h-10 rounded-full object-cover grayscale" data-alt="Professional logistics operator in a clean business suit, sharp confident look, studio lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBJ9w4uUGdmO6-6epGbBbeJGGpSuCd_jEjtWLIZkJK_mVtLrvMJi2bQIT2c_atfaKDEkbClN1WwLETCwhZxl0BScz-WeSXY21TFTDGxmBwCly3yYdsruzudmYKDD8ZSGkqomZNW6_uhtiwTeVop7cxmRI595vnejkzGAoMUYwiezow46ffJ5ujXQ4bcySG-WVNW5Q613WL309wHZmBc7wjJ_PO6KQVCcdOGDzhZMC15szcEHL_676taDa9IeLG7Uc2V6lyZD7RvxuBY"/>
+<div class="overflow-hidden">
+<p class="text-xs font-bold text-[#0a182e] truncate">Precision Ops</p>
+<p class="text-[10px] text-slate-500">Logistics Operator</p>
+</div>
+</div>
+<a class="flex items-center space-x-3 p-3 text-slate-600 dark:text-slate-400 hover:bg-slate-50 rounded-xl transition-all text-sm font-medium" href="#">
+<span class="material-symbols-outlined">help</span>
+<span>Support</span>
+</a>
+<a class="flex items-center space-x-3 p-3 text-slate-600 dark:text-slate-400 hover:bg-slate-50 rounded-xl transition-all text-sm font-medium" href="#">
+<span class="material-symbols-outlined">logout</span>
+<span>Sign Out</span>
+</a>
+</div>
+</aside>
+<!-- Main Canvas -->
+<main class="ml-64 min-h-screen">
+<!-- TopNavBar Shell -->
+<header class="w-full sticky top-0 z-40 bg-slate-50/80 backdrop-blur-md dark:bg-[#0a182e]/80 shadow-sm flex justify-between items-center px-8 py-4">
+<div class="flex items-center space-x-4">
+<h2 class="font-headline font-extrabold text-2xl tracking-tighter text-[#0a182e] dark:text-white">Reportes y Estadísticas</h2>
+</div>
+<div class="flex items-center space-x-4">
+<button class="flex items-center space-x-2 px-6 py-2.5 rounded-full border border-outline-variant text-on-surface hover:bg-surface-container transition-colors text-sm font-semibold">
+<span class="material-symbols-outlined text-lg">filter_list</span>
+<span>Filtrar</span>
+</button>
+<button class="flex items-center space-x-2 px-6 py-2.5 rounded-full bg-primary-container text-white hover:opacity-90 active:scale-95 transition-all text-sm font-bold shadow-lg shadow-on-primary-fixed/10">
+<span class="material-symbols-outlined text-lg">picture_as_pdf</span>
+<span>Exportar PDF</span>
+</button>
+<div class="h-8 w-px bg-slate-200 mx-2"></div>
+<span class="material-symbols-outlined text-slate-500 hover:text-primary cursor-pointer p-2 hover:bg-slate-100 rounded-full transition-colors">notifications</span>
+<span class="material-symbols-outlined text-slate-500 hover:text-primary cursor-pointer p-2 hover:bg-slate-100 rounded-full transition-colors">settings</span>
+</div>
+</header>
+<section class="p-8 space-y-8">
+<!-- Key Metrics Bar -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+<div class="bg-surface-container-lowest p-6 rounded-2xl border-l-4 border-[#dc5d00] shadow-sm">
+<p class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-1">Eficiencia Global</p>
+<div class="flex items-baseline space-x-2">
+<span class="text-3xl font-headline font-extrabold text-on-surface">94.2%</span>
+<span class="text-xs text-green-600 font-bold">+2.4%</span>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-2xl shadow-sm">
+<p class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-1">Volumen Total Semanal</p>
+<div class="flex items-baseline space-x-2">
+<span class="text-3xl font-headline font-extrabold text-on-surface">12.8k</span>
+<span class="text-xs text-slate-400 font-medium">Unidades</span>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-2xl shadow-sm">
+<p class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-1">Nodos Activos</p>
+<div class="flex items-baseline space-x-2">
+<span class="text-3xl font-headline font-extrabold text-on-surface">48</span>
+<span class="text-xs text-slate-400 font-medium">Operativos</span>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-2xl shadow-sm">
+<p class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-1">Alertas Críticas</p>
+<div class="flex items-baseline space-x-2">
+<span class="text-3xl font-headline font-extrabold text-on-error-container">03</span>
+<span class="text-xs text-error font-bold">Atención</span>
+</div>
+</div>
+</div>
+<!-- Bento Grid Charts -->
+<div class="grid grid-cols-12 gap-6">
+<!-- Rendimiento de Nodos (Bar Chart Simulation) -->
+<div class="col-span-12 lg:col-span-8 bg-surface-container-lowest rounded-2xl p-8 shadow-sm">
+<div class="flex justify-between items-end mb-8">
+<div>
+<h3 class="font-headline font-bold text-xl text-on-surface">Rendimiento de Nodos</h3>
+<p class="text-sm text-slate-500">Carga operativa por centro de distribución principal</p>
+</div>
+<div class="flex space-x-2">
+<span class="h-3 w-3 rounded-full bg-primary-container"></span>
+<span class="text-[10px] font-bold text-slate-400 uppercase tracking-tighter">Capacidad Real</span>
+</div>
+</div>
+<div class="flex items-end justify-between h-64 space-x-4">
+<div class="group relative flex flex-col items-center flex-1 h-full">
+<div class="bg-slate-100 w-full rounded-t-lg relative h-full flex flex-col justify-end overflow-hidden">
+<div class="bg-primary-container w-full rounded-t-lg transition-all hover:bg-[#dc5d00]" style="height: 85%"></div>
+</div>
+<span class="mt-4 text-[10px] font-bold text-slate-500 uppercase">CD-NORTE</span>
+</div>
+<div class="group relative flex flex-col items-center flex-1 h-full">
+<div class="bg-slate-100 w-full rounded-t-lg relative h-full flex flex-col justify-end overflow-hidden">
+<div class="bg-primary-container w-full rounded-t-lg transition-all hover:bg-[#dc5d00]" style="height: 62%"></div>
+</div>
+<span class="mt-4 text-[10px] font-bold text-slate-500 uppercase">CD-SUR</span>
+</div>
+<div class="group relative flex flex-col items-center flex-1 h-full">
+<div class="bg-slate-100 w-full rounded-t-lg relative h-full flex flex-col justify-end overflow-hidden">
+<div class="bg-primary-container w-full rounded-t-lg transition-all hover:bg-[#dc5d00]" style="height: 94%"></div>
+</div>
+<span class="mt-4 text-[10px] font-bold text-slate-500 uppercase">PUERTO-A</span>
+</div>
+<div class="group relative flex flex-col items-center flex-1 h-full">
+<div class="bg-slate-100 w-full rounded-t-lg relative h-full flex flex-col justify-end overflow-hidden">
+<div class="bg-primary-container w-full rounded-t-lg transition-all hover:bg-[#dc5d00]" style="height: 45%"></div>
+</div>
+<span class="mt-4 text-[10px] font-bold text-slate-500 uppercase">CENTRO-HUB</span>
+</div>
+<div class="group relative flex flex-col items-center flex-1 h-full">
+<div class="bg-slate-100 w-full rounded-t-lg relative h-full flex flex-col justify-end overflow-hidden">
+<div class="bg-primary-container w-full rounded-t-lg transition-all hover:bg-[#dc5d00]" style="height: 78%"></div>
+</div>
+<span class="mt-4 text-[10px] font-bold text-slate-500 uppercase">ADUANA-X</span>
+</div>
+</div>
+</div>
+<!-- Volumen Stock Semanal (Visual Widget) -->
+<div class="col-span-12 lg:col-span-4 bg-primary-container text-white rounded-2xl p-8 relative overflow-hidden flex flex-col justify-between">
+<div class="relative z-10">
+<h3 class="font-headline font-bold text-xl">Stock Semanal</h3>
+<p class="text-sm text-slate-400">Flujo de entrada vs salida</p>
+</div>
+<div class="relative z-10 py-4">
+<div class="text-5xl font-headline font-extrabold tracking-tighter">84,200</div>
+<p class="text-xs text-[#dc5d00] font-bold mt-2 flex items-center">
+<span class="material-symbols-outlined text-sm mr-1">trending_up</span>
+                            INCREMENTO DEL 12% ESTA SEMANA
+                        </p>
+</div>
+<div class="relative z-10 h-24 flex items-end space-x-1">
+<div class="bg-white/10 w-full h-1/4 rounded-sm"></div>
+<div class="bg-white/20 w-full h-2/4 rounded-sm"></div>
+<div class="bg-white/30 w-full h-1/2 rounded-sm"></div>
+<div class="bg-white/40 w-full h-3/4 rounded-sm"></div>
+<div class="bg-white/60 w-full h-2/3 rounded-sm"></div>
+<div class="bg-[#dc5d00] w-full h-full rounded-sm"></div>
+<div class="bg-white/20 w-full h-1/3 rounded-sm"></div>
+</div>
+<!-- Decorative Graphic element -->
+<div class="absolute -right-10 -bottom-10 opacity-10">
+<span class="material-symbols-outlined text-[200px]" style="font-variation-settings: 'FILL' 1;">inventory_2</span>
+</div>
+</div>
+<!-- Historial de Eventos Críticos (Asymmetric Layout) -->
+<div class="col-span-12 bg-surface-container-low rounded-2xl p-8">
+<div class="flex justify-between items-center mb-10">
+<h3 class="font-headline font-bold text-xl text-on-surface">Historial de Eventos Críticos</h3>
+<div class="text-xs font-bold text-slate-500 bg-white px-4 py-2 rounded-full shadow-sm">ÚLTIMAS 72 HORAS</div>
+</div>
+<div class="space-y-4">
+<!-- Critical Event Item -->
+<div class="flex items-center justify-between p-5 bg-white rounded-2xl shadow-sm border-l-8 border-error transition-transform hover:scale-[1.01] duration-150">
+<div class="flex items-center space-x-6">
+<div class="bg-error-container text-error p-3 rounded-full">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">warning</span>
+</div>
+<div>
+<h4 class="font-bold text-on-surface">Fallo de Sensor en Nodo CD-NORTE</h4>
+<p class="text-sm text-slate-500">Detección de anomalía térmica en sector de refrigeración A-12.</p>
+</div>
+</div>
+<div class="text-right">
+<p class="text-xs font-black text-[#0a182e]">14:20 PM</p>
+<p class="text-[10px] text-slate-400 font-bold uppercase mt-1">Hoy</p>
+</div>
+</div>
+<!-- Resolved Event Item -->
+<div class="flex items-center justify-between p-5 bg-white/60 rounded-2xl border-l-8 border-green-500">
+<div class="flex items-center space-x-6 opacity-60">
+<div class="bg-green-100 text-green-600 p-3 rounded-full">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<div>
+<h4 class="font-bold text-on-surface">Desviación de Ruta - Camión #822</h4>
+<p class="text-sm text-slate-500">Incidencia resuelta. El conductor retomó la ruta programada tras cierre vial.</p>
+</div>
+</div>
+<div class="text-right opacity-60">
+<p class="text-xs font-black text-[#0a182e]">09:45 AM</p>
+<p class="text-[10px] text-slate-400 font-bold uppercase mt-1">Hoy</p>
+</div>
+</div>
+<!-- Critical Event Item -->
+<div class="flex items-center justify-between p-5 bg-white rounded-2xl shadow-sm border-l-8 border-error transition-transform hover:scale-[1.01] duration-150">
+<div class="flex items-center space-x-6">
+<div class="bg-error-container text-error p-3 rounded-full">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">lock_reset</span>
+</div>
+<div>
+<h4 class="font-bold text-on-surface">Intento de Acceso No Autorizado</h4>
+<p class="text-sm text-slate-500">Perímetro de seguridad vulnerado en Depósito Puerto-A. Protocolo activo.</p>
+</div>
+</div>
+<div class="text-right">
+<p class="text-xs font-black text-[#0a182e]">23:12 PM</p>
+<p class="text-[10px] text-slate-400 font-bold uppercase mt-1">Ayer</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Detailed Analysis Section -->
+<div class="bg-surface-container p-1 rounded-3xl overflow-hidden">
+<div class="bg-surface-container-lowest rounded-[2.5rem] p-10 flex flex-col md:flex-row items-center gap-10">
+<div class="w-full md:w-1/3">
+<img class="w-full h-80 object-cover rounded-2xl shadow-2xl" data-alt="Modern high-tech logistics warehouse interior with neon blue lighting and industrial robotic arms" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBPOiBh1sDvLUY5kcgu2VcolGNWHHdSv0gKTe0lqkC1SOrw2U1kBT6lc7aWE9peBxfmvY6uFmWu16G_go36aMVSAtdapYx5Hty2eNH77j-U2_x7Qcs-IBagci9M_c59S4T1jH-xCLM_63vhNt5Lyes8A625qQ4hFD2SDW7oCfo_t6uMwdM-MrMZaFYogAujOxr3uPvuK1daufpcqknic5ve6rtqE-c3lQu1zbWbQSpPRpy4RNWdgsAiGCIVrj7FI9NTwrnM4RzMlVtG"/>
+</div>
+<div class="w-full md:w-2/3 space-y-6">
+<span class="inline-block px-4 py-1 bg-tertiary-fixed text-on-tertiary-fixed text-[10px] font-black uppercase tracking-widest rounded-full">Análisis de Operaciones</span>
+<h2 class="text-4xl font-headline font-extrabold text-on-surface tracking-tight">Optimización de Cadenas Frías</h2>
+<p class="text-slate-600 leading-relaxed text-lg">Los reportes del último trimestre indican una oportunidad de ahorro del 14% mediante la reubicación de nodos de distribución secundaria. La precisión cinética de nuestra red permite ajustes en tiempo real sin interrumpir el flujo crítico de suministro.</p>
+<div class="flex gap-4">
+<button class="px-8 py-3 bg-on-surface text-white rounded-full font-bold text-sm transition-all hover:bg-slate-800 active:scale-95">Ver Análisis Completo</button>
+<button class="px-8 py-3 border border-outline-variant text-on-surface rounded-full font-bold text-sm transition-all hover:bg-slate-50">Descargar CSV</button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Footer Shell style from TopBar logic but bottom positioned -->
+<footer class="px-8 py-6 text-center text-slate-400 text-[10px] font-bold uppercase tracking-widest">
+            Precisión Cinética © 2024 Ironclad Logistics Systems - Confidencial
+        </footer>
+</main>
+</body></html>
