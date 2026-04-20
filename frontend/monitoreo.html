@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Monitor de Nodos - Ironclad Logistics</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="/frontend/config/tailwind.config.js"></script>
+<link rel="stylesheet" href="/frontend/assets/css/monitoreo.css">
+
+</head>
+<body class="bg-surface text-on-surface font-body antialiased min-h-screen flex flex-col">
+<!-- TopNavBar -->
+<nav class="flex justify-between items-center px-8 w-full z-40 sticky top-0 backdrop-blur-md bg-[#f8f9ff] dark:bg-[#0a182e] w-full h-16 border-b border-gray-200/15 dark:border-white/5 flat-no-shadows">
+<div class="flex items-center gap-8">
+<span class="text-xl font-extrabold text-[#0a182e] dark:text-white tracking-tighter">Logística Distribuida</span>
+</div>
+<div class="flex items-center gap-4">
+<div class="bg-surface-container rounded-full px-4 py-1.5 flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-lg">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-sm text-on-surface placeholder-secondary w-48" placeholder="Buscar nodo..." type="text"/>
+</div>
+<button class="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-white/5 transition-colors">
+<span class="material-symbols-outlined text-secondary" data-icon="notifications">notifications</span>
+</button>
+<button class="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-white/5 transition-colors">
+<span class="material-symbols-outlined text-secondary" data-icon="account_circle">account_circle</span>
+</button>
+</div>
+</nav>
+<div class="flex flex-1 overflow-hidden">
+<!-- SideNavBar -->
+<aside class="fixed left-0 top-0 flex flex-col p-4 z-50 h-screen w-64 border-r border-gray-200/15 dark:border-white/5 bg-[#eceef3] dark:bg-[#0a182e] shadow-2xl shadow-blue-900/5 hidden lg:flex">
+<div class="flex flex-col gap-1 mb-8 pt-20 px-4">
+<span class="font-['Manrope'] font-black text-[#0a182e] dark:text-white text-lg">Gesti\u00f3n Central</span>
+<span class="font-['Inter'] text-xs font-medium text-[#545e76] uppercase tracking-wider">Operador Senior</span>
+</div>
+<nav class="flex flex-col gap-2 flex-1">
+<a class="flex items-center gap-3 text-[#545e76] dark:text-gray-400 px-4 py-3 hover:translate-x-1 transition-transform duration-200 font-['Inter'] text-sm font-medium" href="/frontend/dashboard.html">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+                    Dashboard
+                </a>
+<a class="flex items-center gap-3 text-[#545e76] dark:text-gray-400 px-4 py-3 hover:translate-x-1 transition-transform duration-200 font-['Inter'] text-sm font-medium" href="/frontend/inventario.html">
+<span class="material-symbols-outlined" data-icon="inventory_2">inventory_2</span>
+                    Inventario
+                </a>
+<a class="flex items-center gap-3 bg-[#0a182e] dark:bg-white text-white dark:text-[#0a182e] rounded-full px-4 py-3 shadow-lg hover:translate-x-1 transition-transform duration-200 font-['Inter'] text-sm font-medium" href="/frontend/monitoreo.html">
+<span class="material-symbols-outlined" data-icon="hub">hub</span>
+                    Nodos
+                </a>
+<a class="flex items-center gap-3 text-[#545e76] dark:text-gray-400 px-4 py-3 hover:translate-x-1 transition-transform duration-200 font-['Inter'] text-sm font-medium" href="/frontend/envios.html">
+<span class="material-symbols-outlined" data-icon="local_shipping">local_shipping</span>
+                    Env\u00edos
+                </a>
+<a class="flex items-center gap-3 text-[#545e76] dark:text-gray-400 px-4 py-3 hover:translate-x-1 transition-transform duration-200 font-['Inter'] text-sm font-medium" href="/frontend/reportes.html">
+<span class="material-symbols-outlined" data-icon="analytics">analytics</span>
+                    Reportes
+                </a>
+</nav>
+<button class="mt-auto mb-4 bg-on-tertiary-container text-white rounded-full py-4 px-6 flex items-center justify-center gap-2 font-bold shadow-lg hover:opacity-90 transition-all click:scale-98">
+<span class="material-symbols-outlined" data-icon="sync">sync</span>
+                Nuevo Env\u00edo
+            </button>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 lg:ml-64 p-8 overflow-y-auto">
+<!-- Header Section with Asymmetry -->
+<header class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+<div class="max-w-2xl">
+<h1 class="text-4xl md:text-5xl font-headline font-extrabold tracking-tighter text-primary mb-2">Monitor de Nodos</h1>
+<p class="text-secondary font-body leading-relaxed">Supervisión en tiempo real de la infraestructura periférica de Ironclad Logistics. Control total sobre latencia y estado de sincronización global.</p>
+</div>
+<button class="bg-primary-container text-on-primary-fixed-variant border border-on-primary-fixed/20 rounded-full px-8 py-4 font-bold flex items-center gap-3 hover:shadow-xl hover:scale-105 transition-all duration-300">
+<span class="material-symbols-outlined" data-icon="refresh">refresh</span>
+                    Sincronizar Manualmente
+                </button>
+</header>
+<div class="grid grid-cols-1 xl:grid-cols-12 gap-8">
+<!-- Central Node Grid -->
+<div class="xl:col-span-8 space-y-6">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<!-- Node Card 1 -->
+<div class="bg-surface-container-low p-6 rounded-2xl kinetic-shadow border-l-4 border-on-tertiary-container relative overflow-hidden">
+<div class="flex justify-between items-start mb-4">
+<div>
+<h3 class="font-headline font-bold text-lg">Sucursal CDMX Norte</h3>
+<p class="text-xs font-mono text-secondary">IP: 192.168.44.102</p>
+</div>
+<div class="flex flex-col items-end">
+<span class="px-3 py-1 bg-green-100 text-green-700 rounded-full text-[10px] font-bold uppercase tracking-wider mb-1">Online</span>
+<span class="text-sm font-bold text-primary">14ms <span class="text-[10px] text-secondary font-normal uppercase">Latencia</span></span>
+</div>
+</div>
+<div class="h-16 flex items-end gap-1 mt-6">
+<div class="w-full bg-secondary/10 h-12 rounded-t-sm relative group cursor-pointer"><div class="absolute bottom-0 w-full bg-on-tertiary-container/40 h-[60%]"></div></div>
+<div class="w-full bg-secondary/10 h-12 rounded-t-sm relative group cursor-pointer"><div class="absolute bottom-0 w-full bg-on-tertiary-container/40 h-[40%]"></div></div>
+<div class="w-full bg-secondary/10 h-12 rounded-t-sm relative group cursor-pointer"><div class="absolute bottom-0 w-full bg-on-tertiary-container/40 h-[80%]"></div></div>
+<div class="w-full bg-secondary/10 h-12 rounded-t-sm relative group cursor-pointer"><div class="absolute bottom-0 w-full bg-on-tertiary-container/40 h-[55%]"></div></div>
+<div class="w-full bg-secondary/10 h-12 rounded-t-sm relative group cursor-pointer"><div class="absolute bottom-0 w-full bg-on-tertiary-container/40 h-[90%]"></div></div>
+<div class="w-full bg-secondary/10 h-12 rounded-t-sm relative group cursor-pointer"><div class="absolute bottom-0 w-full bg-on-tertiary-container/40 h-[70%]"></div></div>
+<div class="w-full bg-secondary/10 h-12 rounded-t-sm relative group cursor-pointer"><div class="absolute bottom-0 w-full bg-on-tertiary-container/40 h-[100%]"></div></div>
+</div>
+<p class="text-[10px] text-secondary mt-2 uppercase tracking-widest">Historial Sincronización (7d)</p>
+</div>
+<!-- Node Card 2 -->
+<div class="bg-surface-container-low p-6 rounded-2xl kinetic-shadow relative overflow-hidden">
+<div class="flex justify-between items-start mb-4">
+<div>
+<h3 class="font-headline font-bold text-lg">Centro Distribución Monterrey</h3>
+<p class="text-xs font-mono text-secondary">IP: 192.168.44.115</p>
+</div>
+<div class="flex flex-col items-end">
+<span class="px-3 py-1 bg-red-100 text-red-700 rounded-full text-[10px] font-bold uppercase tracking-wider mb-1">Offline</span>
+<span class="text-sm font-bold text-primary">-- ms <span class="text-[10px] text-secondary font-normal uppercase">Latencia</span></span>
+</div>
+</div>
+<div class="h-16 flex items-end gap-1 mt-6 opacity-40 grayscale">
+<div class="w-full bg-secondary/10 h-12 rounded-t-sm"><div class="absolute bottom-0 w-full bg-secondary h-[40%]"></div></div>
+<div class="w-full bg-secondary/10 h-12 rounded-t-sm"><div class="absolute bottom-0 w-full bg-secondary h-[50%]"></div></div>
+<div class="w-full bg-secondary/10 h-12 rounded-t-sm"><div class="absolute bottom-0 w-full bg-secondary h-[20%]"></div></div>
+<div class="w-full bg-secondary/10 h-12 rounded-t-sm"></div>
+<div class="w-full bg-secondary/10 h-12 rounded-t-sm"></div>
+<div class="w-full bg-secondary/10 h-12 rounded-t-sm"></div>
+<div class="w-full bg-secondary/10 h-12 rounded-t-sm"></div>
+</div>
+<p class="text-[10px] text-secondary mt-2 uppercase tracking-widest">Fallo de Conexión Detectado</p>
+</div>
+<!-- Node Card 3 -->
+<div class="bg-surface-container-low p-6 rounded-2xl kinetic-shadow relative overflow-hidden">
+<div class="flex justify-between items-start mb-4">
+<div>
+<h3 class="font-headline font-bold text-lg">Puerto de Veracruz Nudo 1</h3>
+<p class="text-xs font-mono text-secondary">IP: 192.168.45.008</p>
+</div>
+<div class="flex flex-col items-end">
+<span class="px-3 py-1 bg-green-100 text-green-700 rounded-full text-[10px] font-bold uppercase tracking-wider mb-1">Online</span>
+<span class="text-sm font-bold text-primary">32ms <span class="text-[10px] text-secondary font-normal uppercase">Latencia</span></span>
+</div>
+</div>
+<div class="h-16 flex items-end gap-1 mt-6">
+<div class="w-full bg-secondary/10 h-12 rounded-t-sm relative group"><div class="absolute bottom-0 w-full bg-on-tertiary-container/40 h-[70%]"></div></div>
+<div class="w-full bg-secondary/10 h-12 rounded-t-sm relative group"><div class="absolute bottom-0 w-full bg-on-tertiary-container/40 h-[65%]"></div></div>
+<div class="w-full bg-secondary/10 h-12 rounded-t-sm relative group"><div class="absolute bottom-0 w-full bg-on-tertiary-container/40 h-[75%]"></div></div>
+<div class="w-full bg-secondary/10 h-12 rounded-t-sm relative group"><div class="absolute bottom-0 w-full bg-on-tertiary-container/40 h-[80%]"></div></div>
+<div class="w-full bg-secondary/10 h-12 rounded-t-sm relative group"><div class="absolute bottom-0 w-full bg-on-tertiary-container/40 h-[85%]"></div></div>
+<div class="w-full bg-secondary/10 h-12 rounded-t-sm relative group"><div class="absolute bottom-0 w-full bg-on-tertiary-container/40 h-[95%]"></div></div>
+<div class="w-full bg-secondary/10 h-12 rounded-t-sm relative group"><div class="absolute bottom-0 w-full bg-on-tertiary-container/40 h-[100%]"></div></div>
+</div>
+<p class="text-[10px] text-secondary mt-2 uppercase tracking-widest">Estabilidad: Óptima</p>
+</div>
+<!-- Node Card 4 -->
+<div class="bg-surface-container-low p-6 rounded-2xl kinetic-shadow border-l-4 border-on-tertiary-container relative overflow-hidden">
+<div class="flex justify-between items-start mb-4">
+<div>
+<h3 class="font-headline font-bold text-lg">Logística Guadalajara Sur</h3>
+<p class="text-xs font-mono text-secondary">IP: 192.168.42.221</p>
+</div>
+<div class="flex flex-col items-end">
+<span class="px-3 py-1 bg-green-100 text-green-700 rounded-full text-[10px] font-bold uppercase tracking-wider mb-1">Online</span>
+<span class="text-sm font-bold text-primary">21ms <span class="text-[10px] text-secondary font-normal uppercase">Latencia</span></span>
+</div>
+</div>
+<div class="h-16 flex items-end gap-1 mt-6">
+<div class="w-full bg-secondary/10 h-12 rounded-t-sm relative group"><div class="absolute bottom-0 w-full bg-on-tertiary-container/40 h-[40%]"></div></div>
+<div class="w-full bg-secondary/10 h-12 rounded-t-sm relative group"><div class="absolute bottom-0 w-full bg-on-tertiary-container/40 h-[50%]"></div></div>
+<div class="w-full bg-secondary/10 h-12 rounded-t-sm relative group"><div class="absolute bottom-0 w-full bg-on-tertiary-container/40 h-[45%]"></div></div>
+<div class="w-full bg-secondary/10 h-12 rounded-t-sm relative group"><div class="absolute bottom-0 w-full bg-on-tertiary-container/40 h-[60%]"></div></div>
+<div class="w-full bg-secondary/10 h-12 rounded-t-sm relative group"><div class="absolute bottom-0 w-full bg-on-tertiary-container/40 h-[55%]"></div></div>
+<div class="w-full bg-secondary/10 h-12 rounded-t-sm relative group"><div class="absolute bottom-0 w-full bg-on-tertiary-container/40 h-[65%]"></div></div>
+<div class="w-full bg-secondary/10 h-12 rounded-t-sm relative group"><div class="absolute bottom-0 w-full bg-on-tertiary-container/40 h-[70%]"></div></div>
+</div>
+<p class="text-[10px] text-secondary mt-2 uppercase tracking-widest">Carga de Datos: Media</p>
+</div>
+</div>
+<!-- Asymmetric Map Section -->
+<div class="bg-surface-container-high rounded-2xl p-8 relative min-h-[400px] overflow-hidden flex flex-col justify-between">
+<div>
+<h3 class="font-headline font-bold text-2xl mb-1">Distribución Geográfica</h3>
+<p class="text-secondary text-sm">Visualización de puntos de anclaje de red activos.</p>
+</div>
+<div class="absolute inset-0 z-0 opacity-40 grayscale contrast-125">
+<img alt="Mapa técnico" class="w-full h-full object-cover" data-alt="High-contrast stylized blueprint of a city map with glowing connection points and technical grid lines on a dark blue background" data-location="Mexico" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCDV-O_WLLOblA4LTX2ZsMapXNmAuLm2E6VM-PbIMK8kufad2tQAE2hKl1p-Eq3OHLgmAZtHMu8k3VuD8bhnSBQTYV3dxnbXKvZSDHnME6X6AQnkY-R8VVtj9r9KK9J92_BTAtHIUGtzKxfEQIGqGP5JSWvvd4zPRcwKNAezvrP6znjLmWFkV360mfXzJo4poaZOEWKMYDDd05kuwOfhyfIi0hpys629Cj9m1LG1avFLP08f1zgZaLwdHbmdw9SdLIBtHJhmVWROI-f"/>
+</div>
+<div class="z-10 flex gap-4 mt-auto">
+<div class="bg-surface p-4 rounded-xl shadow-lg border border-outline-variant/20 max-w-xs industrial-blur">
+<p class="text-[10px] font-bold text-on-tertiary-container uppercase tracking-tighter mb-1">Nota de Campo</p>
+<p class="text-xs text-on-surface leading-tight">La latencia en el sector Sur ha mejorado un 12% tras la actualización del firmware v2.4.</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Side Panel -->
+<aside class="xl:col-span-4 space-y-8">
+<!-- Estado Global Box -->
+<div class="bg-primary text-white p-8 rounded-2xl shadow-2xl relative overflow-hidden">
+<div class="absolute top-0 right-0 p-8 opacity-20">
+<span class="material-symbols-outlined text-8xl" data-icon="language" style="font-variation-settings: 'wght' 200;">language</span>
+</div>
+<h3 class="font-headline font-bold text-xl mb-6 relative z-10">Estado Global de la Red</h3>
+<div class="space-y-6 relative z-10">
+<div class="flex justify-between items-end border-b border-white/10 pb-4">
+<span class="text-gray-400 text-sm">Nodos Activos</span>
+<span class="text-3xl font-extrabold tracking-tighter">42 / 45</span>
+</div>
+<div class="flex justify-between items-end border-b border-white/10 pb-4">
+<span class="text-gray-400 text-sm">Uptime Mensual</span>
+<span class="text-3xl font-extrabold tracking-tighter">99.82%</span>
+</div>
+<div class="flex justify-between items-end">
+<span class="text-gray-400 text-sm">Tráfico de Red</span>
+<span class="text-3xl font-extrabold tracking-tighter">2.4 TB/s</span>
+</div>
+</div>
+</div>
+<!-- Alert Panel -->
+<div class="bg-surface-container-highest p-8 rounded-2xl">
+<div class="flex items-center gap-2 mb-6">
+<span class="material-symbols-outlined text-on-tertiary-container" data-icon="warning" style="font-variation-settings: 'FILL' 1;">warning</span>
+<h3 class="font-headline font-bold text-xl">Alertas Críticas</h3>
+</div>
+<div class="space-y-4">
+<!-- Alert 1 -->
+<div class="bg-surface-container-lowest p-4 rounded-xl border-l-4 border-error shadow-sm flex gap-3">
+<span class="material-symbols-outlined text-error" data-icon="error_outline">error_outline</span>
+<div>
+<h4 class="font-bold text-sm">Desconexión Crítica</h4>
+<p class="text-xs text-secondary mb-2">Nodo Monterrey dejó de responder a las 14:22 CST.</p>
+<button class="text-[10px] font-bold text-error uppercase tracking-widest hover:underline">Iniciar Recuperación</button>
+</div>
+</div>
+<!-- Alert 2 -->
+<div class="bg-surface-container-lowest p-4 rounded-xl border-l-4 border-on-tertiary-container shadow-sm flex gap-3">
+<span class="material-symbols-outlined text-on-tertiary-container" data-icon="bolt">bolt</span>
+<div>
+<h4 class="font-bold text-sm">Alta Latencia</h4>
+<p class="text-xs text-secondary mb-2">Pico detectado en Sucursal Tijuana (180ms).</p>
+<button class="text-[10px] font-bold text-on-tertiary-container uppercase tracking-widest hover:underline">Ver Diagnóstico</button>
+</div>
+</div>
+<!-- Alert 3 -->
+<div class="bg-surface-container-lowest p-4 rounded-xl border-l-4 border-secondary shadow-sm flex gap-3 opacity-60">
+<span class="material-symbols-outlined text-secondary" data-icon="update">update</span>
+<div>
+<h4 class="font-bold text-sm">Actualización Pendiente</h4>
+<p class="text-xs text-secondary mb-2">12 nodos requieren parche de seguridad v2.5.</p>
+<button class="text-[10px] font-bold text-secondary uppercase tracking-widest hover:underline">Programar</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Small Utility Card -->
+<div class="bg-tertiary-fixed p-6 rounded-2xl flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 bg-on-tertiary-container rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined text-white text-lg" data-icon="support_agent">support_agent</span>
+</div>
+<div>
+<p class="text-xs font-bold text-on-tertiary-fixed-variant uppercase">Soporte Técnico</p>
+<p class="text-sm font-semibold">Nivel 3 Disponible</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-on-tertiary-container" data-icon="arrow_forward">arrow_forward</span>
+</div>
+</aside>
+</div>
+</main>
+</div>
+<!-- Footer -->
+<footer class="flex justify-between items-center px-12 w-full border-t border-gray-200/10 bg-transparent py-6 mt-auto">
+<div class="flex gap-6">
+<span class="font-['Inter'] text-xs uppercase tracking-widest text-[#545e76] dark:text-gray-500 hover:text-[#0a182e] dark:hover:text-white underline-offset-4 cursor-pointer transition-colors">Legal</span>
+<span class="font-['Inter'] text-xs uppercase tracking-widest text-[#545e76] dark:text-gray-500 hover:text-[#0a182e] dark:hover:text-white underline-offset-4 cursor-pointer transition-colors">Privacidad</span>
+<div class="flex items-center gap-1">
+<div class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+<span class="font-['Inter'] text-xs uppercase tracking-widest text-[#dc5d00]">Estado del Sistema</span>
+</div>
+</div>
+<p class="font-['Inter'] text-xs uppercase tracking-widest text-[#545e76] dark:text-gray-500">© 2024 La Armadura Digital - Logística</p>
+</footer>
+</body></html>

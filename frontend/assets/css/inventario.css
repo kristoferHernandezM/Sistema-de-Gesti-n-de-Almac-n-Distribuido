@@ -1,9 +1,6 @@
-.material-symbols-outlined {
-    font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
-}
-body { 
-    font-family: 'Inter', sans-serif; 
-}
-h1, h2, h3 {
-    font-family: 'Manrope', sans-serif; 
-}
+ .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .kinetic-shadow {
+            box-shadow: 0 24px 48px -12px rgba(10, 24, 46, 0.08);
+        }
