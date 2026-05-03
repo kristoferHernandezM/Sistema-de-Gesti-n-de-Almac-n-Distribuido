@@ -7,9 +7,10 @@
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<script src="/frontend/config/tailwind.config.js"></script>
-<link rel="stylesheet" href="/frontend/assets/css/inventario.css">
+<script src="/config/tailwind.config.js"></script>
+<link rel="stylesheet" href="/assets/css/inventario.css">
 </head>
+
 <body class="bg-surface font-body text-on-surface flex min-h-screen">
 <!-- SideNavBar -->
 <aside class="fixed left-0 top-0 flex flex-col p-4 z-50 h-screen w-64 border-r border-gray-200/15 bg-surface-container shadow-2xl shadow-blue-900/5 font-['Inter'] text-sm font-medium">
@@ -18,23 +19,23 @@
 <p class="text-[10px] uppercase tracking-widest text-secondary mt-1">Logística Distribuida</p>
 </div>
 <nav class="flex-1 space-y-2">
-<a class="flex items-center gap-3 text-[#545e76] px-4 py-3 hover:translate-x-1 transition-transform duration-200" href="/frontend/dashboard.html">
+<a class="flex items-center gap-3 text-[#545e76] px-4 py-3 hover:translate-x-1 transition-transform duration-200" href="/dashboard.html">
 <span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
 <span>Dashboard</span>
 </a>
-<a class="flex items-center gap-3 bg-[#0a182e] text-white rounded-full px-4 py-3 shadow-lg hover:translate-x-1 transition-transform duration-200" href="/frontend/inventario.html">
+<a class="flex items-center gap-3 bg-[#0a182e] text-white rounded-full px-4 py-3 shadow-lg hover:translate-x-1 transition-transform duration-200" href="/inventario.html">
 <span class="material-symbols-outlined" data-icon="inventory_2">inventory_2</span>
 <span>Inventario</span>
 </a>
-<a class="flex items-center gap-3 text-[#545e76] px-4 py-3 hover:translate-x-1 transition-transform duration-200" href="/frontend/monitoreo.html">
+<a class="flex items-center gap-3 text-[#545e76] px-4 py-3 hover:translate-x-1 transition-transform duration-200" href="/monitoreo.html">
 <span class="material-symbols-outlined" data-icon="hub">hub</span>
 <span>Nodos</span>
 </a>
-<a class="flex items-center gap-3 text-[#545e76] px-4 py-3 hover:translate-x-1 transition-transform duration-200" href="/frontend/envios.html">
+<a class="flex items-center gap-3 text-[#545e76] px-4 py-3 hover:translate-x-1 transition-transform duration-200" href="/envios.html">
 <span class="material-symbols-outlined" data-icon="local_shipping">envios</span>
 <span>Envíos</span>
 </a>
-<a class="flex items-center gap-3 text-[#545e76] px-4 py-3 hover:translate-x-1 transition-transform duration-200" href="/frontend/reportes.html">
+<a class="flex items-center gap-3 text-[#545e76] px-4 py-3 hover:translate-x-1 transition-transform duration-200" href="/reportes.html">
 <span class="material-symbols-outlined" data-icon="analytics">analytics</span>
 <span>Reportes</span>
 </a>
@@ -76,24 +77,25 @@
 <div class="w-1 h-8 bg-on-tertiary-container rounded-full"></div>
 <h3 class="font-headline font-bold text-xl text-primary">Detalles del Producto</h3>
 </div>
-<form class="space-y-6">
+<form class="space-y-6" id="formProducto">
 <div class="grid grid-cols-2 gap-6">
 <div class="space-y-2">
 <label class="text-xs font-bold text-secondary uppercase tracking-wider px-1">SKU de Referencia</label>
-<input class="w-full bg-surface-container-low border-none rounded-xl px-4 py-3 text-sm font-mono focus:ring-2 focus:ring-on-tertiary-container/20" type="text" value="ICL-4492-BX"/>
+<input id="sku" class="w-full bg-surface-container-low border-none rounded-xl px-4 py-3 text-sm font-mono focus:ring-2 focus:ring-on-tertiary-container/20" type="text" placeholder="ICL-001"/>
 </div>
 <div class="space-y-2">
 <label class="text-xs font-bold text-secondary uppercase tracking-wider px-1">Sucursal de Origen</label>
-<select class="w-full bg-surface-container-low border-none rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-on-tertiary-container/20">
-<option>Nodo Central - Madrid</option>
-<option>Centro Logístico - Barcelona</option>
-<option>Puerto Hub - Valencia</option>
+<select id="nodo" class="w-full bg-surface-container-low border-none rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-on-tertiary-container/20">
+  <option>Nodo Central</option>
+  <option>Nodo Norte</option>
+  <option>Nodo Sur</option>
+  <option>Nodo Oeste</option>
 </select>
 </div>
 </div>
 <div class="space-y-2">
 <label class="text-xs font-bold text-secondary uppercase tracking-wider px-1">Nombre del Producto</label>
-<input class="w-full bg-surface-container-low border-none rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-on-tertiary-container/20" placeholder="Ej: Unidad de Procesamiento Criogénico" type="text"/>
+<input id="nombre" class="w-full bg-surface-container-low border-none rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-on-tertiary-container/20" placeholder="Ej: Laptop Dell" type="text"/>
 </div>
 <div class="p-6 bg-surface-container rounded-2xl flex items-center justify-between">
 <div class="space-y-1">
@@ -111,6 +113,17 @@
 </div>
 </div>
 <div class="pt-4">
+<div class="grid grid-cols-2 gap-6">
+<div class="space-y-2">
+<label class="text-xs font-bold text-secondary uppercase tracking-wider px-1">Categoría</label>
+<input id="categoria" class="w-full bg-surface-container-low border-none rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-on-tertiary-container/20" placeholder="Computo" type="text"/>
+</div>
+
+<div class="space-y-2">
+<label class="text-xs font-bold text-secondary uppercase tracking-wider px-1">Stock</label>
+<input id="stock" class="w-full bg-surface-container-low border-none rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-on-tertiary-container/20" placeholder="10" type="number"/>
+</div>
+</div>
 <button class="w-full bg-on-tertiary-container text-white font-headline font-bold py-4 rounded-full shadow-xl shadow-on-tertiary-container/20 hover:scale-[1.01] active:scale-[0.98] transition-all flex items-center justify-center gap-3" type="submit">
 <span class="material-symbols-outlined" data-icon="save">save</span>
                                 Guardar Cambios en Inventario
@@ -119,6 +132,10 @@
 </form>
 </div>
 <!-- Red de Distribución Status -->
+ <div class="bg-surface-container-lowest rounded-2xl p-8 kinetic-shadow">
+  <h3 class="font-headline font-bold text-xl text-primary mb-6">Productos registrados</h3>
+  <div id="listaProductos" class="grid grid-cols-1 gap-4"></div>
+</div>
 <div class="bg-surface-container-low rounded-2xl p-8">
 <div class="flex justify-between items-center mb-6">
 <h3 class="font-headline font-bold text-lg text-primary">Red de Distribución</h3>
@@ -205,4 +222,61 @@
 </div>
 </footer>
 </main>
+<script>
+const API_URL = "http://localhost:3000/api/productos";
+
+async function cargarProductos() {
+  const response = await fetch(API_URL);
+  const productos = await response.json();
+
+  const contenedor = document.getElementById("listaProductos");
+  contenedor.innerHTML = "";
+
+  productos.forEach(producto => {
+    contenedor.innerHTML += `
+      <div class="bg-white rounded-xl p-4 shadow border border-gray-100">
+        <div class="flex justify-between">
+          <strong>${producto.nombre}</strong>
+          <span class="text-xs bg-green-100 text-green-700 px-2 py-1 rounded-full">${producto.estado}</span>
+        </div>
+        <p class="text-sm text-gray-500">SKU: ${producto.sku}</p>
+        <p class="text-sm text-gray-500">Categoría: ${producto.categoria}</p>
+        <p class="text-sm text-gray-500">Stock: ${producto.stock}</p>
+        <p class="text-sm text-gray-500">Nodo: ${producto.nodo}</p>
+      </div>
+    `;
+  });
+}
+
+document.getElementById("formProducto").addEventListener("submit", async function(e) {
+  e.preventDefault();
+
+  const producto = {
+    sku: document.getElementById("sku").value,
+    nombre: document.getElementById("nombre").value,
+    categoria: document.getElementById("categoria").value,
+    stock: Number(document.getElementById("stock").value),
+    nodo: document.getElementById("nodo").value,
+    estado: "Disponible"
+  };
+
+  const response = await fetch(API_URL, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(producto)
+  });
+
+  const data = await response.json();
+
+  if (response.ok) {
+    alert("Producto guardado correctamente");
+    document.getElementById("formProducto").reset();
+    cargarProductos();
+  } else {
+    alert(data.mensaje || "Error al guardar producto");
+  }
+});
+
+cargarProductos();
+</script>
 </body></html>

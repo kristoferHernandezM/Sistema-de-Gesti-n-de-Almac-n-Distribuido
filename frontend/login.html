@@ -9,14 +9,34 @@
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <script src="config/tailwind.config.js"></script>
 <script>
-function login() {
+async function login() {
     const user = document.getElementById("employee-id").value;
     const pass = document.getElementById("password").value;
 
-    if (user === "admin" && pass === "admin") {
-        window.location.href = "/frontend/dashboard.html";
-    } else {
-        alert("Usuario o contraseña incorrectos");
+    try {
+        const response = await fetch("http://localhost:3000/api/auth/login", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                correo: user,
+                password: pass
+            })
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+            alert("Bienvenido " + data.usuario.nombre);
+            window.location.href = "/dashboard.html";
+        } else {
+            alert(data.mensaje);
+        }
+
+    } catch (error) {
+        console.error(error);
+        alert("Error al conectar con el servidor");
     }
 }
 </script>
