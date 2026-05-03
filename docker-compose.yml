@@ -17,6 +17,8 @@ services:
     environment:
       MONGO_URI: mongodb://mongo1:27017,mongo2:27017,mongo3:27017/ironclad?replicaSet=rs0
     depends_on:
+      - service_inventario
+      - service_auth
       - mongo1
       - mongo2
       - mongo3
@@ -47,6 +49,30 @@ services:
       - "27019:27017"
     volumes:
       - mongo3_data:/data/db
+  
+  service_auth:
+    build: ./service_auth
+    container_name: service_auth
+    ports:
+      - "3001:3001"
+    environment:
+      MONGO_URI: mongodb://mongo1:27017,mongo2:27017,mongo3:27017/ironclad?replicaSet=rs0
+    depends_on:
+      - mongo1
+      - mongo2
+      - mongo3
+  
+  service_inventario:
+    build: ./service_inventario
+    container_name: service_inventario
+    ports:
+      - "3002:3002"
+    environment:
+      MONGO_URI: mongodb://mongo1:27017,mongo2:27017,mongo3:27017/ironclad?replicaSet=rs0
+    depends_on:
+      - mongo1
+      - mongo2
+      - mongo3
 
 volumes:
   mongo1_data:
