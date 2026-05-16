@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mi Perfil - Sistema de Inventario</title>
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+
+<body class="bg-gray-50 min-h-screen">
+
+  <div class="flex min-h-screen">
+
+    <!-- SIDEBAR -->
+    <aside class="w-64 bg-white border-r border-gray-200 hidden lg:flex flex-col">
+
+      <!-- Logo -->
+      <div class="p-6 border-b border-gray-200">
+
+        <div class="flex items-center gap-3">
+
+          <div class="bg-blue-600 p-2 rounded-lg">
+            <i data-lucide="package" class="w-6 h-6 text-white"></i>
+          </div>
+
+          <div>
+            <h1 class="text-lg font-semibold text-gray-900">
+              Sistema de
+            </h1>
+
+            <p class="text-sm text-gray-600">
+              Inventario
+            </p>
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- Navegación -->
+      <nav class="flex-1 p-4 space-y-1">
+
+        <a
+          href="dashboard.html"
+          class="flex items-center gap-3 px-4 py-3 rounded-lg text-gray-700 hover:bg-gray-100 transition"
+        >
+          <i data-lucide="layout-dashboard" class="w-5 h-5"></i>
+          <span>Dashboard</span>
+        </a>
+
+        <a
+          href="inventario.html"
+          class="flex items-center gap-3 px-4 py-3 rounded-lg text-gray-700 hover:bg-gray-100 transition"
+        >
+          <i data-lucide="package" class="w-5 h-5"></i>
+          <span>Inventario</span>
+        </a>
+
+        <a
+          href="envios.html"
+          class="flex items-center gap-3 px-4 py-3 rounded-lg text-gray-700 hover:bg-gray-100 transition"
+        >
+          <i data-lucide="truck" class="w-5 h-5"></i>
+          <span>Envíos</span>
+        </a>
+
+        <a
+          href="reportes.html"
+          class="flex items-center gap-3 px-4 py-3 rounded-lg text-gray-700 hover:bg-gray-100 transition"
+        >
+          <i data-lucide="bar-chart-3" class="w-5 h-5"></i>
+          <span>Reportes</span>
+        </a>
+
+        <a
+          href="perfil.html"
+          class="flex items-center gap-3 px-4 py-3 rounded-lg bg-blue-50 text-blue-600"
+        >
+          <i data-lucide="user" class="w-5 h-5"></i>
+          <span>Perfil</span>
+        </a>
+
+      </nav>
+
+      <!-- Usuario -->
+      <div class="p-4 border-t border-gray-200">
+
+        <div class="bg-gray-50 rounded-lg p-3 mb-3">
+
+          <div class="flex items-center gap-3">
+
+            <div class="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center">
+              <span class="text-white font-medium">
+                U
+              </span>
+            </div>
+
+            <div>
+              <p class="text-sm font-medium text-gray-900">
+                Usuario
+              </p>
+
+              <p class="text-xs text-gray-500">
+                usuario@correo.com
+              </p>
+            </div>
+
+          </div>
+
+        </div>
+
+        <button
+          class="w-full flex items-center gap-3 px-4 py-3 text-red-600 hover:bg-red-50 rounded-lg transition"
+        >
+          <i data-lucide="log-out" class="w-5 h-5"></i>
+          <span>Cerrar Sesión</span>
+        </button>
+
+      </div>
+
+    </aside>
+
+    <!-- CONTENIDO -->
+    <main class="flex-1 lg:ml-64 p-4 lg:p-8">
+
+      <!-- Contenedor Principal -->
+      <div class="space-y-6 max-w-4xl mx-auto">
+
+        <!-- Encabezado -->
+    <div>
+      <h1 class="text-3xl font-medium text-gray-900 mb-2">Mi Perfil</h1>
+      <p class="text-gray-600">Gestiona tu información personal y configuración</p>
+    </div>
+
+    <!-- Contenedor de Alertas (Oculto por defecto) -->
+    <div id="alert-box" class="hidden p-4 rounded-lg border font-medium"></div>
+
+    <!-- Tarjeta de Banner y Stats -->
+    <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+      <!-- Gradiente superior -->
+      <div class="bg-gradient-to-r from-blue-500 to-blue-600 h-32"></div>
+      
+      <div class="px-6 pb-6">
+        <div class="flex flex-col sm:flex-row items-center sm:items-end gap-6 -mt-16 mb-6">
+          
+          <!-- Avatar -->
+          <div class="relative">
+            <div class="w-32 h-32 bg-white rounded-full border-4 border-white shadow-lg flex items-center justify-center">
+              <span id="avatar-initial" class="text-4xl font-bold text-blue-600">U</span>
+            </div>
+            <button class="absolute bottom-0 right-0 w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center text-white hover:bg-blue-700 transition shadow-lg">
+              <i data-lucide="camera" class="w-5 h-5"></i>
+            </button>
+          </div>
+          
+          <!-- Info de Usuario -->
+          <div class="flex-1 text-center sm:text-left">
+            <h2 id="display-name" class="text-2xl font-medium text-gray-900 mb-1">Nombre Usuario</h2>
+            <p id="display-email" class="text-gray-600">usuario@ejemplo.com</p>
+            <div class="flex items-center justify-center sm:justify-start gap-2 mt-2">
+              <i data-lucide="shield" class="w-4 h-4 text-purple-600"></i>
+              <span id="display-role" class="text-sm font-medium text-purple-600">Administrador</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Estadísticas -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 pt-6 border-t border-gray-200">
+          <div class="bg-blue-50 rounded-lg p-4 text-center">
+            <p class="text-2xl font-semibold text-blue-600 mb-1">245</p>
+            <p class="text-sm font-medium text-gray-600">Acciones Realizadas</p>
+          </div>
+          <div class="bg-green-50 rounded-lg p-4 text-center">
+            <p class="text-2xl font-semibold text-green-600 mb-1">98%</p>
+            <p class="text-sm font-medium text-gray-600">Tasa de Precisión</p>
+          </div>
+          <div class="bg-purple-50 rounded-lg p-4 text-center">
+            <p class="text-2xl font-semibold text-purple-600 mb-1">3 meses</p>
+            <p class="text-sm font-medium text-gray-600">Tiempo Activo</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Formulario de Información Personal -->
+    <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+      <div class="flex items-center justify-between mb-6">
+        <h2 class="text-xl font-medium text-gray-900">Información Personal</h2>
+        <button
+          type="button"
+          id="toggle-edit-btn"
+          class="text-blue-600 font-medium hover:text-blue-700 text-sm"
+        >
+          Editar
+        </button>
+      </div>
+
+      <form id="personal-info-form" class="space-y-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-2">
+              <div class="flex items-center gap-2 mb-2">
+                <i data-lucide="user" class="w-4 h-4"></i>
+                <span>Nombre Completo</span>
+              </div>
+            </label>
+            <input
+              type="text"
+              id="input-name"
+              disabled
+              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none disabled:bg-gray-50 disabled:text-gray-600 transition"
+            />
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-2">
+              <div class="flex items-center gap-2 mb-2">
+                <i data-lucide="mail" class="w-4 h-4"></i>
+                <span>Correo Electrónico</span>
+              </div>
+            </label>
+            <input
+              type="email"
+              id="input-email"
+              disabled
+              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none disabled:bg-gray-50 disabled:text-gray-600 transition"
+            />
+          </div>
+        </div>
+
+        <div id="save-info-container" class="hidden pt-4 border-t border-gray-200">
+          <button
+            type="submit"
+            class="bg-blue-600 text-white font-medium px-6 py-2 rounded-lg hover:bg-blue-700 transition flex items-center gap-2"
+          >
+            <i data-lucide="save" class="w-5 h-5"></i>
+            <span>Guardar Cambios</span>
+          </button>
+        </div>
+      </form>
+    </div>
+
+    <!-- Formulario de Cambio de Contraseña -->
+    <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+      <h2 class="text-xl font-medium text-gray-900 mb-6">Cambiar Contraseña</h2>
+      <form id="password-form" class="space-y-4">
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-2">
+            <div class="flex items-center gap-2 mb-2">
+              <i data-lucide="lock" class="w-4 h-4"></i>
+              <span>Contraseña Actual</span>
+            </div>
+          </label>
+          <input
+            type="password"
+            id="input-current-password"
+            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition"
+            placeholder="••••••••"
+            required
+          />
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-2">Nueva Contraseña</label>
+            <input
+              type="password"
+              id="input-new-password"
+              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition"
+              placeholder="••••••••"
+              required
+            />
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-2">Confirmar Contraseña</label>
+            <input
+              type="password"
+              id="input-confirm-password"
+              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition"
+              placeholder="••••••••"
+              required
+            />
+          </div>
+        </div>
+
+        <div class="pt-4">
+          <button
+            type="submit"
+            class="bg-blue-600 text-white font-medium px-6 py-2 rounded-lg hover:bg-blue-700 transition flex items-center gap-2"
+          >
+            <i data-lucide="lock" class="w-5 h-5"></i>
+            <span>Actualizar Contraseña</span>
+          </button>
+        </div>
+      </form>
+
+      </div>
+
+    </main>
+
+  </div>
+  <script>
+    // Inicializar Iconos
+    lucide.createIcons();
+
+    // Simulación del contexto de usuario (Mock Auth)
+    const currentUser = {
+      name: 'Usuario de Prueba',
+      email: 'usuario@inventario.com',
+      role: 'admin'
+    };
+
+    // Referencias del DOM - Alertas
+    const alertBox = document.getElementById('alert-box');
+    let alertTimeout;
+
+    // Función para mostrar mensajes
+    function showMessage(text, type) {
+      alertBox.textContent = text;
+      alertBox.classList.remove('hidden', 'bg-green-50', 'text-green-600', 'border-green-200', 'bg-red-50', 'text-red-600', 'border-red-200');
+      
+      if (type === 'success') {
+        alertBox.classList.add('bg-green-50', 'text-green-600', 'border-green-200');
+      } else {
+        alertBox.classList.add('bg-red-50', 'text-red-600', 'border-red-200');
+      }
+
+      clearTimeout(alertTimeout);
+      alertTimeout = setTimeout(() => {
+        alertBox.classList.add('hidden');
+      }, 3000);
+    }
+
+    // Inicializar Datos en la UI
+    document.getElementById('display-name').textContent = currentUser.name;
+    document.getElementById('display-email').textContent = currentUser.email;
+    document.getElementById('avatar-initial').textContent = currentUser.name.charAt(0).toUpperCase();
+    document.getElementById('display-role').textContent = currentUser.role === 'admin' ? 'Administrador' : 'Usuario';
+    
+    const inputName = document.getElementById('input-name');
+    const inputEmail = document.getElementById('input-email');
+    inputName.value = currentUser.name;
+    inputEmail.value = currentUser.email;
+
+    // Lógica para Formulario de Información Personal
+    let isEditing = false;
+    const toggleEditBtn = document.getElementById('toggle-edit-btn');
+    const personalInfoForm = document.getElementById('personal-info-form');
+    const saveInfoContainer = document.getElementById('save-info-container');
+
+    toggleEditBtn.addEventListener('click', () => {
+      isEditing = !isEditing;
+      inputName.disabled = !isEditing;
+      inputEmail.disabled = !isEditing;
+      
+      toggleEditBtn.textContent = isEditing ? 'Cancelar' : 'Editar';
+
+      if (isEditing) {
+        saveInfoContainer.classList.remove('hidden');
+      } else {
+        saveInfoContainer.classList.add('hidden');
+        // Revertir cambios si cancela
+        inputName.value = currentUser.name;
+        inputEmail.value = currentUser.email;
+      }
+    });
+
+    personalInfoForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      
+      // Actualizar simulación de usuario
+      currentUser.name = inputName.value;
+      currentUser.email = inputEmail.value;
+
+      // Actualizar UI del banner
+      document.getElementById('display-name').textContent = currentUser.name;
+      document.getElementById('display-email').textContent = currentUser.email;
+      document.getElementById('avatar-initial').textContent = currentUser.name.charAt(0).toUpperCase();
+
+      showMessage('Perfil actualizado exitosamente', 'success');
+      
+      // Salir del modo edición
+      toggleEditBtn.click();
+    });
+
+    // Lógica para Cambio de Contraseña
+    const passwordForm = document.getElementById('password-form');
+    
+    passwordForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      
+      const newPassword = document.getElementById('input-new-password').value;
+      const confirmPassword = document.getElementById('input-confirm-password').value;
+
+      if (newPassword !== confirmPassword) {
+        showMessage('Las contraseñas no coinciden', 'error');
+        return;
+      }
+
+      if (newPassword.length < 6) {
+        showMessage('La contraseña debe tener al menos 6 caracteres', 'error');
+        return;
+      }
+
+      showMessage('Contraseña actualizada exitosamente', 'success');
+      passwordForm.reset(); // Limpiar inputs
+    });
+  </script>
+
+</body>
+</html>
