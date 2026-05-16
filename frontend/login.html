@@ -103,56 +103,72 @@
   </div>
 
   <script>
-    // Inicializar Iconos
-    lucide.createIcons();
+  lucide.createIcons();
 
-    // Referencias del DOM
-    const form = document.getElementById('login-form');
-    const emailInput = document.getElementById('email');
-    const passwordInput = document.getElementById('password');
-    const errorMessage = document.getElementById('error-message');
-    const submitBtn = document.getElementById('submit-btn');
-    const btnContent = document.getElementById('btn-content');
-    const btnSpinner = document.getElementById('btn-spinner');
+  const API_AUTH = "http://192.168.4.105:3001/login";
 
-    form.addEventListener('submit', function(e) {
-      e.preventDefault();
+  const form = document.getElementById("login-form");
+  const emailInput = document.getElementById("email");
+  const passwordInput = document.getElementById("password");
+  const errorMessage = document.getElementById("error-message");
+  const submitBtn = document.getElementById("submit-btn");
+  const btnContent = document.getElementById("btn-content");
+  const btnSpinner = document.getElementById("btn-spinner");
 
-      // Resetear estado de error
-      errorMessage.classList.add('hidden');
+  function setCookie(nombre, valor, horas) {
+    const fecha = new Date();
+    fecha.setTime(fecha.getTime() + horas * 60 * 60 * 1000);
+    document.cookie = `${nombre}=${encodeURIComponent(valor)}; expires=${fecha.toUTCString()}; path=/`;
+  }
 
-      // Activar estado de carga (loading)
-      submitBtn.disabled = true;
-      submitBtn.classList.add('opacity-50', 'cursor-not-allowed');
-      btnContent.classList.add('hidden');
-      btnSpinner.classList.remove('hidden');
+  form.addEventListener("submit", async function(e) {
+    e.preventDefault();
 
-      // Simular una petición asíncrona de 1 segundo
-      setTimeout(() => {
-        const email = emailInput.value;
-        const password = passwordInput.value;
+    errorMessage.classList.add("hidden");
 
-        // Validar credenciales de prueba
-        const isValidAdmin = email === 'admin@inventario.com' && password === 'admin123';
-        const isValidUser = email === 'usuario@inventario.com' && password === 'user123';
+    submitBtn.disabled = true;
+    submitBtn.classList.add("opacity-50", "cursor-not-allowed");
+    btnContent.classList.add("hidden");
+    btnSpinner.classList.remove("hidden");
 
-        if (isValidAdmin || isValidUser) {
-          // Simular redirección a dashboard
-          window.location.href = 'dashboard.html'; 
-          // NOTA: Como esto es HTML puro y probablemente no tienes esa ruta, 
-          // verás un error 404 en el navegador, lo cual indica que la redirección funcionó.
-        } else {
-          // Mostrar error
-          errorMessage.classList.remove('hidden');
-          
-          // Revertir estado de carga
-          submitBtn.disabled = false;
-          submitBtn.classList.remove('opacity-50', 'cursor-not-allowed');
-          btnContent.classList.remove('hidden');
-          btnSpinner.classList.add('hidden');
-        }
-      }, 1000);
-    });
-  </script>
+    try {
+      const res = await fetch(API_AUTH, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          correo: emailInput.value,
+          password: passwordInput.value
+        })
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        throw new Error(data.mensaje || "Credenciales incorrectas");
+      }
+
+      const usuario = data.usuario;
+
+      setCookie("sesionUsuario", JSON.stringify(usuario), 8);
+
+      localStorage.setItem("usuarioActual", JSON.stringify(usuario));
+      localStorage.setItem("nodoActual", usuario.nodo || "Nodo PC1 - La Paz");
+
+      window.location.href = "dashboard.html";
+
+    } catch (error) {
+      errorMessage.textContent = error.message;
+      errorMessage.classList.remove("hidden");
+
+      submitBtn.disabled = false;
+      submitBtn.classList.remove("opacity-50", "cursor-not-allowed");
+      btnContent.classList.remove("hidden");
+      btnSpinner.classList.add("hidden");
+    }
+  });
+</script>
+
 </body>
 </html>

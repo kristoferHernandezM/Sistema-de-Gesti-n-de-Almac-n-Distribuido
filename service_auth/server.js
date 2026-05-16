@@ -8,16 +8,27 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-const MONGO_URI = process.env.MONGO_URI || "mongodb://localhost:27017/ironclad";
+const MONGO_URI = process.env.MONGO_URI;
 
-mongoose.connect(MONGO_URI)
-  .then(() => console.log("service_auth conectado a MongoDB Replica Set"))
-  .catch((err) => console.error("Error conectando a MongoDB:", err));
+if (!MONGO_URI) {
+  throw new Error("MONGO_URI no definida");
+}
+
+mongoose.connect(MONGO_URI, {
+  serverSelectionTimeoutMS: 5000
+})
+.then(() => console.log("Conectado a MongoDB Replica Set"))
+.catch(err => console.error("Error Mongo:", err));
 
 const Usuario = mongoose.model("Usuario", new mongoose.Schema({
   nombre: {
     type: String,
     required: true
+  },
+  correo: {
+    type: String,
+    required: true,
+    unique: true
   },
   idEmpleado: {
     type: String,
@@ -65,12 +76,11 @@ app.post("/registro", async (req, res) => {
 
 app.post("/login", async (req, res) => {
   try {
-    const { idEmpleado, correo, password } = req.body;
+
+    const { correo, password } = req.body;
 
     const usuario = await Usuario.findOne({
-      $or: [
-        { idEmpleado: idEmpleado || correo }
-      ],
+      correo,
       password
     });
 
@@ -84,6 +94,7 @@ app.post("/login", async (req, res) => {
       mensaje: "Login correcto",
       usuario
     });
+
   } catch (error) {
     res.status(500).json({
       mensaje: "Error en login",
