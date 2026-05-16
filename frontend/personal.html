@@ -63,14 +63,14 @@
 <h2 class="font-headline font-bold text-2xl text-on-surface tracking-tight mb-2">Registro de Personal</h2>
 <p class="text-secondary text-sm">Ingrese los datos del nuevo operario para habilitar sus credenciales de acceso.</p>
 </div>
-<form class="space-y-6">
+<form class="space-y-6" id="formPersonal">
 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
 <!-- Full Name -->
 <div class="col-span-full">
 <label class="block text-xs font-bold text-on-surface-variant uppercase tracking-wider mb-2 ml-1">Nombre Completo</label>
 <div class="relative">
 <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline-variant text-sm">person</span>
-<input class="w-full pl-12 pr-4 py-3.5 bg-surface-container-low border-none rounded-2xl focus:ring-2 focus:ring-on-tertiary-container/30 transition-all text-sm font-medium placeholder:text-outline-variant/60" placeholder="Ej. Carlos Mendoza Ruiz" type="text"/>
+<input id="nombre "class="w-full pl-12 pr-4 py-3.5 bg-surface-container-low border-none rounded-2xl focus:ring-2 focus:ring-on-tertiary-container/30 transition-all text-sm font-medium placeholder:text-outline-variant/60" placeholder="Ej. Carlos Mendoza Ruiz" type="text"/>
 </div>
 </div>
 <!-- ID Employee -->
@@ -78,7 +78,7 @@
 <label class="block text-xs font-bold text-on-surface-variant uppercase tracking-wider mb-2 ml-1">ID de Empleado</label>
 <div class="relative">
 <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline-variant text-sm">badge</span>
-<input class="w-full pl-12 pr-4 py-3.5 bg-surface-container-low border-none rounded-2xl focus:ring-2 focus:ring-on-tertiary-container/30 transition-all text-sm font-medium" placeholder="ID-0000" type="text"/>
+<input id="idEmpelado" class="w-full pl-12 pr-4 py-3.5 bg-surface-container-low border-none rounded-2xl focus:ring-2 focus:ring-on-tertiary-container/30 transition-all text-sm font-medium" placeholder="ID-0000" type="text"/>
 </div>
 </div>
 <!-- Node Dropdown -->
@@ -86,7 +86,7 @@
 <label class="block text-xs font-bold text-on-surface-variant uppercase tracking-wider mb-2 ml-1">Nodo / Sucursal</label>
 <div class="relative">
 <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline-variant text-sm">location_on</span>
-<select class="w-full pl-12 pr-4 py-3.5 bg-surface-container-low border-none rounded-2xl focus:ring-2 focus:ring-on-tertiary-container/30 appearance-none transition-all text-sm font-medium">
+<select id="nodo" class="w-full pl-12 pr-4 py-3.5 bg-surface-container-low border-none rounded-2xl focus:ring-2 focus:ring-on-tertiary-container/30 appearance-none transition-all text-sm font-medium">
 <option disabled="" selected="" value="">Seleccionar Nodo</option>
 <option>Nodo Central - CDMX</option>
 <option>Nodo Norte - Monterrey</option>
@@ -101,7 +101,7 @@
 <label class="block text-xs font-bold text-on-surface-variant uppercase tracking-wider mb-2 ml-1">Contraseña</label>
 <div class="relative">
 <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline-variant text-sm">lock</span>
-<input class="w-full pl-12 pr-4 py-3.5 bg-surface-container-low border-none rounded-2xl focus:ring-2 focus:ring-on-tertiary-container/30 transition-all text-sm font-medium" placeholder="••••••••" type="password"/>
+<input id="password" class="w-full pl-12 pr-4 py-3.5 bg-surface-container-low border-none rounded-2xl focus:ring-2 focus:ring-on-tertiary-container/30 transition-all text-sm font-medium" placeholder="••••••••" type="password"/>
 </div>
 </div>
 <!-- Verify Password -->
@@ -109,7 +109,7 @@
 <label class="block text-xs font-bold text-on-surface-variant uppercase tracking-wider mb-2 ml-1">Verificar Contraseña</label>
 <div class="relative">
 <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline-variant text-sm">verified_user</span>
-<input class="w-full pl-12 pr-4 py-3.5 bg-surface-container-low border-none rounded-2xl focus:ring-2 focus:ring-on-tertiary-container/30 transition-all text-sm font-medium" placeholder="••••••••" type="password"/>
+<input id=passwordConfirm class="w-full pl-12 pr-4 py-3.5 bg-surface-container-low border-none rounded-2xl focus:ring-2 focus:ring-on-tertiary-container/30 transition-all text-sm font-medium" placeholder="••••••••" type="password"/>
 </div>
 </div>
 </div>
@@ -138,4 +138,44 @@
 <a class="font-['Inter'] text-xs uppercase tracking-widest text-[#545e76] hover:text-[#0a182e] transition-colors" href="#">Estado del Sistema</a>
 </div>
 </footer>
+<script>
+        const API_REGISTRO = "http://localhost:3000/api/auth/registro";
+
+        document.getElementById("formPersonal").addEventListener("submit", async function(e) {
+        e.preventDefault();
+
+        const password = document.getElementById("password").value;
+        const passwordConfirm = document.getElementById("passwordConfirm").value;
+
+        if (password !== passwordConfirm) {
+            alert("Las contraseñas no coinciden");
+            return;
+        }
+
+        const personal = {
+            nombre: document.getElementById("nombre").value,
+            idEmpleado: document.getElementById("idEmpleado").value,
+            nodo: document.getElementById("nodo").value,
+            password: password,
+            rol: "operador"
+        };
+
+        const response = await fetch(API_REGISTRO, {
+            method: "POST",
+            headers: {
+            "Content-Type": "application/json"
+            },
+            body: JSON.stringify(personal)
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+            alert("Personal registrado correctamente");
+            document.getElementById("formPersonal").reset();
+        } else {
+            alert(data.mensaje || "Error al registrar personal");
+        }
+        });
+</script>
 </body></html>
