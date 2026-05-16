@@ -207,6 +207,10 @@
                     Estado
                   </th>
 
+                  <th class="text-left py-3 px-4 text-sm font-medium text-gray-600">
+                    Última Modificación
+                  </th>
+
                   <th class="text-right py-3 px-4 text-sm font-medium text-gray-600">
                     Acciones
                   </th>
@@ -269,6 +273,36 @@
           />
         </div>
 
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-2">Categoría</label>
+          <input type="text" id="form-category" required class="w-full px-4 py-2 border border-gray-300 rounded-lg" />
+        </div>
+
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-2">Stock</label>
+            <input type="number" id="form-stock" required class="w-full px-4 py-2 border border-gray-300 rounded-lg" />
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-2">Stock mínimo</label>
+            <input type="number" id="form-minStock" required class="w-full px-4 py-2 border border-gray-300 rounded-lg" />
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-2">Precio</label>
+          <input type="number" step="0.01" id="form-price" required class="w-full px-4 py-2 border border-gray-300 rounded-lg" />
+        </div>
+
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-2">Nodo</label>
+          <select id="form-node" disabled class="w-full px-4 py-2 border border-gray-300 rounded-lg">
+            <option value="Nodo PC1 - La Paz">Nodo PC1 - La Paz</option>
+            <option value="Nodo PC2 - Réplica">Nodo PC2 - Réplica</option>
+          </select>
+        </div>
+
         <div class="flex gap-3 pt-4">
 
           <button
@@ -292,151 +326,9 @@
       </form>
     </div>
   </div>
-
-   <script>
-    // Estado Inicial
-    let products = [
-      { id: '1', name: 'Laptop Dell XPS 15', category: 'Computadoras', stock: 15, price: 1299.99, sku: 'LAP-001', minStock: 5 },
-      { id: '2', name: 'Mouse Logitech MX Master', category: 'Periféricos', stock: 45, price: 99.99, sku: 'MOU-001', minStock: 20 },
-      { id: '3', name: 'Teclado Mecánico RGB', category: 'Periféricos', stock: 32, price: 149.99, sku: 'KEY-001', minStock: 15 },
-      { id: '4', name: 'Monitor Samsung 27"', category: 'Monitores', stock: 8, price: 299.99, sku: 'MON-001', minStock: 10 },
-      { id: '5', name: 'Webcam Logitech C920', category: 'Accesorios', stock: 25, price: 79.99, sku: 'WEB-001', minStock: 10 },
-      { id: '6', name: 'Auriculares Sony WH-1000XM4', category: 'Audio', stock: 18, price: 349.99, sku: 'AUD-001', minStock: 8 },
-    ];
-
-    let editingId = null;
-
-    // Referencias al DOM
-    const tableBody = document.getElementById('table-body');
-    const searchInput = document.getElementById('search-input');
-    const modal = document.getElementById('product-modal');
-    const form = document.getElementById('product-form');
-    const modalTitle = document.getElementById('modal-title');
-    const submitBtn = document.getElementById('submit-btn');
-
-    // Función para renderizar la tabla
-    function renderTable() {
-      const searchTerm = searchInput.value.toLowerCase();
-      tableBody.innerHTML = '';
-
-      const filteredProducts = products.filter(product =>
-        product.name.toLowerCase().includes(searchTerm) ||
-        product.category.toLowerCase().includes(searchTerm) ||
-        product.sku.toLowerCase().includes(searchTerm)
-      );
-
-      filteredProducts.forEach(product => {
-        const isLowStock = product.stock <= product.minStock;
-        const statusBadge = isLowStock
-          ? `<span class="bg-orange-100 text-orange-600 text-xs px-3 py-1 rounded-full">Stock Bajo</span>`
-          : `<span class="bg-green-100 text-green-600 text-xs px-3 py-1 rounded-full">Normal</span>`;
-
-        const row = document.createElement('tr');
-        row.className = "border-b border-gray-100 hover:bg-gray-50";
-        row.innerHTML = `
-          <td class="py-3 px-4 text-sm text-gray-900">${product.sku}</td>
-          <td class="py-3 px-4">
-            <div class="flex items-center gap-3">
-              <div class="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
-                <i data-lucide="package" class="w-5 h-5 text-blue-600"></i>
-              </div>
-              <span class="text-sm font-medium text-gray-900">${product.name}</span>
-            </div>
-          </td>
-          <td class="py-3 px-4 text-sm text-gray-600">${product.category}</td>
-          <td class="py-3 px-4 text-sm text-gray-900">${product.stock}</td>
-          <td class="py-3 px-4 text-sm text-gray-900">$${product.price.toFixed(2)}</td>
-          <td class="py-3 px-4">${statusBadge}</td>
-          <td class="py-3 px-4">
-            <div class="flex items-center justify-end gap-2">
-              <button onclick="handleOpenModal('${product.id}')" class="p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition">
-                <i data-lucide="edit" class="w-4 h-4"></i>
-              </button>
-              <button onclick="handleDelete('${product.id}')" class="p-2 text-red-600 hover:bg-red-50 rounded-lg transition">
-                <i data-lucide="trash-2" class="w-4 h-4"></i>
-              </button>
-            </div>
-          </td>
-        `;
-        tableBody.appendChild(row);
-      });
-
-      // Recargar iconos en los nuevos elementos insertados
-      lucide.createIcons();
-    }
-
-    // Buscador
-    searchInput.addEventListener('input', renderTable);
-
-    // Modal - Abrir
-    function handleOpenModal(id = null) {
-      editingId = id;
-      if (id) {
-        const product = products.find(p => p.id === id);
-        modalTitle.textContent = 'Editar Producto';
-        submitBtn.textContent = 'Guardar';
-        
-        document.getElementById('form-name').value = product.name;
-        document.getElementById('form-sku').value = product.sku;
-        document.getElementById('form-category').value = product.category;
-        document.getElementById('form-stock').value = product.stock;
-        document.getElementById('form-minStock').value = product.minStock;
-        document.getElementById('form-price').value = product.price;
-      } else {
-        modalTitle.textContent = 'Nuevo Producto';
-        submitBtn.textContent = 'Crear';
-        form.reset();
-      }
-      modal.classList.remove('hidden');
-    }
-
-    // Modal - Cerrar
-    function handleCloseModal() {
-      modal.classList.add('hidden');
-      editingId = null;
-      form.reset();
-    }
-
-    // Formulario - Submit (Crear/Editar)
-    form.addEventListener('submit', function(e) {
-      e.preventDefault();
-      
-      const formData = {
-        name: document.getElementById('form-name').value,
-        sku: document.getElementById('form-sku').value,
-        category: document.getElementById('form-category').value,
-        stock: Number(document.getElementById('form-stock').value),
-        minStock: Number(document.getElementById('form-minStock').value),
-        price: Number(document.getElementById('form-price').value),
-      };
-
-      if (editingId) {
-        // Actualizar
-        const index = products.findIndex(p => p.id === editingId);
-        products[index] = { ...products[index], ...formData };
-      } else {
-        // Crear
-        products.push({
-          ...formData,
-          id: String(Date.now())
-        });
-      }
-
-      handleCloseModal();
-      renderTable();
-    });
-
-    // Eliminar producto
-    function handleDelete(id) {
-      if (confirm('¿Estás seguro de eliminar este producto?')) {
-        products = products.filter(p => p.id !== id);
-        renderTable();
-      }
-    }
-
-    // Inicializar la tabla al cargar la página
-    renderTable();
-  </script>
-
+  
+  <script src="assets/js/auth.js"></script>
+  <script src="assets/js/script_inventario.js"></script>
+ 
 </body>
 </html>
