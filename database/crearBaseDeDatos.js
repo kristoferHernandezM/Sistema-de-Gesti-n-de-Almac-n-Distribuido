@@ -137,9 +137,57 @@ async function crearBaseDeDatos() {
         idEmpleado: "EMP-002",
         password: "user123",
         rol: "operador",
-        nodo: "Nodo PC2 - Réplica",
+        nodo: "Nodo PC2 - Laptop",
         estado: "Activo",
         accionesRealizadas: 98,
+        fechaRegistro: new Date()
+      },
+      {
+        _id: new ObjectId(),
+        nombre: "Kristofer Hernández",
+        correo: "kris@inventario.com",
+        idEmpleado: "EMP-003",
+        password: "kris123",
+        rol: "admin",
+        nodo: "Nodo PC1 - La Paz",
+        estado: "Activo",
+        accionesRealizadas: 180,
+        fechaRegistro: new Date()
+      },
+      {
+        _id: new ObjectId(),
+        nombre: "Elvia Medina",
+        correo: "elvia@inventario.com",
+        idEmpleado: "EMP-004",
+        password: "elvia123",
+        rol: "operador",
+        nodo: "Nodo PC2 - Laptop",
+        estado: "Activo",
+        accionesRealizadas: 75,
+        fechaRegistro: new Date()
+      },
+      {
+        _id: new ObjectId(),
+        nombre: "Michelle Martínez",
+        correo: "michelle@inventario.com",
+        idEmpleado: "EMP-005",
+        password: "michelle123",
+        rol: "operador",
+        nodo: "Nodo PC1 - La Paz",
+        estado: "Activo",
+        accionesRealizadas: 130,
+        fechaRegistro: new Date()
+      },
+      {
+        _id: new ObjectId(),
+        nombre: "Carlos Jiménez",
+        correo: "carlos@inventario.com",
+        idEmpleado: "EMP-006",
+        password: "carlos123",
+        rol: "operador",
+        nodo: "Nodo PC2 - Laptop",
+        estado: "Activo",
+        accionesRealizadas: 112,
         fechaRegistro: new Date()
       }
     ];
@@ -154,7 +202,7 @@ async function crearBaseDeDatos() {
         origen: "Nodo PC1 - La Paz",
         destino: "Nodo PC2 - Réplica",
         ipOrigen: "192.168.4.105",
-        ipDestino: "192.168.4.101",
+        ipDestino: "192.168.4.103",
         estado: "En tránsito",
         fechaSalida: new Date(),
         fechaEntregaEstimada: new Date(Date.now() + 2 * 24 * 60 * 60 * 1000)
@@ -167,7 +215,7 @@ async function crearBaseDeDatos() {
         cantidad: 10,
         origen: "Nodo PC2 - Réplica",
         destino: "Nodo PC1 - La Paz",
-        ipOrigen: "192.168.4.101",
+        ipOrigen: "192.168.4.103",
         ipDestino: "192.168.4.105",
         estado: "Entregado",
         fechaSalida: new Date(),
