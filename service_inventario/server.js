@@ -10,25 +10,6 @@ app.use(express.json());
 
 const MONGO_URI = process.env.MONGO_URI;
 
-<<<<<<< HEAD
-mongoose.connect(MONGO_URI)
-  .then(() => console.log("service_inventario conectado a MongoDB Replica Set"))
-  .catch(err => console.error("Error Mongo Inventario:", err));
-
-const Producto = mongoose.model("Producto", new mongoose.Schema({
-  sku: String,
-  nombre: String,
-  categoria: String,
-  stock: Number,
-  nodo: String,
-  estado: String,
-  fecha: {
-    type: Date,
-    default: Date.now
-  }
-}));
-
-=======
 mongoose.connect(MONGO_URI, {
   serverSelectionTimeoutMS: 5000
 })
@@ -80,7 +61,6 @@ const Producto = mongoose.model("Producto", new mongoose.Schema({
 }));
 
 
->>>>>>> 9bf6a5599a22cfcbfe8e1b9880cb27cb1cf798b8
 app.get("/", (req, res) => {
   res.json({ mensaje: "service_inventario funcionando" });
 });
@@ -112,25 +92,6 @@ app.get("/productos", async (req, res) => {
   }
 });
 
-<<<<<<< HEAD
-app.put("/productos/:id", async (req, res) => {
-  try {
-    const producto = await Producto.findByIdAndUpdate(req.params.id, req.body, { new: true });
-    res.json({
-      mensaje: "Producto actualizado",
-      producto
-    });
-  } catch (error) {
-    res.status(500).json({
-      mensaje: "Error al actualizar producto",
-      error: error.message
-    });
-  }
-});
-
-app.delete("/productos/:id", async (req, res) => {
-  try {
-=======
 app.delete("/productos/:id", async (req, res) => {
   try {
     const productoActual = await Producto.findById(req.params.id);
@@ -141,7 +102,6 @@ app.delete("/productos/:id", async (req, res) => {
         lock: productoActual.lock
       });
     }
->>>>>>> 9bf6a5599a22cfcbfe8e1b9880cb27cb1cf798b8
     await Producto.findByIdAndDelete(req.params.id);
     res.json({ mensaje: "Producto eliminado" });
   } catch (error) {
@@ -152,8 +112,6 @@ app.delete("/productos/:id", async (req, res) => {
   }
 });
 
-<<<<<<< HEAD
-=======
 app.post("/productos/:id/acquire", async (req, res) => {
   try {
     const { usuario, nodo } = req.body;
@@ -284,7 +242,6 @@ app.put("/productos/:id", async (req, res) => {
   }
 });
 
->>>>>>> 9bf6a5599a22cfcbfe8e1b9880cb27cb1cf798b8
 const PORT = process.env.PORT || 3002;
 
 app.listen(PORT, () => {

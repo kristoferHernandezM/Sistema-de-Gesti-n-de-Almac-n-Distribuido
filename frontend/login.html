@@ -94,21 +94,9 @@
   </div>
 
   <script>
-<<<<<<< HEAD
-    lucide.createIcons();
-
-    const form = document.getElementById('login-form');
-    const emailInput = document.getElementById('email');
-    const passwordInput = document.getElementById('password');
-    const errorMessage = document.getElementById('error-message');
-    const submitBtn = document.getElementById('submit-btn');
-    const btnContent = document.getElementById('btn-content');
-    const btnSpinner = document.getElementById('btn-spinner');
-=======
   lucide.createIcons();
 
   const API_AUTH = "http://192.168.4.105:3001/login";
->>>>>>> 9bf6a5599a22cfcbfe8e1b9880cb27cb1cf798b8
 
   const form = document.getElementById("login-form");
   const emailInput = document.getElementById("email");
@@ -118,35 +106,6 @@
   const btnContent = document.getElementById("btn-content");
   const btnSpinner = document.getElementById("btn-spinner");
 
-<<<<<<< HEAD
-      errorMessage.classList.add('hidden');
-
-      submitBtn.disabled = true;
-      submitBtn.classList.add('opacity-50', 'cursor-not-allowed');
-      btnContent.classList.add('hidden');
-      btnSpinner.classList.remove('hidden');
-
-      setTimeout(() => {
-        const email = emailInput.value;
-        const password = passwordInput.value;
-
-        const isValidAdmin = email === 'admin@inventario.com' && password === 'admin123';
-        const isValidUser = email === 'usuario@inventario.com' && password === 'user123';
-
-        if (isValidAdmin || isValidUser) {
-          window.location.href = '/dashboard'; 
-        } else {
-          errorMessage.classList.remove('hidden');
-          
-          submitBtn.disabled = false;
-          submitBtn.classList.remove('opacity-50', 'cursor-not-allowed');
-          btnContent.classList.remove('hidden');
-          btnSpinner.classList.add('hidden');
-        }
-      }, 1000);
-    });
-  </script>
-=======
   function setCookie(nombre, valor, horas) {
     const fecha = new Date();
     fecha.setTime(fecha.getTime() + horas * 60 * 60 * 1000);
@@ -202,6 +161,5 @@
   });
 </script>
 
->>>>>>> 9bf6a5599a22cfcbfe8e1b9880cb27cb1cf798b8
 </body>
 </html>

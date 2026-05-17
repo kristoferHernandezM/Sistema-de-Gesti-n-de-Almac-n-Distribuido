@@ -71,10 +71,16 @@
 
         <a
           href="reportes.html"
-          class="flex items-center gap-3 px-4 py-3 rounded-lg text-gray-700 hover:bg-gray-100 transition"
-        >
+          class="flex items-center gap-3 px-4 py-3 rounded-lg text-gray-700 hover:bg-gray-100 transition">
           <i data-lucide="bar-chart-3" class="w-5 h-5"></i>
           <span>Reportes</span>
+        </a>
+
+        <a 
+          href="personal.html"
+          class="flex items-center gap-3 px-4 py-3 rounded-lg  text-gray-700 hover:bg-gray-100 transition">
+          <i data-lucide="users" class="w-5 h-5"></i>
+          <span>Personal</span>
         </a>
 
         <a
@@ -87,7 +93,6 @@
 
       </nav>
 
-      <!-- Usuario -->
       <div class="p-4 border-t border-gray-200">
 
         <div class="bg-gray-50 rounded-lg p-3 mb-3">
@@ -125,30 +130,23 @@
 
     </aside>
 
-    <!-- CONTENIDO -->
     <main class="flex-1 lg:ml-64 p-4 lg:p-8">
 
-      <!-- Contenedor Principal -->
       <div class="space-y-6 max-w-4xl mx-auto">
 
-        <!-- Encabezado -->
     <div>
       <h1 class="text-3xl font-medium text-gray-900 mb-2">Mi Perfil</h1>
       <p class="text-gray-600">Gestiona tu información personal y configuración</p>
     </div>
 
-    <!-- Contenedor de Alertas (Oculto por defecto) -->
     <div id="alert-box" class="hidden p-4 rounded-lg border font-medium"></div>
 
-    <!-- Tarjeta de Banner y Stats -->
     <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
-      <!-- Gradiente superior -->
       <div class="bg-gradient-to-r from-blue-500 to-blue-600 h-32"></div>
       
       <div class="px-6 pb-6">
         <div class="flex flex-col sm:flex-row items-center sm:items-end gap-6 -mt-16 mb-6">
           
-          <!-- Avatar -->
           <div class="relative">
             <div class="w-32 h-32 bg-white rounded-full border-4 border-white shadow-lg flex items-center justify-center">
               <span id="avatar-initial" class="text-4xl font-bold text-blue-600">U</span>
@@ -158,7 +156,6 @@
             </button>
           </div>
           
-          <!-- Info de Usuario -->
           <div class="flex-1 text-center sm:text-left">
             <h2 id="display-name" class="text-2xl font-medium text-gray-900 mb-1">Nombre Usuario</h2>
             <p id="display-email" class="text-gray-600">usuario@ejemplo.com</p>
@@ -169,7 +166,6 @@
           </div>
         </div>
 
-        <!-- Estadísticas -->
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4 pt-6 border-t border-gray-200">
           <div class="bg-blue-50 rounded-lg p-4 text-center">
             <p class="text-2xl font-semibold text-blue-600 mb-1">245</p>
@@ -187,7 +183,6 @@
       </div>
     </div>
 
-    <!-- Formulario de Información Personal -->
     <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
       <div class="flex items-center justify-between mb-6">
         <h2 class="text-xl font-medium text-gray-900">Información Personal</h2>
@@ -245,7 +240,6 @@
       </form>
     </div>
 
-    <!-- Formulario de Cambio de Contraseña -->
     <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
       <h2 class="text-xl font-medium text-gragity-900 mb-6">Cambiar Contraseña</h2>
       <form id="password-form" class="space-y-4">
@@ -306,21 +300,18 @@
 
   </div>
   <script>
-    // Inicializar Iconos
+
     lucide.createIcons();
 
-    // Simulación del contexto de usuario (Mock Auth)
     const currentUser = {
       name: 'Usuario de Prueba',
       email: 'usuario@inventario.com',
       role: 'admin'
     };
 
-    // Referencias del DOM - Alertas
     const alertBox = document.getElementById('alert-box');
     let alertTimeout;
 
-    // Función para mostrar mensajes
     function showMessage(text, type) {
       alertBox.textContent = text;
       alertBox.classList.remove('hidden', 'bg-green-50', 'text-green-600', 'border-green-200', 'bg-red-50', 'text-red-600', 'border-red-200');
@@ -337,7 +328,6 @@
       }, 3000);
     }
 
-    // Inicializar Datos en la UI
     document.getElementById('display-name').textContent = currentUser.name;
     document.getElementById('display-email').textContent = currentUser.email;
     document.getElementById('avatar-initial').textContent = currentUser.name.charAt(0).toUpperCase();
@@ -348,7 +338,6 @@
     inputName.value = currentUser.name;
     inputEmail.value = currentUser.email;
 
-    // Lógica para Formulario de Información Personal
     let isEditing = false;
     const toggleEditBtn = document.getElementById('toggle-edit-btn');
     const personalInfoForm = document.getElementById('personal-info-form');
@@ -365,7 +354,6 @@
         saveInfoContainer.classList.remove('hidden');
       } else {
         saveInfoContainer.classList.add('hidden');
-        // Revertir cambios si cancela
         inputName.value = currentUser.name;
         inputEmail.value = currentUser.email;
       }
@@ -374,22 +362,18 @@
     personalInfoForm.addEventListener('submit', (e) => {
       e.preventDefault();
       
-      // Actualizar simulación de usuario
       currentUser.name = inputName.value;
       currentUser.email = inputEmail.value;
 
-      // Actualizar UI del banner
       document.getElementById('display-name').textContent = currentUser.name;
       document.getElementById('display-email').textContent = currentUser.email;
       document.getElementById('avatar-initial').textContent = currentUser.name.charAt(0).toUpperCase();
 
       showMessage('Perfil actualizado exitosamente', 'success');
       
-      // Salir del modo edición
       toggleEditBtn.click();
     });
 
-    // Lógica para Cambio de Contraseña
     const passwordForm = document.getElementById('password-form');
     
     passwordForm.addEventListener('submit', (e) => {
@@ -409,7 +393,7 @@
       }
 
       showMessage('Contraseña actualizada exitosamente', 'success');
-      passwordForm.reset(); // Limpiar inputs
+      passwordForm.reset(); 
     });
   </script>
   <script src="assets/js/auth.js"></script>
