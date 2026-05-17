@@ -195,6 +195,10 @@
                     Estado
                   </th>
 
+                  <th class="text-left py-3 px-4 text-sm font-medium text-gray-600">
+                    Última Modificación
+                  </th>
+
                   <th class="text-right py-3 px-4 text-sm font-medium text-gray-600">
                     Acciones
                   </th>
@@ -256,6 +260,36 @@
           />
         </div>
 
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-2">Categoría</label>
+          <input type="text" id="form-category" required class="w-full px-4 py-2 border border-gray-300 rounded-lg" />
+        </div>
+
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-2">Stock</label>
+            <input type="number" id="form-stock" required class="w-full px-4 py-2 border border-gray-300 rounded-lg" />
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-2">Stock mínimo</label>
+            <input type="number" id="form-minStock" required class="w-full px-4 py-2 border border-gray-300 rounded-lg" />
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-2">Precio</label>
+          <input type="number" step="0.01" id="form-price" required class="w-full px-4 py-2 border border-gray-300 rounded-lg" />
+        </div>
+
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-2">Nodo</label>
+          <select id="form-node" disabled class="w-full px-4 py-2 border border-gray-300 rounded-lg">
+            <option value="Nodo PC1 - La Paz">Nodo PC1 - La Paz</option>
+            <option value="Nodo PC2 - Réplica">Nodo PC2 - Réplica</option>
+          </select>
+        </div>
+
         <div class="flex gap-3 pt-4">
 
           <button
@@ -279,6 +313,7 @@
       </form>
     </div>
   </div>
+<<<<<<< HEAD
 
    <script>
     let products = [
@@ -413,5 +448,11 @@
     renderTable();
   </script>
 
+=======
+  
+  <script src="assets/js/auth.js"></script>
+  <script src="assets/js/script_inventario.js"></script>
+ 
+>>>>>>> 9bf6a5599a22cfcbfe8e1b9880cb27cb1cf798b8
 </body>
 </html>

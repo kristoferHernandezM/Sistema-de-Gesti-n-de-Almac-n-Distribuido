@@ -15,13 +15,20 @@ services:
     ports:
       - "3000:3000"
     environment:
+<<<<<<< HEAD
       MONGO_URI: mongodb://mongo1:27017,mongo2:27017,mongo3:27017/ironclad?replicaSet=rs0
+=======
+      MONGO_URI: mongodb://192.168.4.105:27017,192.168.4.101:27017/ironclad?replicaSet=rs0
+>>>>>>> 9bf6a5599a22cfcbfe8e1b9880cb27cb1cf798b8
     depends_on:
       - service_inventario
       - service_auth
       - mongo1
+<<<<<<< HEAD
       - mongo2
       - mongo3
+=======
+>>>>>>> 9bf6a5599a22cfcbfe8e1b9880cb27cb1cf798b8
 
   mongo1:
     image: mongo:7
@@ -32,6 +39,7 @@ services:
     volumes:
       - mongo1_data:/data/db
 
+<<<<<<< HEAD
   mongo2:
     image: mongo:7
     container_name: mongo2
@@ -50,24 +58,34 @@ services:
     volumes:
       - mongo3_data:/data/db
   
+=======
+>>>>>>> 9bf6a5599a22cfcbfe8e1b9880cb27cb1cf798b8
   service_auth:
     build: ./service_auth
     container_name: service_auth
     ports:
       - "3001:3001"
     environment:
+<<<<<<< HEAD
       MONGO_URI: mongodb://mongo1:27017,mongo2:27017,mongo3:27017/ironclad?replicaSet=rs0
     depends_on:
       - mongo1
       - mongo2
       - mongo3
   
+=======
+      MONGO_URI: mongodb://192.168.4.105:27017,192.168.4.101:27017/ironclad?replicaSet=rs0
+    depends_on:
+      - mongo1
+
+>>>>>>> 9bf6a5599a22cfcbfe8e1b9880cb27cb1cf798b8
   service_inventario:
     build: ./service_inventario
     container_name: service_inventario
     ports:
       - "3002:3002"
     environment:
+<<<<<<< HEAD
       MONGO_URI: mongodb://mongo1:27017,mongo2:27017,mongo3:27017/ironclad?replicaSet=rs0
     depends_on:
       - mongo1
@@ -78,3 +96,12 @@ volumes:
   mongo1_data:
   mongo2_data:
   mongo3_data:
+=======
+      MONGO_URI: mongodb://192.168.4.105:27017,192.168.4.101:27017/ironclad?replicaSet=rs0
+      PORT: 3002
+    depends_on:
+      - mongo1
+
+volumes:
+  mongo1_data:
+>>>>>>> 9bf6a5599a22cfcbfe8e1b9880cb27cb1cf798b8
