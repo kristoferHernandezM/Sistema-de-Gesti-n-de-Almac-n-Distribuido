@@ -3,7 +3,7 @@ services:
     image: nginx:alpine
     container_name: ironclad_frontend
     ports:
-      - "8080:80"
+      - "${FRONTEND_PORT}:80"
     volumes:
       - ./frontend:/usr/share/nginx/html
     depends_on:
@@ -13,9 +13,10 @@ services:
     build: ./gateway
     container_name: ironclad_gateway
     ports:
-      - "3000:3000"
+      - "${GATEWAY_PORT}:3000"
     environment:
-      MONGO_URI: mongodb://192.168.4.105:27017,192.168.4.101:27017/ironclad?replicaSet=rs0
+      MONGO_URI: ${MONGO_URI}
+      DB_NAME: ${DB_NAME}
     depends_on:
       - service_inventario
       - service_auth
@@ -26,7 +27,7 @@ services:
     container_name: mongo1
     command: ["mongod", "--replSet", "rs0", "--bind_ip_all"]
     ports:
-      - "27017:27017"
+      - "${MONGO_PORT}:27017"
     volumes:
       - mongo1_data:/data/db
 
@@ -34,9 +35,11 @@ services:
     build: ./service_auth
     container_name: service_auth
     ports:
-      - "3001:3001"
+      - "${AUTH_PORT}:3001"
     environment:
-      MONGO_URI: mongodb://192.168.4.105:27017,192.168.4.101:27017/ironclad?replicaSet=rs0
+      MONGO_URI: ${MONGO_URI}
+      DB_NAME: ${DB_NAME}
+      PORT: 3001
     depends_on:
       - mongo1
 
@@ -44,9 +47,10 @@ services:
     build: ./service_inventario
     container_name: service_inventario
     ports:
-      - "3002:3002"
+      - "${INVENTARIO_PORT}:3002"
     environment:
-      MONGO_URI: mongodb://192.168.4.105:27017,192.168.4.101:27017/ironclad?replicaSet=rs0
+      MONGO_URI: ${MONGO_URI}
+      DB_NAME: ${DB_NAME}
       PORT: 3002
     depends_on:
       - mongo1

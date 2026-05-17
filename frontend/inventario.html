@@ -216,11 +216,28 @@
                   </th>
 
                 </tr>
+
               </thead>
 
               <tbody id="table-body"></tbody>
 
             </table>
+
+              <div class="flex items-center justify-between mt-6">
+
+                <button onclick="prevPage()" class="px-4 py-2 bg-gray-100 hover:bg-gray-200 rounded-lg">
+                  Anterior
+                </button>
+
+                <p id="pagination-info" class="text-sm text-gray-600">
+                  Página 1
+                </p>
+
+                <button onclick="nextPage()" class="px-4 py-2 bg-blue-600 text-white hover:bg-blue-700 rounded-lg">
+                  Siguiente
+                </button>
+
+              </div>
 
           </div>
         </div>
@@ -326,7 +343,7 @@
       </form>
     </div>
   </div>
-  
+  <script src="config/rutas_config.js"></script>
   <script src="assets/js/auth.js"></script>
   <script src="assets/js/script_inventario.js"></script>
  
