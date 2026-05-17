@@ -6,10 +6,7 @@
 
   <title>Inventario</title>
 
-  <!-- Tailwind -->
   <script src="https://cdn.tailwindcss.com"></script>
-
-  <!-- Lucide -->
   <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 
@@ -17,10 +14,8 @@
 
   <div class="flex min-h-screen">
 
-    <!-- SIDEBAR -->
     <aside class="w-64 bg-white border-r border-gray-200 hidden lg:flex flex-col">
 
-      <!-- Logo -->
       <div class="p-6 border-b border-gray-200">
 
         <div class="flex items-center gap-3">
@@ -43,7 +38,6 @@
 
       </div>
 
-      <!-- Navegación -->
       <nav class="flex-1 p-4 space-y-1">
 
         <a
@@ -88,7 +82,6 @@
 
       </nav>
 
-      <!-- Usuario -->
       <div class="p-4 border-t border-gray-200">
 
         <div class="bg-gray-50 rounded-lg p-3 mb-3">
@@ -126,12 +119,10 @@
 
     </aside>
 
-    <!-- CONTENIDO -->
     <main class="flex-1">
 
       <div class="p-4 lg:p-8 max-w-7xl mx-auto space-y-6">
 
-        <!-- Header -->
         <div class="flex items-center justify-between">
 
           <div>
@@ -155,10 +146,8 @@
 
         </div>
 
-        <!-- Tabla -->
         <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
 
-          <!-- Buscador -->
           <div class="relative mb-6">
 
             <i
@@ -175,7 +164,6 @@
 
           </div>
 
-          <!-- Tabla -->
           <div class="overflow-x-auto">
 
             <table class="w-full">
@@ -226,7 +214,6 @@
 
   </div>
 
-  <!-- Modal -->
   <div
     id="product-modal"
     class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4"
@@ -294,7 +281,6 @@
   </div>
 
    <script>
-    // Estado Inicial
     let products = [
       { id: '1', name: 'Laptop Dell XPS 15', category: 'Computadoras', stock: 15, price: 1299.99, sku: 'LAP-001', minStock: 5 },
       { id: '2', name: 'Mouse Logitech MX Master', category: 'Periféricos', stock: 45, price: 99.99, sku: 'MOU-001', minStock: 20 },
@@ -306,7 +292,6 @@
 
     let editingId = null;
 
-    // Referencias al DOM
     const tableBody = document.getElementById('table-body');
     const searchInput = document.getElementById('search-input');
     const modal = document.getElementById('product-modal');
@@ -314,7 +299,6 @@
     const modalTitle = document.getElementById('modal-title');
     const submitBtn = document.getElementById('submit-btn');
 
-    // Función para renderizar la tabla
     function renderTable() {
       const searchTerm = searchInput.value.toLowerCase();
       tableBody.innerHTML = '';
@@ -361,14 +345,11 @@
         tableBody.appendChild(row);
       });
 
-      // Recargar iconos en los nuevos elementos insertados
       lucide.createIcons();
     }
 
-    // Buscador
     searchInput.addEventListener('input', renderTable);
 
-    // Modal - Abrir
     function handleOpenModal(id = null) {
       editingId = id;
       if (id) {
@@ -390,14 +371,12 @@
       modal.classList.remove('hidden');
     }
 
-    // Modal - Cerrar
     function handleCloseModal() {
       modal.classList.add('hidden');
       editingId = null;
       form.reset();
     }
 
-    // Formulario - Submit (Crear/Editar)
     form.addEventListener('submit', function(e) {
       e.preventDefault();
       
@@ -411,11 +390,9 @@
       };
 
       if (editingId) {
-        // Actualizar
         const index = products.findIndex(p => p.id === editingId);
         products[index] = { ...products[index], ...formData };
       } else {
-        // Crear
         products.push({
           ...formData,
           id: String(Date.now())
@@ -426,7 +403,6 @@
       renderTable();
     });
 
-    // Eliminar producto
     function handleDelete(id) {
       if (confirm('¿Estás seguro de eliminar este producto?')) {
         products = products.filter(p => p.id !== id);
@@ -434,7 +410,6 @@
       }
     }
 
-    // Inicializar la tabla al cargar la página
     renderTable();
   </script>
 

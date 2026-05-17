@@ -4,9 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Iniciar Sesión - Sistema de Inventario</title>
-  <!-- Tailwind CSS -->
+
   <script src="https://cdn.tailwindcss.com"></script>
-  <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 <body>
@@ -15,7 +14,6 @@
     <div class="w-full max-w-md">
       <div class="bg-white rounded-2xl shadow-xl p-8">
         
-        <!-- Logo -->
         <div class="flex justify-center mb-6">
           <div class="bg-blue-600 p-3 rounded-xl">
             <i data-lucide="package" class="w-8 h-8 text-white"></i>
@@ -25,7 +23,6 @@
         <h1 class="text-3xl text-center font-medium text-gray-900 mb-2">Sistema de Inventario</h1>
         <p class="text-center text-gray-600 mb-8">Inicia sesión para continuar</p>
 
-        <!-- Formulario -->
         <form id="login-form" class="space-y-6">
           <div>
             <label class="block text-sm font-medium text-gray-700 mb-2">
@@ -53,29 +50,24 @@
             />
           </div>
 
-          <!-- Mensaje de Error (Oculto por defecto) -->
           <div id="error-message" class="hidden bg-red-50 text-red-600 px-4 py-3 rounded-lg text-sm font-medium">
             Credenciales incorrectas
           </div>
 
-          <!-- Botón de Submit -->
           <button
             type="submit"
             id="submit-btn"
             class="w-full bg-blue-600 text-white font-medium py-3 rounded-lg hover:bg-blue-700 transition flex items-center justify-center gap-2"
           >
-            <!-- Contenido normal del botón -->
             <div id="btn-content" class="flex items-center gap-2">
               <i data-lucide="log-in" class="w-5 h-5"></i>
               <span>Iniciar Sesión</span>
             </div>
             
-            <!-- Spinner (Oculto por defecto) -->
             <div id="btn-spinner" class="hidden animate-spin rounded-full h-5 w-5 border-b-2 border-white"></div>
           </button>
         </form>
 
-        <!-- Links adicionales -->
         <div class="mt-6 text-center">
           <p class="text-gray-600 text-sm">
             ¿No tienes cuenta?
@@ -85,7 +77,6 @@
           </p>
         </div>
 
-        <!-- Credenciales de prueba -->
         <div class="mt-8 pt-6 border-t border-gray-200">
           <p class="text-xs text-gray-500 text-center mb-3">Credenciales de prueba:</p>
           <div class="space-y-2 text-xs text-gray-600">
@@ -103,10 +94,8 @@
   </div>
 
   <script>
-    // Inicializar Iconos
     lucide.createIcons();
 
-    // Referencias del DOM
     const form = document.getElementById('login-form');
     const emailInput = document.getElementById('email');
     const passwordInput = document.getElementById('password');
@@ -118,34 +107,25 @@
     form.addEventListener('submit', function(e) {
       e.preventDefault();
 
-      // Resetear estado de error
       errorMessage.classList.add('hidden');
 
-      // Activar estado de carga (loading)
       submitBtn.disabled = true;
       submitBtn.classList.add('opacity-50', 'cursor-not-allowed');
       btnContent.classList.add('hidden');
       btnSpinner.classList.remove('hidden');
 
-      // Simular una petición asíncrona de 1 segundo
       setTimeout(() => {
         const email = emailInput.value;
         const password = passwordInput.value;
 
-        // Validar credenciales de prueba
         const isValidAdmin = email === 'admin@inventario.com' && password === 'admin123';
         const isValidUser = email === 'usuario@inventario.com' && password === 'user123';
 
         if (isValidAdmin || isValidUser) {
-          // Simular redirección a dashboard
-          window.location.href = 'dashboard.html'; 
-          // NOTA: Como esto es HTML puro y probablemente no tienes esa ruta, 
-          // verás un error 404 en el navegador, lo cual indica que la redirección funcionó.
+          window.location.href = '/dashboard'; 
         } else {
-          // Mostrar error
           errorMessage.classList.remove('hidden');
           
-          // Revertir estado de carga
           submitBtn.disabled = false;
           submitBtn.classList.remove('opacity-50', 'cursor-not-allowed');
           btnContent.classList.remove('hidden');
