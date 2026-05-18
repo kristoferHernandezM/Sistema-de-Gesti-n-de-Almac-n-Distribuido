@@ -1,0 +1,21 @@
+docker compose up --build -d //comando para levantar
+docker compose down -v //apagar
+docker exec -it mongo1 mongosh //para revisar contenedores mongo 
+
+//para cambiar ip si es necesario 
+cfg = rs.conf()
+cfg.members[1].host = "192.168.4.105:27017"
+rs.reconfig(cfg, { force: true })
+
+//para configurar
+rs.initiate({
+  _id: "rs0",
+  members: [
+    { _id: 0, host: "192.168.4.104:27017" },
+    { _id: 1, host: "192.168.4.103:27017" }
+  ]
+})
+
+docker compose restart service_auth //reiniciar servicios
+
+docker logs service_auth //revisar que todo funcione
