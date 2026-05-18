@@ -1,324 +1,536 @@
 <!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Envíos</title>
 
-<html class="light" lang="es"><head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<script src="/frontend/config/tailwind.config.js"></script>
-<link rel="stylesheet" href="/frontend/assets/css/envios.css">
-
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
 </head>
-<body class="bg-surface text-on-surface min-h-screen flex">
-<!-- SideNavBar (Shared Component) -->
-<aside class="h-screen w-64 fixed left-0 top-0 border-r border-slate-100 bg-white flex flex-col p-4 space-y-2 z-50">
-<div class="px-4 py-6 mb-4">
-<h1 class="text-lg font-black text-[#0a182e] tracking-tighter">Control Center</h1>
-<p class="text-xs text-slate-500 font-medium uppercase tracking-widest">Precision Ops</p>
-</div>
-<nav class="flex-1 space-y-1">
-<a class="flex items-center px-4 py-3 text-slate-600 hover:bg-slate-50 rounded-xl transition-all duration-200" href="/frontend/dashboard.html">
-<span class="material-symbols-outlined mr-3" data-icon="dashboard">dashboard</span>
-<span class="font-medium">Dashboard</span>
-</a>
-<a class="flex items-center px-4 py-3 text-slate-600 hover:bg-slate-50 rounded-xl transition-all duration-200" href="/frontend/inventario.html">
-<span class="material-symbols-outlined mr-3" data-icon="inventory_2">inventory_2</span>
-<span class="font-medium">Inventory</span>
-</a>
-<a class="flex items-center px-4 py-3 text-slate-600 hover:bg-slate-50 rounded-xl transition-all duration-200" href="/frontend/monitoreo.html">
-<span class="material-symbols-outlined mr-3" data-icon="hub">hub</span>
-<span class="font-medium">Nodes</span>
-</a>
-<!-- Active Navigation Tab -->
-<a class="flex items-center px-4 py-3 bg-slate-100 text-[#dc5d00] rounded-xl transition-all duration-200 shadow-sm border-l-4 border-[#dc5d00]" href="/frontend/envios.html">
-<span class="material-symbols-outlined mr-3" data-icon="local_shipping" style="font-variation-settings: 'FILL' 1;">local_shipping</span>
-<span class="font-bold">envios</span>
-</a>
-<a class="flex items-center px-4 py-3 text-slate-600 hover:bg-slate-50 rounded-xl transition-all duration-200" href="/frontend/reportes.html">
-<span class="material-symbols-outlined mr-3" data-icon="analytics">analytics</span>
-<span class="font-medium">Reports</span>
-</a>
-</nav>
-<div class="mt-auto pt-6 border-t border-slate-100 space-y-1">
-<button class="w-full bg-primary-container text-white py-4 rounded-full font-bold text-sm shadow-xl hover:brightness-110 active:scale-95 transition-all mb-4 flex items-center justify-center gap-2">
-<span class="material-symbols-outlined text-sm" data-icon="add">add</span>
-                New Shipment
+
+<body class="bg-gray-50 min-h-screen">
+
+  <div class="flex min-h-screen">
+
+    <aside class="w-64 bg-white border-r border-gray-200 hidden lg:flex flex-col">
+
+      <div class="p-6 border-b border-gray-200">
+        <div class="flex items-center gap-3">
+          <div class="bg-blue-600 p-2 rounded-lg">
+            <i data-lucide="package" class="w-6 h-6 text-white"></i>
+          </div>
+          <div>
+            <h1 class="text-lg font-semibold text-gray-900">Sistema de</h1>
+            <p class="text-sm text-gray-600">Inventario</p>
+          </div>
+        </div>
+      </div>
+
+      <nav class="flex-1 p-4 space-y-1">
+
+        <a href="dashboard.html"
+           class="flex items-center gap-3 px-4 py-3 rounded-lg text-gray-700 hover:bg-gray-100 transition">
+          <i data-lucide="layout-dashboard" class="w-5 h-5"></i>
+          <span>Dashboard</span>
+        </a>
+
+        <a href="inventario.html"
+           class="flex items-center gap-3 px-4 py-3 rounded-lg text-gray-700 hover:bg-gray-100 transition">
+          <i data-lucide="package" class="w-5 h-5"></i>
+          <span>Inventario</span>
+        </a>
+
+        <a href="envios.html"
+           class="flex items-center gap-3 px-4 py-3 rounded-lg bg-blue-50 text-blue-600">
+          <i data-lucide="truck" class="w-5 h-5"></i>
+          <span>Envíos</span>
+        </a>
+
+        <a href="reportes.html"
+           class="flex items-center gap-3 px-4 py-3 rounded-lg text-gray-700 hover:bg-gray-100 transition">
+          <i data-lucide="bar-chart-3" class="w-5 h-5"></i>
+          <span>Reportes</span>
+        </a>
+
+        <a 
+          href="personal.html"
+          class="flex items-center gap-3 px-4 py-3 rounded-lg  text-gray-700 hover:bg-gray-100 transition">
+          <i data-lucide="users" class="w-5 h-5"></i>
+          <span>Personal</span>
+        </a>
+
+        <a href="perfil.html"
+           class="flex items-center gap-3 px-4 py-3 rounded-lg text-gray-700 hover:bg-gray-100 transition">
+          <i data-lucide="user" class="w-5 h-5"></i>
+          <span>Perfil</span>
+        </a>
+
+      </nav>
+
+      <div class="p-4 border-t border-gray-200">
+        <div class="bg-gray-50 rounded-lg p-3 mb-3">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center">
+              <span class="text-white font-medium">U</span>
+            </div>
+            <div>
+              <p class="text-sm font-medium text-gray-900">Usuario</p>
+              <p class="text-xs text-gray-500">usuario@correo.com</p>
+            </div>
+          </div>
+        </div>
+
+        <button class="w-full flex items-center gap-3 px-4 py-3 text-red-600 hover:bg-red-50 rounded-lg transition">
+          <i data-lucide="log-out" class="w-5 h-5"></i>
+          <span>Cerrar Sesión</span>
+        </button>
+      </div>
+
+    </aside>
+
+    <main class="flex-1 p-4 lg:p-8">
+      <div class="max-w-7xl mx-auto space-y-8">
+
+        <div>
+          <h1 class="text-3xl font-bold text-gray-900 mb-2">Gestión de Envíos</h1>
+          <p class="text-gray-600">Control de flujo de mercancías entre nodos regionales.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+
+          <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+            <div class="flex items-center justify-between mb-4">
+              <div class="bg-blue-500 p-3 rounded-lg">
+                <i data-lucide="truck" class="w-6 h-6 text-white"></i>
+              </div>
+              <div class="flex items-center gap-1">
+                <i data-lucide="arrow-up" class="w-4 h-4 text-green-600"></i>
+                <span class="text-sm text-green-600">+8%</span>
+              </div>
+            </div>
+            <h3 class="text-2xl font-bold text-gray-900 mb-1">142</h3>
+            <p class="text-sm text-gray-600">En Tránsito</p>
+          </div>
+
+          <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+            <div class="flex items-center justify-between mb-4">
+              <div class="bg-green-500 p-3 rounded-lg">
+                <i data-lucide="package-check" class="w-6 h-6 text-white"></i>
+              </div>
+              <div class="flex items-center gap-1">
+                <i data-lucide="arrow-up" class="w-4 h-4 text-green-600"></i>
+                <span class="text-sm text-green-600">+24 hoy</span>
+              </div>
+            </div>
+            <h3 class="text-2xl font-bold text-gray-900 mb-1">2,841</h3>
+            <p class="text-sm text-gray-600">Entregas Este Mes</p>
+          </div>
+
+          <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+            <div class="flex items-center justify-between mb-4">
+              <div class="bg-purple-500 p-3 rounded-lg">
+                <i data-lucide="timer" class="w-6 h-6 text-white"></i>
+              </div>
+              <div class="flex items-center gap-1">
+                <i data-lucide="arrow-down" class="w-4 h-4 text-green-600"></i>
+                <span class="text-sm text-green-600">-12%</span>
+              </div>
+            </div>
+            <h3 class="text-2xl font-bold text-gray-900 mb-1">4.2h</h3>
+            <p class="text-sm text-gray-600">Latencia Media</p>
+          </div>
+
+          <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+            <div class="flex items-center justify-between mb-4">
+              <div class="bg-orange-500 p-3 rounded-lg">
+                <i data-lucide="alert-triangle" class="w-6 h-6 text-white"></i>
+              </div>
+              <div class="flex items-center gap-1">
+                <i data-lucide="arrow-up" class="w-4 h-4 text-red-600"></i>
+                <span class="text-sm text-red-600">3 activas</span>
+              </div>
+            </div>
+            <h3 class="text-2xl font-bold text-gray-900 mb-1">3</h3>
+            <p class="text-sm text-gray-600">Alertas Críticas</p>
+          </div>
+
+        </div>
+
+        <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+
+          <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
+            <div>
+              <h2 class="text-xl font-semibold text-gray-900">Monitoreo en Tiempo Real</h2>
+              <p class="text-sm text-gray-500 mt-1">Envíos activos entre nodos regionales.</p>
+            </div>
+            <div class="flex gap-2">
+              <button id="btn-filters" class="flex items-center gap-2 px-4 py-2 border border-gray-200 rounded-full text-sm font-medium text-gray-600 hover:bg-gray-50 transition">
+                <i data-lucide="filter" class="w-4 h-4"></i>
+                Filtros
+              </button>
+              <button id="btn-export" class="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-full text-sm font-medium hover:bg-blue-700 transition">
+                <i data-lucide="download" class="w-4 h-4"></i>
+                Exportar
+              </button>
+            </div>
+          </div>
+
+          <div class="overflow-x-auto">
+            <table class="w-full text-left">
+              <thead>
+                <tr class="border-b border-gray-100">
+                  <th class="pb-3 text-xs font-semibold text-gray-400 uppercase tracking-wider">ID de Envío</th>
+                  <th class="pb-3 text-xs font-semibold text-gray-400 uppercase tracking-wider">Origen (IP Nodo)</th>
+                  <th class="pb-3 text-xs font-semibold text-gray-400 uppercase tracking-wider">Destino Regional</th>
+                  <th class="pb-3 text-xs font-semibold text-gray-400 uppercase tracking-wider">Estado</th>
+                  <th class="pb-3 text-xs font-semibold text-gray-400 uppercase tracking-wider">Progreso</th>
+                  <th class="pb-3"></th>
+                </tr>
+              </thead>
+              <tbody id="shipments-table"></tbody>
+            </table>
+          </div>
+
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+
+          <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+            <div class="bg-gradient-to-br from-blue-900 to-blue-950 h-48 flex items-center justify-center relative">
+              <i data-lucide="map" class="w-16 h-16 text-blue-800 opacity-40"></i>
+              <div class="absolute top-4 left-4 bg-white/90 backdrop-blur-sm rounded-lg p-3 shadow-sm">
+                <p class="text-xs font-semibold text-gray-400 uppercase tracking-wide">Nodo origen detectado</p>
+                <p class="text-sm font-semibold text-gray-900 mt-0.5">Sector Delta-4, Chihuahua</p>
+              </div>
+            </div>
+            <div class="p-4">
+              <p class="text-xs text-gray-500">Vista de red de nodos activos en tiempo real.</p>
+            </div>
+          </div>
+
+          <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+            <h2 class="text-xl font-semibold text-gray-900 mb-4">Logs de Actividad</h2>
+            <div id="logs-container" class="space-y-4"></div>
+            <button class="w-full mt-4 text-sm font-medium text-blue-600 hover:text-blue-800 transition py-2">
+              Ver todos los eventos
             </button>
-<a class="flex items-center px-4 py-3 text-slate-600 hover:bg-slate-50 rounded-xl transition-all duration-200" href="#">
-<span class="material-symbols-outlined mr-3" data-icon="help">help</span>
-<span class="font-medium">Support</span>
-</a>
-<a class="flex items-center px-4 py-3 text-slate-600 hover:bg-slate-50 rounded-xl transition-all duration-200" href="#">
-<span class="material-symbols-outlined mr-3" data-icon="logout">logout</span>
-<span class="font-medium">Sign Out</span>
-</a>
-</div>
-</aside>
-<!-- Main Content Area -->
-<main class="ml-64 flex-1 flex flex-col min-h-screen">
-<!-- TopAppBar (Shared Component) -->
-<header class="w-full sticky top-0 z-40 bg-slate-50 flex justify-between items-center px-8 py-4 shadow-sm border-b border-slate-100">
-<div class="flex items-center gap-4">
-<span class="text-xl font-extrabold text-[#0a182e] tracking-tighter">Precisión Cinética</span>
-<div class="h-6 w-px bg-slate-200 mx-2"></div>
-<h2 class="font-headline font-bold text-slate-900 tracking-tight text-lg">Gestión de Envíos</h2>
-</div>
-<div class="flex items-center gap-6">
-<div class="relative hidden lg:block">
-<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" data-icon="search">search</span>
-<input class="pl-10 pr-4 py-2 bg-slate-100 border-none rounded-full text-sm w-64 focus:ring-2 focus:ring-[#dc5d00]/20 transition-all" placeholder="Buscar envío o nodo..." type="text"/>
-</div>
-<div class="flex items-center gap-3">
-<button class="p-2 text-slate-500 hover:bg-slate-200/50 rounded-full transition-colors active:scale-95">
-<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
-</button>
-<button class="p-2 text-slate-500 hover:bg-slate-200/50 rounded-full transition-colors active:scale-95">
-<span class="material-symbols-outlined" data-icon="settings">settings</span>
-</button>
-<div class="w-10 h-10 rounded-full overflow-hidden border-2 border-white shadow-sm ml-2">
-<img alt="User profile" data-alt="professional portrait of a logistics manager in a modern office with natural light and sharp focus" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDfXO01X7a9AnyXrew4VlQzwFc06Vl40pH3HW5twqfqVHAYQccYb0xWClz-E7C_G4KWFiGIj4OYAfJa2-3vtal4oRfV14yd2I3__5IBo5X4TGvCMN9IHRaqED3v_CuCXw-kXsXDZ2fXyv4xzkkjiItACfMHhJuEbnncqCx2wS2licjjqdnOWXUxL0WG4XN6YvH0K-7PFbYbC5JX4-EZTAoboqonAaICRtQuEZrokjgaFaB1MR9XykCWDkTS-gGkn1eSTAPvCc0e8jZu"/>
-</div>
-</div>
-</div>
-</header>
-<!-- Page Canvas -->
-<div class="p-8 max-w-7xl mx-auto w-full space-y-8">
-<!-- Hero Stats / Bento Grid Intro -->
-<div class="grid grid-cols-1 md:grid-cols-4 gap-6">
-<div class="md:col-span-2 bg-primary-container p-8 rounded-2xl text-white relative overflow-hidden flex flex-col justify-between min-h-[200px] shadow-2xl">
-<div class="z-10">
-<span class="text-xs font-bold uppercase tracking-widest text-primary-fixed-dim/70">Estado de Flota</span>
-<h3 class="text-3xl font-headline font-black mt-2">Operación Activa</h3>
-</div>
-<div class="flex gap-8 z-10">
-<div>
-<p class="text-3xl font-headline font-bold">142</p>
-<p class="text-xs text-primary-fixed-dim">En Tránsito</p>
-</div>
-<div>
-<p class="text-3xl font-headline font-bold text-[#dc5d00]">3</p>
-<p class="text-xs text-primary-fixed-dim">Alertas Críticas</p>
-</div>
-</div>
-<!-- Abstract Background Pattern -->
-<div class="absolute -right-10 -bottom-10 opacity-20 transform rotate-12">
-<span class="material-symbols-outlined text-[200px]" data-icon="precision_manufacturing">precision_manufacturing</span>
-</div>
-</div>
-<div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-50 flex flex-col justify-between">
-<div class="flex justify-between items-start">
-<div class="p-3 bg-slate-50 rounded-xl">
-<span class="material-symbols-outlined text-[#dc5d00]" data-icon="timer">timer</span>
-</div>
-<span class="text-emerald-500 text-xs font-bold bg-emerald-50 px-2 py-1 rounded-full">-12%</span>
-</div>
-<div class="mt-4">
-<p class="text-2xl font-headline font-bold text-on-surface">4.2h</p>
-<p class="text-sm text-slate-500 font-medium">Latencia Media</p>
-</div>
-</div>
-<div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-50 flex flex-col justify-between">
-<div class="flex justify-between items-start">
-<div class="p-3 bg-slate-50 rounded-xl">
-<span class="material-symbols-outlined text-[#dc5d00]" data-icon="package_2">package_2</span>
-</div>
-<span class="text-slate-400 text-xs font-bold bg-slate-50 px-2 py-1 rounded-full">+24 hoy</span>
-</div>
-<div class="mt-4">
-<p class="text-2xl font-headline font-bold text-on-surface">2,841</p>
-<p class="text-sm text-slate-500 font-medium">Entregas Mes</p>
-</div>
-</div>
-</div>
-<!-- Shipments Table Section -->
-<section class="space-y-6">
-<div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
-<div>
-<h2 class="text-2xl font-headline font-black text-on-surface tracking-tight">Monitoreo de Envíos en Tiempo Real</h2>
-<p class="text-slate-500 text-sm mt-1">Control de flujo cinético de mercancías entre nodos regionales.</p>
-</div>
-<div class="flex gap-2">
-<button class="px-4 py-2 bg-white border border-slate-200 rounded-full text-xs font-bold text-slate-600 hover:bg-slate-50 transition-colors flex items-center gap-2">
-<span class="material-symbols-outlined text-sm" data-icon="filter_list">filter_list</span>
-                            Filtros Avanzados
-                        </button>
-<button class="px-4 py-2 bg-[#dc5d00] text-white rounded-full text-xs font-bold hover:brightness-110 shadow-lg shadow-[#dc5d00]/20 transition-all active:scale-95 flex items-center gap-2">
-<span class="material-symbols-outlined text-sm" data-icon="download">download</span>
-                            Exportar Datos
-                        </button>
-</div>
-</div>
-<!-- Industrial Data Table -->
-<div class="bg-white rounded-2xl shadow-sm overflow-hidden border border-slate-50">
-<table class="w-full text-left border-collapse">
-<thead>
-<tr class="bg-slate-50/50">
-<th class="px-6 py-5 text-xs font-bold text-slate-400 uppercase tracking-widest border-b border-slate-100">ID de Envío</th>
-<th class="px-6 py-5 text-xs font-bold text-slate-400 uppercase tracking-widest border-b border-slate-100">Origen (IP Nodo)</th>
-<th class="px-6 py-5 text-xs font-bold text-slate-400 uppercase tracking-widest border-b border-slate-100">Destino Regional</th>
-<th class="px-6 py-5 text-xs font-bold text-slate-400 uppercase tracking-widest border-b border-slate-100">Estado Operativo</th>
-<th class="px-6 py-5 text-xs font-bold text-slate-400 uppercase tracking-widest border-b border-slate-100">Progreso de Ruta</th>
-<th class="px-6 py-5 text-xs font-bold text-slate-400 uppercase tracking-widest border-b border-slate-100"></th>
-</tr>
-</thead>
-<tbody class="divide-y divide-slate-50">
-<!-- Row 1 -->
-<tr class="group hover:bg-slate-50/80 transition-colors">
-<td class="px-6 py-5">
-<span class="font-headline font-bold text-on-surface">#IC-9928-X</span>
-</td>
-<td class="px-6 py-5">
-<div class="flex items-center gap-2">
-<div class="w-2 h-2 rounded-full bg-emerald-500"></div>
-<code class="text-xs font-mono bg-slate-100 px-2 py-1 rounded text-slate-600">192.168.4.120</code>
-</div>
-</td>
-<td class="px-6 py-5 text-sm font-medium text-slate-700">Terminal Norte, CDMX</td>
-<td class="px-6 py-5">
-<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#ffdbcb] text-[#dc5d00] text-[10px] font-black uppercase tracking-wider">
-<span class="material-symbols-outlined text-[14px]" data-icon="local_shipping">local_shipping</span>
-                                        En tránsito
-                                    </span>
-</td>
-<td class="px-6 py-5">
-<div class="w-full max-w-[120px] space-y-1.5">
-<div class="flex justify-between text-[10px] font-bold text-slate-400">
-<span>65%</span>
-<span>ETA 2h</span>
-</div>
-<div class="h-1.5 w-full bg-slate-100 rounded-full overflow-hidden">
-<div class="h-full bg-[#dc5d00] rounded-full" style="width: 65%"></div>
-</div>
-</div>
-</td>
-<td class="px-6 py-5 text-right">
-<button class="p-2 text-slate-400 hover:text-on-surface transition-colors">
-<span class="material-symbols-outlined" data-icon="more_vert">more_vert</span>
-</button>
-</td>
-</tr>
-<!-- Row 2 -->
-<tr class="group hover:bg-slate-50/80 transition-colors">
-<td class="px-6 py-5">
-<span class="font-headline font-bold text-on-surface">#IC-8841-B</span>
-</td>
-<td class="px-6 py-5">
-<div class="flex items-center gap-2">
-<div class="w-2 h-2 rounded-full bg-emerald-500"></div>
-<code class="text-xs font-mono bg-slate-100 px-2 py-1 rounded text-slate-600">10.0.45.221</code>
-</div>
-</td>
-<td class="px-6 py-5 text-sm font-medium text-slate-700">Puerto de Valencia, ES</td>
-<td class="px-6 py-5">
-<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-100 text-emerald-700 text-[10px] font-black uppercase tracking-wider">
-<span class="material-symbols-outlined text-[14px]" data-icon="check_circle">check_circle</span>
-                                        Entregado
-                                    </span>
-</td>
-<td class="px-6 py-5">
-<div class="w-full max-w-[120px] space-y-1.5">
-<div class="flex justify-between text-[10px] font-bold text-slate-400">
-<span>100%</span>
-<span>Completado</span>
-</div>
-<div class="h-1.5 w-full bg-emerald-500 rounded-full overflow-hidden"></div>
-</div>
-</td>
-<td class="px-6 py-5 text-right">
-<button class="p-2 text-slate-400 hover:text-on-surface transition-colors">
-<span class="material-symbols-outlined" data-icon="more_vert">more_vert</span>
-</button>
-</td>
-</tr>
-<!-- Row 3 -->
-<tr class="group hover:bg-slate-50/80 transition-colors">
-<td class="px-6 py-5">
-<span class="font-headline font-bold text-on-surface">#IC-1205-Z</span>
-</td>
-<td class="px-6 py-5">
-<div class="flex items-center gap-2">
-<div class="w-2 h-2 rounded-full bg-amber-500"></div>
-<code class="text-xs font-mono bg-slate-100 px-2 py-1 rounded text-slate-600">172.16.8.5</code>
-</div>
-</td>
-<td class="px-6 py-5 text-sm font-medium text-slate-700">Hub Logístico, Bogotá</td>
-<td class="px-6 py-5">
-<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-100 text-slate-500 text-[10px] font-black uppercase tracking-wider">
-<span class="material-symbols-outlined text-[14px]" data-icon="schedule">schedule</span>
-                                        Pendiente
-                                    </span>
-</td>
-<td class="px-6 py-5">
-<div class="w-full max-w-[120px] space-y-1.5">
-<div class="flex justify-between text-[10px] font-bold text-slate-400">
-<span>0%</span>
-<span>Esperando</span>
-</div>
-<div class="h-1.5 w-full bg-slate-100 rounded-full overflow-hidden"></div>
-</div>
-</td>
-<td class="px-6 py-5 text-right">
-<button class="p-2 text-slate-400 hover:text-on-surface transition-colors">
-<span class="material-symbols-outlined" data-icon="more_vert">more_vert</span>
-</button>
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</section>
-<!-- Bottom Layout: Map & Details Grid -->
-<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-<!-- Mini Map Section -->
-<div class="lg:col-span-2 bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-50 h-[300px] relative">
-<div class="absolute inset-0 bg-slate-200">
-<img alt="Map view" class="w-full h-full object-cover" data-alt="minimalist dark blue stylized digital map showing network connection lines between points of light across a continent" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBF0heB6gdUbIMZsjWZMzZRCIftchNNwE4GKMvm4RULAz0ayfCRKI76ijzNftyQONkgbHYA7sTuw_fcWn0k4FeMVBdtNGrkgaLUZhCy5Hn6A-S52_jexvWD5FdfvGkL8GxzBoj-Qpo9cThBVFv2SxBrFHuOCBQoRPqdKkDPR0735MW_7OW0VBQc81qNvaofgnLeBlvs3XnNroUylonknEuNjZ4aBgvK46w17WFdVV_rlmqW01jbWTzW0RuHFCecSvXlVVJSEp-GsvIl"/>
-<!-- Simulated Map Overlays -->
-<div class="absolute top-4 left-4 z-10 bg-white/90 backdrop-blur-md p-3 rounded-xl shadow-lg border border-white/20">
-<p class="text-[10px] font-bold text-slate-400 uppercase">Nodo Origen Detectado</p>
-<p class="text-sm font-bold text-on-surface">Sector Delta-4, Chihuahua</p>
-</div>
-</div>
-</div>
-<!-- System Logs / Asymmetric Card -->
-<div class="bg-surface-container p-6 rounded-2xl flex flex-col space-y-4">
-<h4 class="font-headline font-bold text-on-surface flex items-center gap-2">
-<span class="material-symbols-outlined text-primary" data-icon="list_alt">list_alt</span>
-                        Logs de Actividad
-                    </h4>
-<div class="space-y-4 overflow-y-auto max-h-[220px] pr-2">
-<div class="flex gap-3">
-<div class="w-1 h-full bg-emerald-500 rounded-full"></div>
-<div>
-<p class="text-xs font-bold text-on-surface">#IC-8841-B: Entregado</p>
-<p class="text-[10px] text-slate-500">Hace 4 minutos - Confirmación vía Nodo-221</p>
-</div>
-</div>
-<div class="flex gap-3">
-<div class="w-1 h-full bg-[#dc5d00] rounded-full"></div>
-<div>
-<p class="text-xs font-bold text-on-surface">#IC-9928-X: Retraso detectado</p>
-<p class="text-[10px] text-slate-500">Hace 12 minutos - Congestión en Nodo Central</p>
-</div>
-</div>
-<div class="flex gap-3">
-<div class="w-1 h-full bg-blue-500 rounded-full"></div>
-<div>
-<p class="text-xs font-bold text-on-surface">Sistema: Backup iniciado</p>
-<p class="text-[10px] text-slate-500">Hace 32 minutos - Automatización rutinaria</p>
-</div>
-</div>
-</div>
-<button class="w-full mt-2 py-2 text-xs font-bold text-[#dc5d00] hover:bg-[#dc5d00]/5 transition-colors rounded-lg">Ver todos los eventos</button>
-</div>
-</div>
-</div>
-</main>
-<!-- FAB for Quick Actions (Mandatory for Shipments Dashboard) -->
-<button class="fixed bottom-8 right-8 w-16 h-16 bg-primary-container text-white rounded-full shadow-2xl flex items-center justify-center hover:scale-110 active:scale-90 transition-all z-50 group">
-<span class="material-symbols-outlined text-3xl group-hover:rotate-90 transition-transform duration-300" data-icon="add">add</span>
-</button>
-<script src="assets/js/auth.js"></script>
-</body></html>
+          </div>
+
+        </div>
+
+      </div>
+    </main>
+
+  </div>
+
+  <div id="filter-backdrop" class="hidden fixed inset-0 bg-black/20 z-40" onclick="closeFilters()"></div>
+
+  <div id="filter-panel" class="hidden fixed right-0 top-0 h-full w-80 bg-white shadow-2xl z-50 flex flex-col">
+    <div class="flex items-center justify-between p-6 border-b border-gray-100">
+      <h3 class="text-lg font-semibold text-gray-900">Filtros</h3>
+      <button onclick="closeFilters()" class="p-2 hover:bg-gray-100 rounded-lg transition">
+        <i data-lucide="x" class="w-5 h-5 text-gray-500"></i>
+      </button>
+    </div>
+
+    <div class="flex-1 p-6 space-y-6 overflow-y-auto">
+
+      <div>
+        <label class="block text-sm font-semibold text-gray-700 mb-3">Estado</label>
+        <div class="space-y-2">
+          <label class="flex items-center gap-3 cursor-pointer">
+            <input type="checkbox" value="transit" class="filter-status w-4 h-4 rounded text-blue-600 border-gray-300 focus:ring-blue-500" checked>
+            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-blue-100 text-blue-700">
+              <i data-lucide="truck" class="w-3 h-3"></i> En tránsito
+            </span>
+          </label>
+          <label class="flex items-center gap-3 cursor-pointer">
+            <input type="checkbox" value="delivered" class="filter-status w-4 h-4 rounded text-blue-600 border-gray-300 focus:ring-blue-500" checked>
+            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-green-100 text-green-700">
+              <i data-lucide="check-circle" class="w-3 h-3"></i> Entregado
+            </span>
+          </label>
+          <label class="flex items-center gap-3 cursor-pointer">
+            <input type="checkbox" value="pending" class="filter-status w-4 h-4 rounded text-blue-600 border-gray-300 focus:ring-blue-500" checked>
+            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-gray-100 text-gray-500">
+              <i data-lucide="clock" class="w-3 h-3"></i> Pendiente
+            </span>
+          </label>
+        </div>
+      </div>
+
+      <div>
+        <label class="block text-sm font-semibold text-gray-700 mb-3">
+          Progreso mínimo: <span id="progress-label">0%</span>
+        </label>
+        <input type="range" id="filter-progress" min="0" max="100" value="0" step="5"
+               class="w-full accent-blue-600"
+               oninput="document.getElementById('progress-label').textContent = this.value + '%'">
+        <div class="flex justify-between text-xs text-gray-400 mt-1">
+          <span>0%</span><span>50%</span><span>100%</span>
+        </div>
+      </div>
+
+      <div>
+        <label class="block text-sm font-semibold text-gray-700 mb-2">Destino</label>
+        <input type="text" id="filter-destination" placeholder="Buscar destino..."
+               class="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+      </div>
+
+    </div>
+
+    <div class="p-6 border-t border-gray-100 flex gap-3">
+      <button onclick="resetFilters()" class="flex-1 py-2.5 border border-gray-200 rounded-lg text-sm font-medium text-gray-600 hover:bg-gray-50 transition">
+        Limpiar
+      </button>
+      <button onclick="applyFilters()" class="flex-1 py-2.5 bg-blue-600 text-white rounded-lg text-sm font-semibold hover:bg-blue-700 transition">
+        Aplicar
+      </button>
+    </div>
+  </div>
+
+  <button class="fixed bottom-8 right-8 w-14 h-14 bg-blue-600 text-white rounded-full shadow-xl flex items-center justify-center hover:bg-blue-700 hover:scale-110 active:scale-90 transition-all z-50">
+    <i data-lucide="plus" class="w-7 h-7"></i>
+  </button>
+
+  <script>
+
+    lucide.createIcons();
+
+    const shipments = [
+      {
+        id: '#IC-9928-X',
+        ip: '192.168.4.120',
+        nodeStatus: 'green',
+        destination: 'Terminal Norte, CDMX',
+        status: 'transit',
+        progress: 65,
+        eta: 'ETA 2h'
+      },
+      {
+        id: '#IC-8841-B',
+        ip: '10.0.45.221',
+        nodeStatus: 'green',
+        destination: 'Puerto de Valencia, ES',
+        status: 'delivered',
+        progress: 100,
+        eta: 'Completado'
+      },
+      {
+        id: '#IC-1205-Z',
+        ip: '172.16.8.5',
+        nodeStatus: 'amber',
+        destination: 'Hub Logístico, Bogotá',
+        status: 'pending',
+        progress: 0,
+        eta: 'Esperando'
+      },
+    ];
+
+    const statusConfig = {
+      transit:   { label: 'En tránsito', icon: 'truck',        classes: 'bg-blue-100 text-blue-700' },
+      delivered: { label: 'Entregado',   icon: 'check-circle', classes: 'bg-green-100 text-green-700' },
+      pending:   { label: 'Pendiente',   icon: 'clock',        classes: 'bg-gray-100 text-gray-500' },
+    };
+
+    const progressColor = {
+      transit: 'bg-blue-500', delivered: 'bg-green-500', pending: 'bg-gray-200'
+    };
+
+    const nodeDot = { green: 'bg-green-500', amber: 'bg-amber-500' };
+
+    function renderTable(data) {
+      const tbody = document.getElementById('shipments-table');
+      tbody.innerHTML = '';
+
+      if (data.length === 0) {
+        tbody.innerHTML = `
+          <tr>
+            <td colspan="6" class="py-12 text-center text-sm text-gray-400">
+              No se encontraron envíos con los filtros aplicados.
+            </td>
+          </tr>`;
+        lucide.createIcons();
+        return;
+      }
+
+      data.forEach(s => {
+        const cfg = statusConfig[s.status];
+        const row = document.createElement('tr');
+        row.className = 'border-b border-gray-50 hover:bg-gray-50 transition-colors';
+        row.innerHTML = `
+          <td class="py-4 pr-4">
+            <span class="font-semibold text-gray-900">${s.id}</span>
+          </td>
+          <td class="py-4 pr-4">
+            <div class="flex items-center gap-2">
+              <div class="w-2 h-2 rounded-full ${nodeDot[s.nodeStatus]}"></div>
+              <code class="text-xs bg-gray-100 px-2 py-1 rounded text-gray-600 font-mono">${s.ip}</code>
+            </div>
+          </td>
+          <td class="py-4 pr-4 text-sm font-medium text-gray-700">${s.destination}</td>
+          <td class="py-4 pr-4">
+            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold ${cfg.classes}">
+              <i data-lucide="${cfg.icon}" class="w-3.5 h-3.5"></i>
+              ${cfg.label}
+            </span>
+          </td>
+          <td class="py-4 pr-4">
+            <div class="w-28 space-y-1.5">
+              <div class="flex justify-between text-xs font-medium text-gray-400">
+                <span>${s.progress}%</span>
+                <span>${s.eta}</span>
+              </div>
+              <div class="h-1.5 w-full bg-gray-100 rounded-full overflow-hidden">
+                <div class="h-full ${progressColor[s.status]} rounded-full transition-all" style="width: ${s.progress}%"></div>
+              </div>
+            </div>
+          </td>
+          <td class="py-4 text-right">
+            <button class="p-1.5 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-lg transition">
+              <i data-lucide="more-vertical" class="w-4 h-4"></i>
+            </button>
+          </td>
+        `;
+        tbody.appendChild(row);
+      });
+
+      lucide.createIcons();
+    }
+
+    renderTable(shipments);
+
+    let activeFilters = { statuses: ['transit','delivered','pending'], minProgress: 0, destination: '' };
+
+    function getFilteredData() {
+      return shipments.filter(s => {
+        const statusOk = activeFilters.statuses.includes(s.status);
+        const progressOk = s.progress >= activeFilters.minProgress;
+        const destOk = s.destination.toLowerCase().includes(activeFilters.destination.toLowerCase());
+        return statusOk && progressOk && destOk;
+      });
+    }
+
+    function openFilters() {
+      document.querySelectorAll('.filter-status').forEach(cb => {
+        cb.checked = activeFilters.statuses.includes(cb.value);
+      });
+      document.getElementById('filter-progress').value = activeFilters.minProgress;
+      document.getElementById('progress-label').textContent = activeFilters.minProgress + '%';
+      document.getElementById('filter-destination').value = activeFilters.destination;
+
+      document.getElementById('filter-panel').classList.remove('hidden');
+      document.getElementById('filter-backdrop').classList.remove('hidden');
+      lucide.createIcons();
+    }
+
+    function closeFilters() {
+      document.getElementById('filter-panel').classList.add('hidden');
+      document.getElementById('filter-backdrop').classList.add('hidden');
+    }
+
+    function applyFilters() {
+      const checked = [...document.querySelectorAll('.filter-status:checked')].map(cb => cb.value);
+      activeFilters.statuses = checked;
+      activeFilters.minProgress = Number(document.getElementById('filter-progress').value);
+      activeFilters.destination = document.getElementById('filter-destination').value.trim();
+
+      renderTable(getFilteredData());
+      updateFilterBadge();
+      closeFilters();
+    }
+
+    function resetFilters() {
+      activeFilters = { statuses: ['transit','delivered','pending'], minProgress: 0, destination: '' };
+      document.querySelectorAll('.filter-status').forEach(cb => cb.checked = true);
+      document.getElementById('filter-progress').value = 0;
+      document.getElementById('progress-label').textContent = '0%';
+      document.getElementById('filter-destination').value = '';
+
+      renderTable(shipments);
+      updateFilterBadge();
+      closeFilters();
+    }
+
+    function updateFilterBadge() {
+      const btn = document.getElementById('btn-filters');
+      const isDefault =
+        activeFilters.statuses.length === 3 &&
+        activeFilters.minProgress === 0 &&
+        activeFilters.destination === '';
+
+      const existingBadge = btn.querySelector('.filter-count');
+      if (existingBadge) existingBadge.remove();
+
+      if (!isDefault) {
+        const count = (3 - activeFilters.statuses.length)
+          + (activeFilters.minProgress > 0 ? 1 : 0)
+          + (activeFilters.destination ? 1 : 0);
+        const badge = document.createElement('span');
+        badge.className = 'filter-count w-4 h-4 bg-blue-600 text-white text-[10px] font-bold rounded-full flex items-center justify-center';
+        badge.textContent = count;
+        btn.appendChild(badge);
+        btn.classList.add('border-blue-300', 'text-blue-600');
+      } else {
+        btn.classList.remove('border-blue-300', 'text-blue-600');
+      }
+    }
+
+    document.getElementById('btn-filters').addEventListener('click', openFilters);
+
+    document.getElementById('btn-export').addEventListener('click', () => {
+      const data = getFilteredData();
+      const statusLabels = { transit: 'En tránsito', delivered: 'Entregado', pending: 'Pendiente' };
+
+      const headers = ['ID de Envío', 'IP Nodo', 'Destino', 'Estado', 'Progreso (%)', 'ETA'];
+      const rows = data.map(s => [
+        s.id, s.ip, s.destination, statusLabels[s.status], s.progress, s.eta
+      ]);
+
+      const csv = [headers, ...rows]
+        .map(row => row.map(v => `"${String(v).replace(/"/g, '""')}"`).join(','))
+        .join('\n');
+
+      const blob = new Blob(['\uFEFF' + csv], { type: 'text/csv;charset=utf-8;' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `envios_${new Date().toISOString().slice(0,10)}.csv`;
+      a.click();
+      URL.revokeObjectURL(url);
+
+      const btn = document.getElementById('btn-export');
+      btn.innerHTML = '<i data-lucide="check" class="w-4 h-4"></i> Exportado';
+      lucide.createIcons();
+      setTimeout(() => {
+        btn.innerHTML = '<i data-lucide="download" class="w-4 h-4"></i> Exportar';
+        lucide.createIcons();
+      }, 2000);
+    });
+
+    const logs = [
+      { color: 'bg-green-500',  title: '#IC-8841-B: Entregado',       time: 'Hace 4 minutos — Confirmación vía Nodo-221' },
+      { color: 'bg-orange-500', title: '#IC-9928-X: Retraso detectado', time: 'Hace 12 minutos — Congestión en Nodo Central' },
+      { color: 'bg-blue-500',   title: 'Sistema: Backup iniciado',     time: 'Hace 32 minutos — Automatización rutinaria' },
+    ];
+
+    const logsContainer = document.getElementById('logs-container');
+    logs.forEach(log => {
+      logsContainer.insertAdjacentHTML('beforeend', `
+        <div class="flex items-start gap-3 pb-4 border-b border-gray-100">
+          <div class="w-1 self-stretch ${log.color} rounded-full mt-1"></div>
+          <div class="flex-1">
+            <p class="text-sm font-medium text-gray-900">${log.title}</p>
+            <p class="text-xs text-gray-500 mt-0.5">${log.time}</p>
+          </div>
+        </div>
+      `);
+    });
+
+    lucide.createIcons();
+
+  </script>
+
+</body>
+</html>

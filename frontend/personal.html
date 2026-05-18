@@ -1,182 +1,407 @@
 <!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Registro de Personal</title>
 
-<html class="light" lang="es"><head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Registro de Personal - Ironclad Logistics</title>
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<script src="/frontend/config/tailwind.config.js"></script>
-<link rel="stylesheet" href="/frontend/assets/css/personal.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
 </head>
-<body class="bg-background text-on-background font-body min-h-screen flex flex-col">
-<!-- TopNavBar Suppression Check: This is a task-focused registration screen, 
-         but for Brand Identity in this demo, we'll keep a minimal anchor header -->
-<header class="w-full h-16 flex justify-between items-center px-8 z-40 sticky top-0 backdrop-blur-md bg-[#f8f9ff]/80">
-<div class="text-xl font-extrabold text-[#0a182e] tracking-tighter font-headline">
-            Logística Distribuida
+
+<body class="bg-gray-50 min-h-screen">
+
+  <div class="flex min-h-screen">
+
+    <aside class="w-64 bg-white border-r border-gray-200 hidden lg:flex flex-col">
+
+      <div class="p-6 border-b border-gray-200">
+        <div class="flex items-center gap-3">
+          <div class="bg-blue-600 p-2 rounded-lg">
+            <i data-lucide="package" class="w-6 h-6 text-white"></i>
+          </div>
+          <div>
+            <h1 class="text-lg font-semibold text-gray-900">Sistema de</h1>
+            <p class="text-sm text-gray-600">Inventario</p>
+          </div>
         </div>
-<div class="flex items-center gap-4">
-<span class="material-symbols-outlined text-secondary">notifications</span>
-<span class="material-symbols-outlined text-secondary">account_circle</span>
-</div>
-</header>
-<main class="flex-grow flex items-center justify-center p-6 md:p-12 relative overflow-hidden">
-<!-- Background decorative elements for "Industrial Precision" -->
-<div class="absolute top-[-10%] right-[-5%] w-[500px] h-[500px] bg-secondary-container/20 rounded-full blur-[120px] pointer-events-none"></div>
-<div class="absolute bottom-[-10%] left-[-5%] w-[400px] h-[400px] bg-tertiary-fixed/30 rounded-full blur-[100px] pointer-events-none"></div>
-<div class="w-full max-w-5xl grid grid-cols-1 lg:grid-cols-12 gap-0 overflow-hidden rounded-xl shadow-2xl shadow-on-surface/5 border border-outline-variant/10">
-<!-- Left Side: Visual Anchor & Branding -->
-<div class="lg:col-span-5 kinetic-gradient p-10 flex flex-col justify-between relative overflow-hidden">
-<div class="relative z-10">
-<div class="inline-block px-3 py-1 bg-on-tertiary-container/20 text-tertiary-fixed text-[10px] font-bold uppercase tracking-widest rounded-full mb-6">
-                        Personal Operativo
+      </div>
+
+      <nav class="flex-1 p-4 space-y-1">
+
+        <a href="dashboard.html"
+           class="flex items-center gap-3 px-4 py-3 rounded-lg text-gray-700 hover:bg-gray-100 transition">
+          <i data-lucide="layout-dashboard" class="w-5 h-5"></i>
+          <span>Dashboard</span>
+        </a>
+
+        <a href="inventario.html"
+           class="flex items-center gap-3 px-4 py-3 rounded-lg text-gray-700 hover:bg-gray-100 transition">
+          <i data-lucide="package" class="w-5 h-5"></i>
+          <span>Inventario</span>
+        </a>
+
+        <a href="envios.html"
+           class="flex items-center gap-3 px-4 py-3 rounded-lg text-gray-700 hover:bg-gray-100 transition">
+          <i data-lucide="truck" class="w-5 h-5"></i>
+          <span>Envíos</span>
+        </a>
+
+        <a href="reportes.html"
+           class="flex items-center gap-3 px-4 py-3 rounded-lg text-gray-700 hover:bg-gray-100 transition">
+          <i data-lucide="bar-chart-3" class="w-5 h-5"></i>
+          <span>Reportes</span>
+        </a>
+
+        <a href="personal.html"
+           class="flex items-center gap-3 px-4 py-3 rounded-lg bg-blue-50 text-blue-600">
+          <i data-lucide="users" class="w-5 h-5"></i>
+          <span>Personal</span>
+        </a>
+
+        <a href="perfil.html"
+          class="flex items-center gap-3 px-4 py-3 rounded-lg text-gray-700 hover:bg-gray-100 transition">
+          <i data-lucide="user" class="w-5 h-5"></i>
+          <span>Perfil</span>
+        </a>
+
+      </nav>
+
+      <div class="p-4 border-t border-gray-200">
+        <div class="bg-gray-50 rounded-lg p-3 mb-3">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center">
+              <span class="text-white font-medium">U</span>
+            </div>
+            <div>
+              <p class="text-sm font-medium text-gray-900">Usuario</p>
+              <p class="text-xs text-gray-500">usuario@correo.com</p>
+            </div>
+          </div>
+        </div>
+
+        <button class="w-full flex items-center gap-3 px-4 py-3 text-red-600 hover:bg-red-50 rounded-lg transition">
+          <i data-lucide="log-out" class="w-5 h-5"></i>
+          <span>Cerrar Sesión</span>
+        </button>
+      </div>
+
+    </aside>
+
+    <main class="flex-1 p-4 lg:p-8">
+      <div class="max-w-7xl mx-auto space-y-8">
+
+        <div>
+          <h1 class="text-3xl font-bold text-gray-900 mb-2">Registro de Personal</h1>
+          <p class="text-gray-600">Ingrese los datos del nuevo operario para habilitar sus credenciales de acceso.</p>
+        </div>
+
+        <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+          <div class="grid grid-cols-1 lg:grid-cols-5">
+
+            <div class="lg:col-span-2 bg-blue-600 p-10 flex flex-col justify-between relative overflow-hidden">
+              <div class="relative z-10">
+                <span class="inline-block px-3 py-1 bg-white/20 text-white text-[10px] font-bold uppercase tracking-widest rounded-full mb-6">
+                  Personal Operativo
+                </span>
+                <h2 class="text-3xl font-bold text-white tracking-tight leading-tight mb-4">
+                  Sistema de<br/>Inventario
+                </h2>
+                <p class="text-blue-100 text-sm max-w-xs">
+                  Gestión centralizada de nodos y personal operativo en tiempo real.
+                </p>
+              </div>
+
+              <div class="relative z-10 mt-10 space-y-4">
+                <div class="flex items-center gap-3 bg-white/10 rounded-xl p-4 border border-white/10">
+                  <div class="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <i data-lucide="shield-check" class="w-5 h-5 text-white"></i>
+                  </div>
+                  <div>
+                    <p class="text-white text-sm font-semibold">Acceso Seguro</p>
+                    <p class="text-blue-200 text-xs">Credenciales encriptadas</p>
+                  </div>
+                </div>
+                <div class="flex items-center gap-3 bg-white/10 rounded-xl p-4 border border-white/10">
+                  <div class="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <i data-lucide="map-pin" class="w-5 h-5 text-white"></i>
+                  </div>
+                  <div>
+                    <p class="text-white text-sm font-semibold">Control de Nodos</p>
+                    <p class="text-blue-200 text-xs">Gestión por sucursal</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="absolute -bottom-8 -right-8 opacity-10">
+                <i data-lucide="users" class="w-48 h-48 text-white"></i>
+              </div>
+            </div>
+
+            <div class="lg:col-span-3 p-8 md:p-10">
+
+              <div class="flex items-center gap-2 mb-8">
+                <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+                <p class="text-xs text-gray-400 font-semibold uppercase tracking-widest">Servidor de Identidad Activo</p>
+              </div>
+
+              <form id="formPersonal" class="space-y-5">
+
+                <div class="col-span-full">
+                  <label class="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">
+                    Nombre Completo
+                  </label>
+                  <div class="relative">
+                    <div class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">
+                      <i data-lucide="user" class="w-4 h-4"></i>
                     </div>
-<h1 class="font-headline font-extrabold text-4xl lg:text-5xl text-white tracking-tighter leading-tight mb-4">
-                        Ironclad<br/>Logistics
-                    </h1>
-<p class="text-secondary-fixed/80 text-sm max-w-xs font-medium">
-                        Sincronización de activos y gestión de nodos en tiempo real para la red logística más robusta del país.
-                    </p>
-</div>
-<div class="relative z-10 mt-12">
-<div class="flex items-center gap-4 mb-8">
-<div class="w-12 h-12 rounded-2xl bg-white/10 flex items-center justify-center border border-white/5">
-<span class="material-symbols-outlined text-white">hub</span>
-</div>
-<div>
-<div class="text-white font-bold text-sm">Control de Nodos</div>
-<div class="text-secondary-fixed/60 text-xs">Gestión centralizada de sucursales</div>
-</div>
-</div>
-</div>
-<!-- Abstract Industrial Texture -->
-<div class="absolute bottom-0 right-0 opacity-10">
-<span class="material-symbols-outlined text-[300px] translate-x-24 translate-y-24" style="font-variation-settings: 'FILL' 1;">precision_manufacturing</span>
-</div>
-</div>
-<!-- Right Side: Registration Form -->
-<div class="lg:col-span-7 bg-surface-container-lowest p-10 md:p-14">
-<div class="mb-10">
-<h2 class="font-headline font-bold text-2xl text-on-surface tracking-tight mb-2">Registro de Personal</h2>
-<p class="text-secondary text-sm">Ingrese los datos del nuevo operario para habilitar sus credenciales de acceso.</p>
-</div>
-<form class="space-y-6" id="formPersonal">
-<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-<!-- Full Name -->
-<div class="col-span-full">
-<label class="block text-xs font-bold text-on-surface-variant uppercase tracking-wider mb-2 ml-1">Nombre Completo</label>
-<div class="relative">
-<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline-variant text-sm">person</span>
-<input id="nombre "class="w-full pl-12 pr-4 py-3.5 bg-surface-container-low border-none rounded-2xl focus:ring-2 focus:ring-on-tertiary-container/30 transition-all text-sm font-medium placeholder:text-outline-variant/60" placeholder="Ej. Carlos Mendoza Ruiz" type="text"/>
-</div>
-</div>
-<!-- ID Employee -->
-<div>
-<label class="block text-xs font-bold text-on-surface-variant uppercase tracking-wider mb-2 ml-1">ID de Empleado</label>
-<div class="relative">
-<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline-variant text-sm">badge</span>
-<input id="idEmpelado" class="w-full pl-12 pr-4 py-3.5 bg-surface-container-low border-none rounded-2xl focus:ring-2 focus:ring-on-tertiary-container/30 transition-all text-sm font-medium" placeholder="ID-0000" type="text"/>
-</div>
-</div>
-<!-- Node Dropdown -->
-<div>
-<label class="block text-xs font-bold text-on-surface-variant uppercase tracking-wider mb-2 ml-1">Nodo / Sucursal</label>
-<div class="relative">
-<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline-variant text-sm">location_on</span>
-<select id="nodo" class="w-full pl-12 pr-4 py-3.5 bg-surface-container-low border-none rounded-2xl focus:ring-2 focus:ring-on-tertiary-container/30 appearance-none transition-all text-sm font-medium">
-<option disabled="" selected="" value="">Seleccionar Nodo</option>
-<option>Nodo Central - CDMX</option>
-<option>Nodo Norte - Monterrey</option>
-<option>Nodo Occidente - Guadalajara</option>
-<option>Punto Logístico - Querétaro</option>
-</select>
-<span class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 text-outline-variant pointer-events-none">expand_more</span>
-</div>
-</div>
-<!-- Password -->
-<div>
-<label class="block text-xs font-bold text-on-surface-variant uppercase tracking-wider mb-2 ml-1">Contraseña</label>
-<div class="relative">
-<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline-variant text-sm">lock</span>
-<input id="password" class="w-full pl-12 pr-4 py-3.5 bg-surface-container-low border-none rounded-2xl focus:ring-2 focus:ring-on-tertiary-container/30 transition-all text-sm font-medium" placeholder="••••••••" type="password"/>
-</div>
-</div>
-<!-- Verify Password -->
-<div>
-<label class="block text-xs font-bold text-on-surface-variant uppercase tracking-wider mb-2 ml-1">Verificar Contraseña</label>
-<div class="relative">
-<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline-variant text-sm">verified_user</span>
-<input id=passwordConfirm class="w-full pl-12 pr-4 py-3.5 bg-surface-container-low border-none rounded-2xl focus:ring-2 focus:ring-on-tertiary-container/30 transition-all text-sm font-medium" placeholder="••••••••" type="password"/>
-</div>
-</div>
-</div>
-<div class="pt-6">
-<button class="w-full py-4 bg-primary-container text-white font-headline font-bold text-sm rounded-full shadow-lg shadow-primary-container/20 hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center justify-center gap-2" type="submit">
-<span>Proveer Acceso</span>
-<span class="material-symbols-outlined text-sm">arrow_forward</span>
-</button>
-</div>
-<div class="mt-8 flex items-center justify-center gap-2">
-<span class="w-2 h-2 rounded-full bg-on-tertiary-container animate-pulse"></span>
-<p class="text-[10px] text-secondary font-medium uppercase tracking-widest">Servidor de Identidad Activo</p>
-</div>
-</form>
-</div>
-</div>
-</main>
-<!-- Footer following Shared Components Logic -->
-<footer class="flex justify-between items-center px-12 w-full border-t border-gray-200/10 py-6 mt-auto bg-transparent">
-<div class="font-['Inter'] text-xs uppercase tracking-widest text-[#545e76]">
-            © 2024 La Armadura Digital - Logística
+                    <input
+                      id="nombre"
+                      type="text"
+                      placeholder="Ej. Carlos Mendoza Ruiz"
+                      class="w-full pl-10 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
+                    />
+                  </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+
+                  <div>
+                    <label class="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">
+                      ID de Empleado
+                    </label>
+                    <div class="relative">
+                      <div class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">
+                        <i data-lucide="badge" class="w-4 h-4"></i>
+                      </div>
+                      <input
+                        id="idEmpleado"
+                        type="text"
+                        placeholder="ID-0000"
+                        class="w-full pl-10 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
+                      />
+                    </div>
+                  </div>
+
+                  <div>
+                    <label class="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">
+                      Nodo / Sucursal
+                    </label>
+                    <div class="relative">
+                      <div class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">
+                        <i data-lucide="map-pin" class="w-4 h-4"></i>
+                      </div>
+                      <select
+                        id="nodo"
+                        class="w-full pl-10 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-lg text-sm appearance-none focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition text-gray-700"
+                      >
+                        <option value="" disabled selected>Seleccionar Nodo</option>
+                        <option>Nodo Central - CDMX</option>
+                        <option>Nodo Norte - Monterrey</option>
+                        <option>Nodo Occidente - Guadalajara</option>
+                        <option>Punto Logístico - Querétaro</option>
+                      </select>
+                      <div class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none">
+                        <i data-lucide="chevron-down" class="w-4 h-4"></i>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div>
+                    <label class="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">
+                      Contraseña
+                    </label>
+                    <div class="relative">
+                      <div class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">
+                        <i data-lucide="lock" class="w-4 h-4"></i>
+                      </div>
+                      <input
+                        id="password"
+                        type="password"
+                        placeholder="••••••••"
+                        class="w-full pl-10 pr-10 py-3 bg-gray-50 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
+                      />
+                      <button type="button" onclick="togglePassword('password', 'eye-password')"
+                              class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600">
+                        <i id="eye-password" data-lucide="eye" class="w-4 h-4"></i>
+                      </button>
+                    </div>
+                  </div>
+
+                  <div>
+                    <label class="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">
+                      Verificar Contraseña
+                    </label>
+                    <div class="relative">
+                      <div class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">
+                        <i data-lucide="shield-check" class="w-4 h-4"></i>
+                      </div>
+                      <input
+                        id="passwordConfirm"
+                        type="password"
+                        placeholder="••••••••"
+                        class="w-full pl-10 pr-10 py-3 bg-gray-50 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
+                      />
+                      <button type="button" onclick="togglePassword('passwordConfirm', 'eye-confirm')"
+                              class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600">
+                        <i id="eye-confirm" data-lucide="eye" class="w-4 h-4"></i>
+                      </button>
+                    </div>
+                    <p id="password-match-msg" class="text-xs mt-1.5 hidden"></p>
+                  </div>
+
+                </div>
+
+                <div id="form-error" class="hidden flex items-center gap-2 p-3 bg-red-50 border border-red-100 rounded-lg text-sm text-red-600">
+                  <i data-lucide="alert-circle" class="w-4 h-4 flex-shrink-0"></i>
+                  <span id="form-error-text"></span>
+                </div>
+
+                <div class="pt-2">
+                  <button
+                    type="submit"
+                    id="btn-submit"
+                    class="w-full flex items-center justify-center gap-2 py-3 bg-blue-600 text-white font-semibold text-sm rounded-lg hover:bg-blue-700 active:scale-[0.98] transition-all shadow-sm"
+                  >
+                    <span id="btn-label">Proveer Acceso</span>
+                    <i id="btn-icon" data-lucide="arrow-right" class="w-4 h-4"></i>
+                  </button>
+                </div>
+
+              </form>
+            </div>
+          </div>
         </div>
-<div class="flex gap-8">
-<a class="font-['Inter'] text-xs uppercase tracking-widest text-[#545e76] hover:text-[#0a182e] transition-colors" href="#">Legal</a>
-<a class="font-['Inter'] text-xs uppercase tracking-widest text-[#545e76] hover:text-[#0a182e] transition-colors" href="#">Privacidad</a>
-<a class="font-['Inter'] text-xs uppercase tracking-widest text-[#545e76] hover:text-[#0a182e] transition-colors" href="#">Estado del Sistema</a>
-</div>
-</footer>
-<script>
-        const API_REGISTRO = "http://localhost:3000/api/auth/registro";
 
-        document.getElementById("formPersonal").addEventListener("submit", async function(e) {
-        e.preventDefault();
+      </div>
+    </main>
 
-        const password = document.getElementById("password").value;
-        const passwordConfirm = document.getElementById("passwordConfirm").value;
+  </div>
 
-        if (password !== passwordConfirm) {
-            alert("Las contraseñas no coinciden");
-            return;
-        }
+  <script>
 
-        const personal = {
-            nombre: document.getElementById("nombre").value,
-            idEmpleado: document.getElementById("idEmpleado").value,
-            nodo: document.getElementById("nodo").value,
-            password: password,
-            rol: "operador"
-        };
+    lucide.createIcons();
 
+    function togglePassword(inputId, iconId) {
+      const input = document.getElementById(inputId);
+      const icon  = document.getElementById(iconId);
+      if (input.type === 'password') {
+        input.type = 'text';
+        icon.setAttribute('data-lucide', 'eye-off');
+      } else {
+        input.type = 'password';
+        icon.setAttribute('data-lucide', 'eye');
+      }
+      lucide.createIcons();
+    }
+
+    document.getElementById('passwordConfirm').addEventListener('input', function () {
+      const pwd  = document.getElementById('password').value;
+      const msg  = document.getElementById('password-match-msg');
+      if (!this.value) { msg.classList.add('hidden'); return; }
+      if (this.value === pwd) {
+        msg.textContent  = '✓ Las contraseñas coinciden';
+        msg.className    = 'text-xs mt-1.5 text-green-600';
+        msg.classList.remove('hidden');
+      } else {
+        msg.textContent  = '✗ Las contraseñas no coinciden';
+        msg.className    = 'text-xs mt-1.5 text-red-500';
+        msg.classList.remove('hidden');
+      }
+    });
+
+    function showError(msg) {
+      const box  = document.getElementById('form-error');
+      document.getElementById('form-error-text').textContent = msg;
+      box.classList.remove('hidden');
+      lucide.createIcons();
+    }
+
+    function hideError() {
+      document.getElementById('form-error').classList.add('hidden');
+    }
+
+    const API_REGISTRO = 'http://localhost:3000/api/auth/registro';
+
+    document.getElementById('formPersonal').addEventListener('submit', async function (e) {
+      e.preventDefault();
+      hideError();
+
+      const nombre   = document.getElementById('nombre').value.trim();
+      const idEmp    = document.getElementById('idEmpleado').value.trim();
+      const nodo     = document.getElementById('nodo').value;
+      const password = document.getElementById('password').value;
+      const confirm  = document.getElementById('passwordConfirm').value;
+
+      if (!nombre || !idEmp || !nodo || !password) {
+        showError('Por favor, completa todos los campos.');
+        return;
+      }
+      if (password !== confirm) {
+        showError('Las contraseñas no coinciden.');
+        return;
+      }
+      if (password.length < 8) {
+        showError('La contraseña debe tener al menos 8 caracteres.');
+        return;
+      }
+
+      const btn   = document.getElementById('btn-submit');
+      const label = document.getElementById('btn-label');
+      const icon  = document.getElementById('btn-icon');
+      btn.disabled      = true;
+      btn.classList.add('opacity-70', 'cursor-not-allowed');
+      label.textContent = 'Registrando...';
+      icon.setAttribute('data-lucide', 'loader');
+      lucide.createIcons();
+
+      try {
         const response = await fetch(API_REGISTRO, {
-            method: "POST",
-            headers: {
-            "Content-Type": "application/json"
-            },
-            body: JSON.stringify(personal)
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ nombre, idEmpleado: idEmp, nodo, password, rol: 'operador' })
         });
 
         const data = await response.json();
 
         if (response.ok) {
-            alert("Personal registrado correctamente");
-            document.getElementById("formPersonal").reset();
+          label.textContent = 'Acceso Habilitado';
+          icon.setAttribute('data-lucide', 'check');
+          btn.classList.remove('bg-blue-600', 'hover:bg-blue-700', 'opacity-70');
+          btn.classList.add('bg-green-600');
+          lucide.createIcons();
+
+          setTimeout(() => {
+            document.getElementById('formPersonal').reset();
+            document.getElementById('password-match-msg').classList.add('hidden');
+            btn.disabled      = false;
+            btn.classList.remove('bg-green-600', 'cursor-not-allowed');
+            btn.classList.add('bg-blue-600', 'hover:bg-blue-700');
+            label.textContent = 'Proveer Acceso';
+            icon.setAttribute('data-lucide', 'arrow-right');
+            lucide.createIcons();
+          }, 2500);
+
         } else {
-            alert(data.mensaje || "Error al registrar personal");
+          showError(data.mensaje || 'Error al registrar personal.');
+          btn.disabled      = false;
+          btn.classList.remove('opacity-70', 'cursor-not-allowed');
+          label.textContent = 'Proveer Acceso';
+          icon.setAttribute('data-lucide', 'arrow-right');
+          lucide.createIcons();
         }
-        });
-</script>
-<script src="assets/js/auth.js"></script>
-</body></html>
+
+      } catch (err) {
+        showError('No se pudo conectar con el servidor. Intenta más tarde.');
+        btn.disabled      = false;
+        btn.classList.remove('opacity-70', 'cursor-not-allowed');
+        label.textContent = 'Proveer Acceso';
+        icon.setAttribute('data-lucide', 'arrow-right');
+        lucide.createIcons();
+      }
+    });
+
+  </script>
+
+</body>
+</html>
