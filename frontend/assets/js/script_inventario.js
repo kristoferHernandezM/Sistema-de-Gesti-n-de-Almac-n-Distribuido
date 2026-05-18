@@ -1,9 +1,11 @@
 lucide.createIcons();
 
-const API_URL = "http://192.168.4.105:3002/productos";
+const API_URL = `${CONFIG.API_PRODUCTOS}`
 
 let products = [];
 let editingId = null;
+let currentPage = 1;
+const itemsPerPage = 20;
 
 function getCookie(nombre) {
   const cookies = document.cookie.split("; ");
@@ -60,73 +62,172 @@ try {
 }
 
 function renderTable() {
-const searchTerm = searchInput.value.toLowerCase();
-tableBody.innerHTML = "";
 
-const filteredProducts = products.filter(product =>
+  const searchTerm =
+    searchInput.value.toLowerCase();
+
+  tableBody.innerHTML = "";
+
+  const filteredProducts = products.filter(product =>
     product.nombre?.toLowerCase().includes(searchTerm) ||
     product.categoria?.toLowerCase().includes(searchTerm) ||
     product.sku?.toLowerCase().includes(searchTerm)
-);
+  );
 
-filteredProducts.forEach(product => {
-    const isLowStock = product.stock <= product.minStock;
+  // SIN RESULTADOS
+  if (filteredProducts.length === 0) {
+
+    tableBody.innerHTML = `
+      <tr>
+        <td colspan="8"
+            class="py-10 text-center text-gray-500">
+          Sin resultados
+        </td>
+      </tr>
+    `;
+
+    document.getElementById("pagination-info").textContent =
+      "0 resultados";
+
+    return;
+  }
+
+  // PAGINACIÓN
+  const start =
+    (currentPage - 1) * itemsPerPage;
+
+  const end =
+    start + itemsPerPage;
+
+  const paginatedProducts =
+    filteredProducts.slice(start, end);
+
+  paginatedProducts.forEach(product => {
+
+    const isLowStock =
+      product.stock <= product.minStock;
 
     const statusBadge = isLowStock
-    ? `<span class="bg-orange-100 text-orange-600 text-xs px-3 py-1 rounded-full">Stock Bajo</span>`
-    : `<span class="bg-green-100 text-green-600 text-xs px-3 py-1 rounded-full">Normal</span>`;
+      ? `<span class="bg-orange-100 text-orange-600 text-xs px-3 py-1 rounded-full">Stock Bajo</span>`
+      : `<span class="bg-green-100 text-green-600 text-xs px-3 py-1 rounded-full">Normal</span>`;
 
     const fecha = product.ultimaActualizacion
-    ? new Date(product.ultimaActualizacion).toLocaleString()
-    : "Sin registro";
+      ? new Date(product.ultimaActualizacion).toLocaleString()
+      : "Sin registro";
 
     const row = document.createElement("tr");
-    row.className = "border-b border-gray-100 hover:bg-gray-50";
+
+    row.className =
+      "border-b border-gray-100 hover:bg-gray-50";
 
     row.innerHTML = `
-    <td class="py-3 px-4 text-sm text-gray-900">${product.sku}</td>
+      <td class="py-3 px-4 text-sm text-gray-900">
+        ${product.sku}
+      </td>
 
-    <td class="py-3 px-4">
+      <td class="py-3 px-4">
         <div class="flex items-center gap-3">
-        <div class="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
+
+          <div class="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
             <i data-lucide="package" class="w-5 h-5 text-blue-600"></i>
-        </div>
-        <span class="text-sm font-medium text-gray-900">${product.nombre}</span>
-        </div>
-    </td>
+          </div>
 
-    <td class="py-3 px-4 text-sm text-gray-600">${product.categoria}</td>
-    <td class="py-3 px-4 text-sm text-gray-900">${product.stock}</td>
-    <td class="py-3 px-4 text-sm text-gray-900">$${Number(product.precio || 0).toFixed(2)}</td>
-    <td class="py-3 px-4">${statusBadge}</td>
+          <span class="text-sm font-medium text-gray-900">
+            ${product.nombre}
+          </span>
 
-    <td class="py-3 px-4 text-sm text-gray-600">
+        </div>
+      </td>
+
+      <td class="py-3 px-4 text-sm text-gray-600">
+        ${product.categoria}
+      </td>
+
+      <td class="py-3 px-4 text-sm text-gray-900">
+        ${product.stock}
+      </td>
+
+      <td class="py-3 px-4 text-sm text-gray-900">
+        $${Number(product.precio || 0).toFixed(2)}
+      </td>
+
+      <td class="py-3 px-4">
+        ${statusBadge}
+      </td>
+
+      <td class="py-3 px-4 text-sm text-gray-600">
         ${fecha}
+
         <div class="text-xs text-gray-400">
-        por ${product.ultimaModificacion || "Sistema"}
+          por ${product.ultimaModificacion || "Sistema"}
         </div>
-    </td>
+      </td>
 
-    <td class="py-3 px-4">
+      <td class="py-3 px-4">
+
         <div class="flex items-center justify-end gap-2">
-        <button onclick="handleOpenModal('${product._id}')" class="p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition">
-            <i data-lucide="edit" class="w-4 h-4"></i>
-        </button>
 
-        <button onclick="handleDelete('${product._id}')" class="p-2 text-red-600 hover:bg-red-50 rounded-lg transition">
+          <button
+            onclick="handleOpenModal('${product._id}')"
+            class="p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition"
+          >
+            <i data-lucide="edit" class="w-4 h-4"></i>
+          </button>
+
+          <button
+            onclick="handleDelete('${product._id}')"
+            class="p-2 text-red-600 hover:bg-red-50 rounded-lg transition"
+          >
             <i data-lucide="trash-2" class="w-4 h-4"></i>
-        </button>
+          </button>
+
         </div>
-    </td>
+
+      </td>
     `;
 
     tableBody.appendChild(row);
-});
+  });
 
-lucide.createIcons();
+  // INFO PAGINACIÓN
+  const totalPages =
+    Math.ceil(filteredProducts.length / itemsPerPage);
+
+  document.getElementById("pagination-info").textContent =
+    `Página ${currentPage} de ${totalPages}`;
+
+  lucide.createIcons();
 }
 
-searchInput.addEventListener("input", renderTable);
+searchInput.addEventListener("input", () => {
+  currentPage = 1;
+  renderTable();
+});
+
+function nextPage() {
+
+  const filteredProducts = products.filter(product =>
+    product.nombre?.toLowerCase().includes(searchInput.value.toLowerCase()) ||
+    product.categoria?.toLowerCase().includes(searchInput.value.toLowerCase()) ||
+    product.sku?.toLowerCase().includes(searchInput.value.toLowerCase())
+  );
+
+  const totalPages =
+    Math.ceil(filteredProducts.length / itemsPerPage);
+
+  if (currentPage < totalPages) {
+    currentPage++;
+    renderTable();
+  }
+}
+
+function prevPage() {
+
+  if (currentPage > 1) {
+    currentPage--;
+    renderTable();
+  }
+}
 
 async function handleOpenModal(id = null) {
 editingId = id;
@@ -223,13 +324,24 @@ cargarProductos();
 });
 
 async function handleDelete(id) {
-if (confirm("¿Estás seguro de eliminar este producto?")) {
+  if (confirm("¿Estás seguro de eliminar este producto?")) {
+    const productoEliminado = products.find(p => p._id === id);
+
     await fetch(`${API_URL}/${id}`, {
-    method: "DELETE"
+      method: "DELETE"
     });
 
+    if (productoEliminado) {
+      localStorage.setItem("ultimaActividad", JSON.stringify({
+        tipo: "Producto eliminado",
+        producto: productoEliminado.nombre,
+        usuario: USUARIO_LOCK,
+        fecha: new Date()
+      }));
+    }
+
     cargarProductos();
-}
+  }
 }
 
 cargarProductos();
