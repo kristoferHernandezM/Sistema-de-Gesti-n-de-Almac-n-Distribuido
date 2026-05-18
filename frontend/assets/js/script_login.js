@@ -27,7 +27,7 @@
     btnSpinner.classList.remove("hidden");
 
     try {
-      const res = await fetch(API_AUTH, {
+      const res = await fetch(CONFIG.API_AUTH, {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
