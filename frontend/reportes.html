@@ -25,12 +25,10 @@
     <!-- sidebar -->    
     <div id="sidebar-container"></div>
 
-    <!-- CONTENIDO -->
     <main class="flex-1">
 
       <div class="p-4 lg:p-8 max-w-7xl mx-auto space-y-6">
 
-        <!-- Encabezado -->
         <div class="flex items-center justify-between">
 
           <div>
@@ -51,10 +49,8 @@
           
         </div>
 
-        <!-- KPIs -->
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
 
-          <!-- Ventas -->
           <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
 
             <div class="flex items-center justify-between mb-2">
@@ -75,7 +71,6 @@
 
           </div>
 
-          <!-- Productos -->
           <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
 
             <div class="flex items-center justify-between mb-2">
@@ -96,7 +91,6 @@
 
           </div>
 
-          <!-- Margen -->
           <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
 
             <div class="flex items-center justify-between mb-2">
@@ -119,10 +113,8 @@
 
         </div>
 
-        <!-- Gráficas -->
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
 
-          <!-- Barras -->
           <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
 
             <h2 class="text-xl font-medium text-gray-900 mb-6">
@@ -135,7 +127,6 @@
 
           </div>
 
-          <!-- Pastel -->
           <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
 
             <h2 class="text-xl font-medium text-gray-900 mb-6">
@@ -148,7 +139,6 @@
 
           </div>
 
-          <!-- Línea -->
           <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
 
             <h2 class="text-xl font-medium text-gray-900 mb-6">
@@ -161,7 +151,6 @@
 
           </div>
 
-          <!-- Productos -->
           <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
 
             <h2 class="text-xl font-medium text-gray-900 mb-6">
@@ -287,7 +276,6 @@
     // 1. Inicializar iconos de Lucide
     lucide.createIcons();
 
-    // 2. Datos (Traducción de tus arrays de React)
     const salesData = [
       { month: 'Ene', ventas: 45000, compras: 32000 },
       { month: 'Feb', ventas: 52000, compras: 28000 },
@@ -320,7 +308,6 @@
       { name: 'Auriculares Sony', sales: 78, revenue: 27299 },
     ];
 
-    // 3. Renderizar Lista de Productos Más Vendidos
     const productsContainer = document.getElementById('top-products-list');
     topProducts.forEach((product, index) => {
       const html = `
@@ -340,11 +327,9 @@
       productsContainer.insertAdjacentHTML('beforeend', html);
     });
 
-    // 4. Configuración Global de Chart.js
     Chart.defaults.font.family = "ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif";
     Chart.defaults.color = "#6b7280";
 
-    // 5. Crear Gráfica de Barras (Ventas vs Compras)
     new Chart(document.getElementById('barChart'), {
       type: 'bar',
       data: {
@@ -377,7 +362,6 @@
       }
     });
 
-    // 6. Crear Gráfica de Pastel (Categorías)
     new Chart(document.getElementById('pieChart'), {
       type: 'pie',
       data: {
@@ -404,7 +388,6 @@
       }
     });
 
-    // 7. Crear Gráfica de Líneas (Tendencia)
     new Chart(document.getElementById('lineChart'), {
       type: 'line',
       data: {
@@ -417,7 +400,7 @@
           borderWidth: 3,
           pointRadius: 5,
           pointBackgroundColor: '#8b5cf6',
-          tension: 0.4 // Para emular el type="monotone" de Recharts
+          tension: 0.4 
         }]
       },
       options: {
