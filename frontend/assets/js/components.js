@@ -1,12 +1,14 @@
+
 document.addEventListener("DOMContentLoaded", () => {
 
-  fetch("components/sidebar.html")
+  fetch("components/sidebar.html?v=2")
     .then(res => res.text())
     .then(data => {
 
       document.getElementById("sidebar-container").innerHTML = data;
 
       activarSidebar();
+      cargarUsuarioSidebar();
 
       lucide.createIcons();
     });
@@ -15,11 +17,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
 function activarSidebar() {
 
-  const currentPage =
-    window.location.pathname.split("/").pop();
+  const currentPage = window.location.pathname.split("/").pop();
 
-  const links =
-    document.querySelectorAll(".sidebar-link");
+  const links = document.querySelectorAll(".sidebar-link");
 
   links.forEach(link => {
 
@@ -38,4 +38,29 @@ function activarSidebar() {
       );
     }
   });
+}
+
+function cargarUsuarioSidebar() {
+  const usuario = JSON.parse(localStorage.getItem("usuarioActual"));
+
+  if (!usuario) {
+    console.warn("No hay usuarioActual");
+    return;
+  }
+
+  const userName = document.getElementById("userName");
+  const userEmail = document.getElementById("userEmail");
+  const userInitial = document.getElementById("userInitial");
+
+  console.log("Elementos sidebar:", userName, userEmail, userInitial);
+  console.log("Usuario:", usuario);
+
+  if (!userName || !userEmail || !userInitial) {
+    console.warn("No existen los ids del sidebar");
+    return;
+  }
+
+  userName.textContent = usuario.nombre || "Usuario";
+  userEmail.textContent = usuario.correo || "usuario@correo.com";
+  userInitial.textContent = (usuario.nombre || "U").charAt(0).toUpperCase();
 }
