@@ -16,6 +16,8 @@ rs.initiate({
   ]
 })
 
+docker restar ironclad_frontend//resetear
+
 mongod --replSet rs0 --bind_ip_all --port 27017 //cada mongo debe levantase asi
 command: ["mongod", "--replSet", "rs0", "--bind_ip_all", "--port", "27017"] o docker 
 
