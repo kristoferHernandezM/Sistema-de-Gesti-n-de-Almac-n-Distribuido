@@ -16,6 +16,9 @@ rs.initiate({
   ]
 })
 
+mongod --replSet rs0 --bind_ip_all --port 27017 //cada mongo debe levantase asi
+command: ["mongod", "--replSet", "rs0", "--bind_ip_all", "--port", "27017"] o docker 
+
 docker compose restart service_auth //reiniciar servicios
 
 docker logs service_auth //revisar que todo funcione

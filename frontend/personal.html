@@ -2,113 +2,46 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Registro de Personal</title>
-
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Usuarios | Sistema de Inventario</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 
 <body class="bg-gray-50 min-h-screen">
-
   <div class="flex min-h-screen">
-
-    <aside class="w-64 bg-white border-r border-gray-200 hidden lg:flex flex-col">
-
-      <div class="p-6 border-b border-gray-200">
-        <div class="flex items-center gap-3">
-          <div class="bg-blue-600 p-2 rounded-lg">
-            <i data-lucide="package" class="w-6 h-6 text-white"></i>
-          </div>
-          <div>
-            <h1 class="text-lg font-semibold text-gray-900">Sistema de</h1>
-            <p class="text-sm text-gray-600">Inventario</p>
-          </div>
-        </div>
-      </div>
-
-      <nav class="flex-1 p-4 space-y-1">
-
-        <a href="dashboard.html"
-           class="flex items-center gap-3 px-4 py-3 rounded-lg text-gray-700 hover:bg-gray-100 transition">
-          <i data-lucide="layout-dashboard" class="w-5 h-5"></i>
-          <span>Dashboard</span>
-        </a>
-
-        <a href="inventario.html"
-           class="flex items-center gap-3 px-4 py-3 rounded-lg text-gray-700 hover:bg-gray-100 transition">
-          <i data-lucide="package" class="w-5 h-5"></i>
-          <span>Inventario</span>
-        </a>
-
-        <a href="envios.html"
-           class="flex items-center gap-3 px-4 py-3 rounded-lg text-gray-700 hover:bg-gray-100 transition">
-          <i data-lucide="truck" class="w-5 h-5"></i>
-          <span>Envíos</span>
-        </a>
-
-        <a href="reportes.html"
-           class="flex items-center gap-3 px-4 py-3 rounded-lg text-gray-700 hover:bg-gray-100 transition">
-          <i data-lucide="bar-chart-3" class="w-5 h-5"></i>
-          <span>Reportes</span>
-        </a>
-
-        <a href="personal.html"
-           class="flex items-center gap-3 px-4 py-3 rounded-lg bg-blue-50 text-blue-600">
-          <i data-lucide="users" class="w-5 h-5"></i>
-          <span>Personal</span>
-        </a>
-
-        <a href="perfil.html"
-          class="flex items-center gap-3 px-4 py-3 rounded-lg text-gray-700 hover:bg-gray-100 transition">
-          <i data-lucide="user" class="w-5 h-5"></i>
-          <span>Perfil</span>
-        </a>
-
-      </nav>
-
-      <div class="p-4 border-t border-gray-200">
-        <div class="bg-gray-50 rounded-lg p-3 mb-3">
-          <div class="flex items-center gap-3">
-            <div class="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center">
-              <span class="text-white font-medium">U</span>
-            </div>
-            <div>
-              <p class="text-sm font-medium text-gray-900">Usuario</p>
-              <p class="text-xs text-gray-500">usuario@correo.com</p>
-            </div>
-          </div>
-        </div>
-
-        <button class="w-full flex items-center gap-3 px-4 py-3 text-red-600 hover:bg-red-50 rounded-lg transition">
-          <i data-lucide="log-out" class="w-5 h-5"></i>
-          <span>Cerrar Sesión</span>
-        </button>
-      </div>
-
-    </aside>
+    <!-- Sidebar opcional: si ya usas components.js, aquí se cargará -->
+    <div id="sidebar-container"></div>
 
     <main class="flex-1 p-4 lg:p-8">
       <div class="max-w-7xl mx-auto space-y-8">
+        <div class="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+          <div>
+            <h1 class="text-3xl font-bold text-gray-900 mb-2">Usuarios</h1>
+            <p class="text-gray-600">Gestiona los usuarios del sistema de inventario.</p>
+          </div>
 
-        <div>
-          <h1 class="text-3xl font-bold text-gray-900 mb-2">Registro de Personal</h1>
-          <p class="text-gray-600">Ingrese los datos del nuevo operario para habilitar sus credenciales de acceso.</p>
+          <button
+            id="btnNuevoUsuario"
+            class="inline-flex items-center justify-center gap-2 px-4 py-3 bg-blue-600 text-white font-semibold text-sm rounded-lg hover:bg-blue-700 active:scale-[0.98] transition-all shadow-sm"
+          >
+            <i data-lucide="plus" class="w-4 h-4"></i>
+            Nuevo Usuario
+          </button>
         </div>
 
         <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
           <div class="grid grid-cols-1 lg:grid-cols-5">
-
-            <div class="lg:col-span-2 bg-blue-600 p-10 flex flex-col justify-between relative overflow-hidden">
+            <aside class="lg:col-span-2 bg-blue-600 p-10 flex flex-col justify-between relative overflow-hidden">
               <div class="relative z-10">
                 <span class="inline-block px-3 py-1 bg-white/20 text-white text-[10px] font-bold uppercase tracking-widest rounded-full mb-6">
-                  Personal Operativo
+                  Administración
                 </span>
                 <h2 class="text-3xl font-bold text-white tracking-tight leading-tight mb-4">
-                  Sistema de<br/>Inventario
+                  Control de<br />Usuarios
                 </h2>
                 <p class="text-blue-100 text-sm max-w-xs">
-                  Gestión centralizada de nodos y personal operativo en tiempo real.
+                  Alta, edición y control de acceso del personal dentro del sistema.
                 </p>
               </div>
 
@@ -118,17 +51,18 @@
                     <i data-lucide="shield-check" class="w-5 h-5 text-white"></i>
                   </div>
                   <div>
-                    <p class="text-white text-sm font-semibold">Acceso Seguro</p>
-                    <p class="text-blue-200 text-xs">Credenciales encriptadas</p>
+                    <p class="text-white text-sm font-semibold">Roles de Acceso</p>
+                    <p class="text-blue-200 text-xs">Administrador y usuario</p>
                   </div>
                 </div>
+
                 <div class="flex items-center gap-3 bg-white/10 rounded-xl p-4 border border-white/10">
                   <div class="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center flex-shrink-0">
-                    <i data-lucide="map-pin" class="w-5 h-5 text-white"></i>
+                    <i data-lucide="activity" class="w-5 h-5 text-white"></i>
                   </div>
                   <div>
-                    <p class="text-white text-sm font-semibold">Control de Nodos</p>
-                    <p class="text-blue-200 text-xs">Gestión por sucursal</p>
+                    <p class="text-white text-sm font-semibold">Estado de Cuenta</p>
+                    <p class="text-blue-200 text-xs">Activos e inactivos</p>
                   </div>
                 </div>
               </div>
@@ -136,272 +70,363 @@
               <div class="absolute -bottom-8 -right-8 opacity-10">
                 <i data-lucide="users" class="w-48 h-48 text-white"></i>
               </div>
-            </div>
+            </aside>
 
-            <div class="lg:col-span-3 p-8 md:p-10">
-
+            <section class="lg:col-span-3 p-8 md:p-10">
               <div class="flex items-center gap-2 mb-8">
                 <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
-                <p class="text-xs text-gray-400 font-semibold uppercase tracking-widest">Servidor de Identidad Activo</p>
+                <p class="text-xs text-gray-400 font-semibold uppercase tracking-widest">Módulo de usuarios activo</p>
               </div>
 
-              <form id="formPersonal" class="space-y-5">
-
-                <div class="col-span-full">
-                  <label class="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">
-                    Nombre Completo
-                  </label>
-                  <div class="relative">
-                    <div class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">
-                      <i data-lucide="user" class="w-4 h-4"></i>
-                    </div>
-                    <input
-                      id="nombre"
-                      type="text"
-                      placeholder="Ej. Carlos Mendoza Ruiz"
-                      class="w-full pl-10 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
-                    />
-                  </div>
+              <div class="relative mb-6">
+                <div class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">
+                  <i data-lucide="search" class="w-4 h-4"></i>
                 </div>
+                <input
+                  id="buscarUsuario"
+                  type="text"
+                  placeholder="Buscar usuarios por nombre o correo..."
+                  class="w-full pl-10 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
+                />
+              </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+              <div id="usuariosGrid" class="grid grid-cols-1 xl:grid-cols-2 gap-4"></div>
 
-                  <div>
-                    <label class="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">
-                      ID de Empleado
-                    </label>
-                    <div class="relative">
-                      <div class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">
-                        <i data-lucide="badge" class="w-4 h-4"></i>
-                      </div>
-                      <input
-                        id="idEmpleado"
-                        type="text"
-                        placeholder="ID-0000"
-                        class="w-full pl-10 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
-                      />
-                    </div>
-                  </div>
+              <div id="sinResultados" class="hidden text-center py-12 border border-dashed border-gray-200 rounded-xl bg-gray-50 mt-4">
+                <i data-lucide="user-x" class="w-10 h-10 mx-auto text-gray-400 mb-3"></i>
+                <p class="text-gray-600 font-semibold">No se encontraron usuarios</p>
+                <p class="text-gray-400 text-sm">Intenta con otro nombre o correo.</p>
+              </div>
+            </section>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
 
-                  <div>
-                    <label class="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">
-                      Nodo / Sucursal
-                    </label>
-                    <div class="relative">
-                      <div class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">
-                        <i data-lucide="map-pin" class="w-4 h-4"></i>
-                      </div>
-                      <select
-                        id="nodo"
-                        class="w-full pl-10 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-lg text-sm appearance-none focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition text-gray-700"
-                      >
-                        <option value="" disabled selected>Seleccionar Nodo</option>
-                        <option>Nodo Central - CDMX</option>
-                        <option>Nodo Norte - Monterrey</option>
-                        <option>Nodo Occidente - Guadalajara</option>
-                        <option>Punto Logístico - Querétaro</option>
-                      </select>
-                      <div class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none">
-                        <i data-lucide="chevron-down" class="w-4 h-4"></i>
-                      </div>
-                    </div>
-                  </div>
+  <!-- Modal -->
+  <div id="modalUsuario" class="hidden fixed inset-0 bg-black/50 z-50 p-4 items-center justify-center">
+    <div class="bg-white rounded-xl shadow-xl max-w-md w-full overflow-hidden">
+      <div class="bg-blue-600 p-6 relative overflow-hidden">
+        <div class="relative z-10">
+          <span class="inline-block px-3 py-1 bg-white/20 text-white text-[10px] font-bold uppercase tracking-widest rounded-full mb-4">
+            Usuario del Sistema
+          </span>
+          <h2 id="modalTitulo" class="text-2xl font-bold text-white">Nuevo Usuario</h2>
+          <p class="text-blue-100 text-sm mt-1">Completa los datos para guardar el acceso.</p>
+        </div>
+        <div class="absolute -bottom-8 -right-8 opacity-10">
+          <i data-lucide="user-plus" class="w-36 h-36 text-white"></i>
+        </div>
+      </div>
 
-                  <div>
-                    <label class="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">
-                      Contraseña
-                    </label>
-                    <div class="relative">
-                      <div class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">
-                        <i data-lucide="lock" class="w-4 h-4"></i>
-                      </div>
-                      <input
-                        id="password"
-                        type="password"
-                        placeholder="••••••••"
-                        class="w-full pl-10 pr-10 py-3 bg-gray-50 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
-                      />
-                      <button type="button" onclick="togglePassword('password', 'eye-password')"
-                              class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600">
-                        <i id="eye-password" data-lucide="eye" class="w-4 h-4"></i>
-                      </button>
-                    </div>
-                  </div>
+      <form id="formUsuario" class="p-6 space-y-4">
+        <input type="hidden" id="usuarioId" />
 
-                  <div>
-                    <label class="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">
-                      Verificar Contraseña
-                    </label>
-                    <div class="relative">
-                      <div class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">
-                        <i data-lucide="shield-check" class="w-4 h-4"></i>
-                      </div>
-                      <input
-                        id="passwordConfirm"
-                        type="password"
-                        placeholder="••••••••"
-                        class="w-full pl-10 pr-10 py-3 bg-gray-50 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
-                      />
-                      <button type="button" onclick="togglePassword('passwordConfirm', 'eye-confirm')"
-                              class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600">
-                        <i id="eye-confirm" data-lucide="eye" class="w-4 h-4"></i>
-                      </button>
-                    </div>
-                    <p id="password-match-msg" class="text-xs mt-1.5 hidden"></p>
-                  </div>
+        <div>
+          <label class="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">Nombre Completo</label>
+          <div class="relative">
+            <div class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">
+              <i data-lucide="user" class="w-4 h-4"></i>
+            </div>
+            <input
+              id="nombre"
+              type="text"
+              required
+              placeholder="Ej. Carlos Rodríguez"
+              class="w-full pl-10 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
+            />
+          </div>
+        </div>
 
-                </div>
+        <div>
+          <label class="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">Correo Electrónico</label>
+          <div class="relative">
+            <div class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">
+              <i data-lucide="mail" class="w-4 h-4"></i>
+            </div>
+            <input
+              id="correo"
+              type="email"
+              required
+              placeholder="correo@inventario.com"
+              class="w-full pl-10 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
+            />
+          </div>
+        </div>
 
-                <div id="form-error" class="hidden flex items-center gap-2 p-3 bg-red-50 border border-red-100 rounded-lg text-sm text-red-600">
-                  <i data-lucide="alert-circle" class="w-4 h-4 flex-shrink-0"></i>
-                  <span id="form-error-text"></span>
-                </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">Rol</label>
+            <div class="relative">
+              <div class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">
+                <i data-lucide="shield" class="w-4 h-4"></i>
+              </div>
+              <select
+                id="rol"
+                class="w-full pl-10 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-lg text-sm appearance-none focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition text-gray-700"
+              >
+                <option value="user">Usuario</option>
+                <option value="admin">Administrador</option>
+              </select>
+            </div>
+          </div>
 
-                <div class="pt-2">
-                  <button
-                    type="submit"
-                    id="btn-submit"
-                    class="w-full flex items-center justify-center gap-2 py-3 bg-blue-600 text-white font-semibold text-sm rounded-lg hover:bg-blue-700 active:scale-[0.98] transition-all shadow-sm"
-                  >
-                    <span id="btn-label">Proveer Acceso</span>
-                    <i id="btn-icon" data-lucide="arrow-right" class="w-4 h-4"></i>
-                  </button>
-                </div>
-
-              </form>
+          <div>
+            <label class="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">Estado</label>
+            <div class="relative">
+              <div class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">
+                <i data-lucide="toggle-right" class="w-4 h-4"></i>
+              </div>
+              <select
+                id="estado"
+                class="w-full pl-10 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-lg text-sm appearance-none focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition text-gray-700"
+              >
+                <option value="active">Activo</option>
+                <option value="inactive">Inactivo</option>
+              </select>
             </div>
           </div>
         </div>
 
-      </div>
-    </main>
+        <div id="formError" class="hidden flex items-center gap-2 p-3 bg-red-50 border border-red-100 rounded-lg text-sm text-red-600">
+          <i data-lucide="alert-circle" class="w-4 h-4 flex-shrink-0"></i>
+          <span id="formErrorTexto"></span>
+        </div>
 
+        <div class="flex gap-3 pt-4">
+          <button
+            type="button"
+            id="btnCancelar"
+            class="flex-1 px-4 py-3 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition text-sm font-semibold"
+          >
+            Cancelar
+          </button>
+          <button
+            type="submit"
+            class="flex-1 px-4 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition text-sm font-semibold"
+          >
+            Guardar
+          </button>
+        </div>
+      </form>
+    </div>
   </div>
 
   <script>
+    const STORAGE_KEY = 'usuariosInventario';
 
-    lucide.createIcons();
+    const usuariosIniciales = [
+      { id: '1', name: 'Administrador', email: 'admin@inventario.com', role: 'admin', status: 'active', lastLogin: '2026-04-30 10:30' },
+      { id: '2', name: 'Usuario Demo', email: 'usuario@inventario.com', role: 'user', status: 'active', lastLogin: '2026-04-29 15:45' },
+      { id: '3', name: 'Carlos Rodríguez', email: 'carlos@inventario.com', role: 'user', status: 'active', lastLogin: '2026-04-28 09:20' },
+      { id: '4', name: 'Ana Martínez', email: 'ana@inventario.com', role: 'user', status: 'inactive', lastLogin: '2026-04-20 14:10' }
+    ];
 
-    function togglePassword(inputId, iconId) {
-      const input = document.getElementById(inputId);
-      const icon  = document.getElementById(iconId);
-      if (input.type === 'password') {
-        input.type = 'text';
-        icon.setAttribute('data-lucide', 'eye-off');
-      } else {
-        input.type = 'password';
-        icon.setAttribute('data-lucide', 'eye');
-      }
-      lucide.createIcons();
-    }
+    let usuarios = cargarUsuarios();
 
-    document.getElementById('passwordConfirm').addEventListener('input', function () {
-      const pwd  = document.getElementById('password').value;
-      const msg  = document.getElementById('password-match-msg');
-      if (!this.value) { msg.classList.add('hidden'); return; }
-      if (this.value === pwd) {
-        msg.textContent  = '✓ Las contraseñas coinciden';
-        msg.className    = 'text-xs mt-1.5 text-green-600';
-        msg.classList.remove('hidden');
-      } else {
-        msg.textContent  = '✗ Las contraseñas no coinciden';
-        msg.className    = 'text-xs mt-1.5 text-red-500';
-        msg.classList.remove('hidden');
-      }
-    });
+    const grid = document.getElementById('usuariosGrid');
+    const buscar = document.getElementById('buscarUsuario');
+    const sinResultados = document.getElementById('sinResultados');
+    const modal = document.getElementById('modalUsuario');
+    const form = document.getElementById('formUsuario');
+    const modalTitulo = document.getElementById('modalTitulo');
 
-    function showError(msg) {
-      const box  = document.getElementById('form-error');
-      document.getElementById('form-error-text').textContent = msg;
-      box.classList.remove('hidden');
-      lucide.createIcons();
-    }
-
-    function hideError() {
-      document.getElementById('form-error').classList.add('hidden');
-    }
-
-    const API_REGISTRO = 'http://localhost:3000/api/auth/registro';
-
-    document.getElementById('formPersonal').addEventListener('submit', async function (e) {
-      e.preventDefault();
-      hideError();
-
-      const nombre   = document.getElementById('nombre').value.trim();
-      const idEmp    = document.getElementById('idEmpleado').value.trim();
-      const nodo     = document.getElementById('nodo').value;
-      const password = document.getElementById('password').value;
-      const confirm  = document.getElementById('passwordConfirm').value;
-
-      if (!nombre || !idEmp || !nodo || !password) {
-        showError('Por favor, completa todos los campos.');
-        return;
-      }
-      if (password !== confirm) {
-        showError('Las contraseñas no coinciden.');
-        return;
-      }
-      if (password.length < 8) {
-        showError('La contraseña debe tener al menos 8 caracteres.');
-        return;
-      }
-
-      const btn   = document.getElementById('btn-submit');
-      const label = document.getElementById('btn-label');
-      const icon  = document.getElementById('btn-icon');
-      btn.disabled      = true;
-      btn.classList.add('opacity-70', 'cursor-not-allowed');
-      label.textContent = 'Registrando...';
-      icon.setAttribute('data-lucide', 'loader');
-      lucide.createIcons();
-
+    function cargarUsuarios() {
+      const guardados = localStorage.getItem(STORAGE_KEY);
+      if (!guardados) return usuariosIniciales;
       try {
-        const response = await fetch(API_REGISTRO, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ nombre, idEmpleado: idEmp, nodo, password, rol: 'operador' })
-        });
-
-        const data = await response.json();
-
-        if (response.ok) {
-          label.textContent = 'Acceso Habilitado';
-          icon.setAttribute('data-lucide', 'check');
-          btn.classList.remove('bg-blue-600', 'hover:bg-blue-700', 'opacity-70');
-          btn.classList.add('bg-green-600');
-          lucide.createIcons();
-
-          setTimeout(() => {
-            document.getElementById('formPersonal').reset();
-            document.getElementById('password-match-msg').classList.add('hidden');
-            btn.disabled      = false;
-            btn.classList.remove('bg-green-600', 'cursor-not-allowed');
-            btn.classList.add('bg-blue-600', 'hover:bg-blue-700');
-            label.textContent = 'Proveer Acceso';
-            icon.setAttribute('data-lucide', 'arrow-right');
-            lucide.createIcons();
-          }, 2500);
-
-        } else {
-          showError(data.mensaje || 'Error al registrar personal.');
-          btn.disabled      = false;
-          btn.classList.remove('opacity-70', 'cursor-not-allowed');
-          label.textContent = 'Proveer Acceso';
-          icon.setAttribute('data-lucide', 'arrow-right');
-          lucide.createIcons();
-        }
-
-      } catch (err) {
-        showError('No se pudo conectar con el servidor. Intenta más tarde.');
-        btn.disabled      = false;
-        btn.classList.remove('opacity-70', 'cursor-not-allowed');
-        label.textContent = 'Proveer Acceso';
-        icon.setAttribute('data-lucide', 'arrow-right');
-        lucide.createIcons();
+        return JSON.parse(guardados);
+      } catch (_) {
+        return usuariosIniciales;
       }
+    }
+
+    function guardarUsuarios() {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(usuarios));
+    }
+
+    function renderUsuarios() {
+      const termino = buscar.value.trim().toLowerCase();
+      const filtrados = usuarios.filter(usuario =>
+        usuario.name.toLowerCase().includes(termino) ||
+        usuario.email.toLowerCase().includes(termino)
+      );
+
+      grid.innerHTML = '';
+      sinResultados.classList.toggle('hidden', filtrados.length !== 0);
+
+      filtrados.forEach(usuario => {
+        const esAdmin = usuario.role === 'admin';
+        const activo = usuario.status === 'active';
+
+        const card = document.createElement('div');
+        card.className = 'bg-white border border-gray-200 rounded-xl p-6 hover:shadow-md transition';
+        card.innerHTML = `
+          <div class="flex items-start justify-between mb-4">
+            <div class="flex items-center gap-3 min-w-0">
+              <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0">
+                <i data-lucide="user" class="w-6 h-6 text-blue-600"></i>
+              </div>
+              <div class="min-w-0">
+                <h3 class="font-semibold text-gray-900 truncate">${usuario.name}</h3>
+                <div class="flex items-center gap-1 text-sm text-gray-600 min-w-0">
+                  <i data-lucide="mail" class="w-3 h-3 flex-shrink-0"></i>
+                  <span class="text-xs truncate">${usuario.email}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="space-y-2 mb-4">
+            <div class="flex items-center justify-between gap-3">
+              <span class="text-sm text-gray-600">Rol:</span>
+              <div class="flex items-center gap-1">
+                <i data-lucide="shield" class="w-4 h-4 text-gray-500"></i>
+                <span class="text-sm ${esAdmin ? 'text-purple-600' : 'text-gray-900'}">
+                  ${esAdmin ? 'Administrador' : 'Usuario'}
+                </span>
+              </div>
+            </div>
+
+            <div class="flex items-center justify-between gap-3">
+              <span class="text-sm text-gray-600">Estado:</span>
+              <span class="text-xs px-2 py-1 rounded-full ${activo ? 'bg-green-100 text-green-600' : 'bg-gray-100 text-gray-600'}">
+                ${activo ? 'Activo' : 'Inactivo'}
+              </span>
+            </div>
+
+            <div class="flex items-center justify-between gap-3">
+              <span class="text-sm text-gray-600">Último acceso:</span>
+              <span class="text-xs text-gray-900">${usuario.lastLogin}</span>
+            </div>
+          </div>
+
+          <div class="flex gap-2 pt-4 border-t border-gray-100">
+            <button onclick="abrirModal('${usuario.id}')" class="flex-1 px-3 py-2 text-blue-600 border border-blue-200 hover:bg-blue-50 rounded-lg transition flex items-center justify-center gap-2">
+              <i data-lucide="edit" class="w-4 h-4"></i>
+              <span class="text-sm">Editar</span>
+            </button>
+            <button onclick="eliminarUsuario('${usuario.id}')" class="flex-1 px-3 py-2 text-red-600 border border-red-200 hover:bg-red-50 rounded-lg transition flex items-center justify-center gap-2">
+              <i data-lucide="trash-2" class="w-4 h-4"></i>
+              <span class="text-sm">Eliminar</span>
+            </button>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+
+      lucide.createIcons();
+    }
+
+    function abrirModal(id = null) {
+      ocultarError();
+      form.reset();
+      document.getElementById('usuarioId').value = '';
+
+      if (id) {
+        const usuario = usuarios.find(u => u.id === id);
+        if (!usuario) return;
+        modalTitulo.textContent = 'Editar Usuario';
+        document.getElementById('usuarioId').value = usuario.id;
+        document.getElementById('nombre').value = usuario.name;
+        document.getElementById('correo').value = usuario.email;
+        document.getElementById('rol').value = usuario.role;
+        document.getElementById('estado').value = usuario.status;
+      } else {
+        modalTitulo.textContent = 'Nuevo Usuario';
+        document.getElementById('rol').value = 'user';
+        document.getElementById('estado').value = 'active';
+      }
+
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+      lucide.createIcons();
+    }
+
+    function cerrarModal() {
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    }
+
+    function mostrarError(mensaje) {
+      document.getElementById('formErrorTexto').textContent = mensaje;
+      document.getElementById('formError').classList.remove('hidden');
+      lucide.createIcons();
+    }
+
+    function ocultarError() {
+      document.getElementById('formError').classList.add('hidden');
+    }
+
+    function eliminarUsuario(id) {
+      if (!confirm('¿Estás seguro de eliminar este usuario?')) return;
+      usuarios = usuarios.filter(usuario => usuario.id !== id);
+      guardarUsuarios();
+      renderUsuarios();
+    }
+
+    form.addEventListener('submit', function (event) {
+      event.preventDefault();
+      ocultarError();
+
+      const id = document.getElementById('usuarioId').value;
+      const name = document.getElementById('nombre').value.trim();
+      const email = document.getElementById('correo').value.trim();
+      const role = document.getElementById('rol').value;
+      const status = document.getElementById('estado').value;
+
+      if (!name || !email) {
+        mostrarError('Completa el nombre y el correo electrónico.');
+        return;
+      }
+
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        mostrarError('Ingresa un correo electrónico válido.');
+        return;
+      }
+
+      const correoRepetido = usuarios.some(usuario => usuario.email === email && usuario.id !== id);
+      if (correoRepetido) {
+        mostrarError('Ese correo ya está registrado.');
+        return;
+      }
+
+      if (id) {
+        usuarios = usuarios.map(usuario =>
+          usuario.id === id
+            ? { ...usuario, name, email, role, status }
+            : usuario
+        );
+      } else {
+        usuarios.push({
+          id: String(Date.now()),
+          name,
+          email,
+          role,
+          status,
+          lastLogin: 'Nunca'
+        });
+      }
+
+      guardarUsuarios();
+      cerrarModal();
+      renderUsuarios();
     });
 
+    document.getElementById('btnNuevoUsuario').addEventListener('click', () => abrirModal());
+    document.getElementById('btnCancelar').addEventListener('click', cerrarModal);
+    buscar.addEventListener('input', renderUsuarios);
+
+    modal.addEventListener('click', function (event) {
+      if (event.target === modal) cerrarModal();
+    });
+
+    renderUsuarios();
   </script>
 
+  <!-- Si tu proyecto ya usa estos archivos, déjalos. Si no existen, puedes quitarlos. -->
+  <script src="assets/js/auth.js"></script>
+  <script src="assets/js/components.js"></script>
 </body>
 </html>

@@ -90,6 +90,25 @@ app.delete("/api/productos/:id", async (req, res) => {
   }
 });
 
+// ENVIOS → service_transactions
+
+app.get("/api/envios", async (req, res) => {
+  try {
+    
+    const response = await axios.get(
+      "http://service_transactions:3004/envios"
+    );
+
+    res.json(response.data);
+
+  } catch (error) {
+    res.status(500).json({
+      mensaje: "Error obteniendo envíos",
+      error: error.message
+    });
+  }
+});
+
 app.listen(3000, () => {
   console.log("Gateway corriendo en puerto 3000");
 });

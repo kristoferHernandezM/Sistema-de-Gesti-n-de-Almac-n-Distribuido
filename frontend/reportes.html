@@ -14,127 +14,16 @@
 
   <!-- Chart.js -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
 </head>
 
 <body class="bg-gray-50 min-h-screen">
 
   <div class="flex min-h-screen">
 
-    <!-- SIDEBAR -->
-    <aside class="w-64 bg-white border-r border-gray-200 hidden lg:flex flex-col">
-
-      <!-- Logo -->
-      <div class="p-6 border-b border-gray-200">
-
-        <div class="flex items-center gap-3">
-
-          <div class="bg-blue-600 p-2 rounded-lg">
-            <i data-lucide="package" class="w-6 h-6 text-white"></i>
-          </div>
-
-          <div>
-            <h1 class="text-lg font-semibold text-gray-900">
-              Sistema de
-            </h1>
-
-            <p class="text-sm text-gray-600">
-              Inventario
-            </p>
-          </div>
-
-        </div>
-
-      </div>
-
-      <!-- Navegación -->
-      <nav class="flex-1 p-4 space-y-1">
-
-        <a
-          href="dashboard.html"
-          class="flex items-center gap-3 px-4 py-3 rounded-lg text-gray-700 hover:bg-gray-100 transition"
-        >
-          <i data-lucide="layout-dashboard" class="w-5 h-5"></i>
-          <span>Dashboard</span>
-        </a>
-
-        <a
-          href="inventario.html"
-          class="flex items-center gap-3 px-4 py-3 rounded-lg text-gray-700 hover:bg-gray-100 transition"
-        >
-          <i data-lucide="package" class="w-5 h-5"></i>
-          <span>Inventario</span>
-        </a>
-
-        <a
-          href="envios.html"
-          class="flex items-center gap-3 px-4 py-3 rounded-lg text-gray-700 hover:bg-gray-100 transition"
-        >
-          <i data-lucide="truck" class="w-5 h-5"></i>
-          <span>Envíos</span>
-        </a>
-
-        <a
-          href="reportes.html"
-          class="flex items-center gap-3 px-4 py-3 rounded-lg bg-blue-50 text-blue-600"
-        >
-          <i data-lucide="bar-chart-3" class="w-5 h-5"></i>
-          <span>Reportes</span>
-        </a>
-
-        <a 
-          href="personal.html"
-          class="flex items-center gap-3 px-4 py-3 rounded-lg  text-gray-700 hover:bg-gray-100 transition">
-          <i data-lucide="users" class="w-5 h-5"></i>
-          <span>Personal</span>
-        </a>
-
-        <a
-          href="perfil.html"
-          class="flex items-center gap-3 px-4 py-3 rounded-lg text-gray-700 hover:bg-gray-100 transition"
-        >
-          <i data-lucide="user" class="w-5 h-5"></i>
-          <span>Perfil</span>
-        </a>
-
-      </nav>
-
-
-      <div class="p-4 border-t border-gray-200">
-
-        <div class="bg-gray-50 rounded-lg p-3 mb-3">
-
-          <div class="flex items-center gap-3">
-
-            <div class="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center">
-              <span class="text-white font-medium">
-                U
-              </span>
-            </div>
-
-            <div>
-              <p class="text-sm font-medium text-gray-900">
-                Usuario
-              </p>
-
-              <p class="text-xs text-gray-500">
-                usuario@correo.com
-              </p>
-            </div>
-
-          </div>
-
-        </div>
-
-        <button
-          class="w-full flex items-center gap-3 px-4 py-3 text-red-600 hover:bg-red-50 rounded-lg transition"
-        >
-          <i data-lucide="log-out" class="w-5 h-5"></i>
-          <span>Cerrar Sesión</span>
-        </button>
-
-      </div>
-
-    </aside>
+    <!-- sidebar -->    
+    <div id="sidebar-container"></div>
 
     <main class="flex-1">
 
@@ -152,13 +41,12 @@
             </p>
           </div>
 
-          <button
-            class="bg-blue-600 text-white font-medium px-4 py-2 rounded-lg hover:bg-blue-700 transition flex items-center gap-2"
-          >
-            <i data-lucide="download" class="w-5 h-5"></i>
-            <span>Exportar PDF</span>
-          </button>
-
+          <div class="flex space-x-4 justify-center">
+            <button onclick="descargarReporte('pdf')" class="bg-slate-800 text-white px-8 py-3 rounded-2xl font-bold hover:bg-slate-700 transition flex items-center shadow-lg shadow-slate-200">
+              Descargar PDF
+            </button>
+          </div>
+          
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -282,6 +170,110 @@
   </div>
 
   <script>
+    async function descargarReporte(tipo) {
+      try {
+        const res = await fetch(CONFIG.API_PRODUCTOS);
+
+        if (!res.ok) {
+          throw new Error("No se pudieron obtener los productos");
+        }
+
+        const productos = await res.json();
+
+        if (tipo === "pdf") {
+          const { jsPDF } = window.jspdf;
+          const doc = new jsPDF();
+
+          const fecha = new Date().toLocaleString();
+
+          // Encabezado
+          doc.setFillColor(15, 23, 42);
+          doc.rect(0, 0, 210, 35, "F");
+
+          doc.setTextColor(255, 255, 255);
+          doc.setFontSize(20);
+          doc.setFont("helvetica", "bold");
+          doc.text("Reporte de Inventario", 14, 18);
+
+          doc.setFontSize(10);
+          doc.setFont("helvetica", "normal");
+          doc.text(`Sistema Ironclad | Generado: ${fecha}`, 14, 27);
+
+          // Resumen
+          const totalProductos = productos.length;
+          const stockTotal = productos.reduce((acc, p) => acc + Number(p.stock || 0), 0);
+          const stockBajo = productos.filter(p => Number(p.stock || 0) <= 10).length;
+
+          doc.setTextColor(30, 41, 59);
+          doc.setFontSize(12);
+          doc.setFont("helvetica", "bold");
+          doc.text("Resumen general", 14, 48);
+
+          doc.setFont("helvetica", "normal");
+          doc.text(`Total de productos: ${totalProductos}`, 14, 58);
+          doc.text(`Stock total: ${stockTotal} unidades`, 14, 66);
+          doc.text(`Productos con stock bajo: ${stockBajo}`, 14, 74);
+
+          const tableData = productos.map((p, index) => [
+            index + 1,
+            p.nombre || "Sin nombre",
+            p.categoria || "Sin categoría",
+            p.stock || 0,
+            p.nodo || "N/A",
+            p.estado || "Activo"
+          ]);
+
+          doc.autoTable({
+            head: [["#", "Producto", "Categoría", "Stock", "Nodo", "Estado"]],
+            body: tableData,
+            startY: 85,
+            theme: "grid",
+            headStyles: {
+              fillColor: [15, 23, 42],
+              textColor: [255, 255, 255],
+              fontStyle: "bold"
+            },
+            styles: {
+              font: "helvetica",
+              fontSize: 9,
+              cellPadding: 3
+            },
+            alternateRowStyles: {
+              fillColor: [248, 250, 252]
+            },
+            columnStyles: {
+              0: { halign: "center", cellWidth: 12 },
+              3: { halign: "center" }
+            }
+          });
+
+          doc.save("Reporte_Inventario_Ironclad.pdf");
+
+        } else {
+          let csv = "Producto,Categoria,Stock,Nodo,Estado\n";
+
+          productos.forEach(p => {
+            csv += `"${p.nombre || ""}","${p.categoria || ""}","${p.stock || 0}","${p.nodo || ""}","${p.estado || ""}"\n`;
+          });
+
+          const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+          const link = document.createElement("a");
+
+          link.href = URL.createObjectURL(blob);
+          link.download = "Inventario_Ironclad.csv";
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+        }
+
+      } catch (error) {
+        console.error(error);
+        alert("Error al generar el reporte. Verifica la conexión con el servidor.");
+      }
+    }
+
+
+    // 1. Inicializar iconos de Lucide
     lucide.createIcons();
 
     const salesData = [
@@ -426,5 +418,9 @@
   </script>
 
 </body>
+
+<script src="config/rutas_config.js"></script>
+<script src="assets/js/script.js"></script>
+<script src="assets/js/components.js"></script>
 <script src="assets/js/auth.js"></script>
 </html>

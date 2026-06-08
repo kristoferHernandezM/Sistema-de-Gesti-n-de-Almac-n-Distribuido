@@ -2,6 +2,7 @@ lucide.createIcons();
 
 const API_URL = `${CONFIG.API_PRODUCTOS}`
 
+
 let products = [];
 let editingId = null;
 let currentPage = 1;
@@ -343,5 +344,6 @@ async function handleDelete(id) {
     cargarProductos();
   }
 }
+
 
 cargarProductos();
