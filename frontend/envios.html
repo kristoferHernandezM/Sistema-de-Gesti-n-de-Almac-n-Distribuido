@@ -13,8 +13,81 @@
 
   <div class="flex min-h-screen">
 
-    <!-- sidebar -->    
-    <div id="sidebar-container"></div>
+    <aside class="w-64 bg-white border-r border-gray-200 hidden lg:flex flex-col">
+
+      <div class="p-6 border-b border-gray-200">
+        <div class="flex items-center gap-3">
+          <div class="bg-blue-600 p-2 rounded-lg">
+            <i data-lucide="package" class="w-6 h-6 text-white"></i>
+          </div>
+          <div>
+            <h1 class="text-lg font-semibold text-gray-900">Sistema de</h1>
+            <p class="text-sm text-gray-600">Inventario</p>
+          </div>
+        </div>
+      </div>
+
+      <nav class="flex-1 p-4 space-y-1">
+
+        <a href="dashboard.html"
+           class="flex items-center gap-3 px-4 py-3 rounded-lg text-gray-700 hover:bg-gray-100 transition">
+          <i data-lucide="layout-dashboard" class="w-5 h-5"></i>
+          <span>Dashboard</span>
+        </a>
+
+        <a href="inventario.html"
+           class="flex items-center gap-3 px-4 py-3 rounded-lg text-gray-700 hover:bg-gray-100 transition">
+          <i data-lucide="package" class="w-5 h-5"></i>
+          <span>Inventario</span>
+        </a>
+
+        <a href="envios.html"
+           class="flex items-center gap-3 px-4 py-3 rounded-lg bg-blue-50 text-blue-600">
+          <i data-lucide="truck" class="w-5 h-5"></i>
+          <span>Envíos</span>
+        </a>
+
+        <a href="reportes.html"
+           class="flex items-center gap-3 px-4 py-3 rounded-lg text-gray-700 hover:bg-gray-100 transition">
+          <i data-lucide="bar-chart-3" class="w-5 h-5"></i>
+          <span>Reportes</span>
+        </a>
+
+        <a 
+          href="personal.html"
+          class="flex items-center gap-3 px-4 py-3 rounded-lg  text-gray-700 hover:bg-gray-100 transition">
+          <i data-lucide="users" class="w-5 h-5"></i>
+          <span>Personal</span>
+        </a>
+
+        <a href="perfil.html"
+           class="flex items-center gap-3 px-4 py-3 rounded-lg text-gray-700 hover:bg-gray-100 transition">
+          <i data-lucide="user" class="w-5 h-5"></i>
+          <span>Perfil</span>
+        </a>
+
+      </nav>
+
+      <div class="p-4 border-t border-gray-200">
+        <div class="bg-gray-50 rounded-lg p-3 mb-3">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center">
+              <span class="text-white font-medium">U</span>
+            </div>
+            <div>
+              <p class="text-sm font-medium text-gray-900">Usuario</p>
+              <p class="text-xs text-gray-500">usuario@correo.com</p>
+            </div>
+          </div>
+        </div>
+
+        <button class="w-full flex items-center gap-3 px-4 py-3 text-red-600 hover:bg-red-50 rounded-lg transition">
+          <i data-lucide="log-out" class="w-5 h-5"></i>
+          <span>Cerrar Sesión</span>
+        </button>
+      </div>
+
+    </aside>
 
     <main class="flex-1 p-4 lg:p-8">
       <div class="max-w-7xl mx-auto space-y-8">
@@ -36,7 +109,7 @@
                 <span class="text-sm text-green-600">+8%</span>
               </div>
             </div>
-            <h3 id="card-transito" class="text-2xl font-bold text-gray-900 mb-1">0</h3>
+            <h3 class="text-2xl font-bold text-gray-900 mb-1">142</h3>
             <p class="text-sm text-gray-600">En Tránsito</p>
           </div>
 
@@ -50,7 +123,7 @@
                 <span class="text-sm text-green-600">+24 hoy</span>
               </div>
             </div>
-            <h3 id="card-entregas" class="text-2xl font-bold text-gray-900 mb-1">0</h3>
+            <h3 class="text-2xl font-bold text-gray-900 mb-1">2,841</h3>
             <p class="text-sm text-gray-600">Entregas Este Mes</p>
           </div>
 
@@ -64,7 +137,7 @@
                 <span class="text-sm text-green-600">-12%</span>
               </div>
             </div>
-            <h3 id="card-latencia" class="text-2xl font-bold text-gray-900 mb-1">0h</h3>
+            <h3 class="text-2xl font-bold text-gray-900 mb-1">4.2h</h3>
             <p class="text-sm text-gray-600">Latencia Media</p>
           </div>
 
@@ -78,7 +151,7 @@
                 <span class="text-sm text-red-600">3 activas</span>
               </div>
             </div>
-            <h3 id="card-alertas" class="text-2xl font-bold text-gray-900 mb-1">0</h3>
+            <h3 class="text-2xl font-bold text-gray-900 mb-1">3</h3>
             <p class="text-sm text-gray-600">Alertas Críticas</p>
           </div>
 
@@ -221,9 +294,243 @@
     <i data-lucide="plus" class="w-7 h-7"></i>
   </button>
 
-  <script src="config/rutas_config.js"></script>
-  <script src="assets/js/script_envios.js"></script>
-  <script src="assets/js/components.js"></script>
-  <script src="assets/js/auth.js"></script>
+  <script>
+
+    lucide.createIcons();
+
+    const shipments = [
+      {
+        id: '#IC-9928-X',
+        ip: '192.168.4.120',
+        nodeStatus: 'green',
+        destination: 'Terminal Norte, CDMX',
+        status: 'transit',
+        progress: 65,
+        eta: 'ETA 2h'
+      },
+      {
+        id: '#IC-8841-B',
+        ip: '10.0.45.221',
+        nodeStatus: 'green',
+        destination: 'Puerto de Valencia, ES',
+        status: 'delivered',
+        progress: 100,
+        eta: 'Completado'
+      },
+      {
+        id: '#IC-1205-Z',
+        ip: '172.16.8.5',
+        nodeStatus: 'amber',
+        destination: 'Hub Logístico, Bogotá',
+        status: 'pending',
+        progress: 0,
+        eta: 'Esperando'
+      },
+    ];
+
+    const statusConfig = {
+      transit:   { label: 'En tránsito', icon: 'truck',        classes: 'bg-blue-100 text-blue-700' },
+      delivered: { label: 'Entregado',   icon: 'check-circle', classes: 'bg-green-100 text-green-700' },
+      pending:   { label: 'Pendiente',   icon: 'clock',        classes: 'bg-gray-100 text-gray-500' },
+    };
+
+    const progressColor = {
+      transit: 'bg-blue-500', delivered: 'bg-green-500', pending: 'bg-gray-200'
+    };
+
+    const nodeDot = { green: 'bg-green-500', amber: 'bg-amber-500' };
+
+    function renderTable(data) {
+      const tbody = document.getElementById('shipments-table');
+      tbody.innerHTML = '';
+
+      if (data.length === 0) {
+        tbody.innerHTML = `
+          <tr>
+            <td colspan="6" class="py-12 text-center text-sm text-gray-400">
+              No se encontraron envíos con los filtros aplicados.
+            </td>
+          </tr>`;
+        lucide.createIcons();
+        return;
+      }
+
+      data.forEach(s => {
+        const cfg = statusConfig[s.status];
+        const row = document.createElement('tr');
+        row.className = 'border-b border-gray-50 hover:bg-gray-50 transition-colors';
+        row.innerHTML = `
+          <td class="py-4 pr-4">
+            <span class="font-semibold text-gray-900">${s.id}</span>
+          </td>
+          <td class="py-4 pr-4">
+            <div class="flex items-center gap-2">
+              <div class="w-2 h-2 rounded-full ${nodeDot[s.nodeStatus]}"></div>
+              <code class="text-xs bg-gray-100 px-2 py-1 rounded text-gray-600 font-mono">${s.ip}</code>
+            </div>
+          </td>
+          <td class="py-4 pr-4 text-sm font-medium text-gray-700">${s.destination}</td>
+          <td class="py-4 pr-4">
+            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold ${cfg.classes}">
+              <i data-lucide="${cfg.icon}" class="w-3.5 h-3.5"></i>
+              ${cfg.label}
+            </span>
+          </td>
+          <td class="py-4 pr-4">
+            <div class="w-28 space-y-1.5">
+              <div class="flex justify-between text-xs font-medium text-gray-400">
+                <span>${s.progress}%</span>
+                <span>${s.eta}</span>
+              </div>
+              <div class="h-1.5 w-full bg-gray-100 rounded-full overflow-hidden">
+                <div class="h-full ${progressColor[s.status]} rounded-full transition-all" style="width: ${s.progress}%"></div>
+              </div>
+            </div>
+          </td>
+          <td class="py-4 text-right">
+            <button class="p-1.5 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-lg transition">
+              <i data-lucide="more-vertical" class="w-4 h-4"></i>
+            </button>
+          </td>
+        `;
+        tbody.appendChild(row);
+      });
+
+      lucide.createIcons();
+    }
+
+    renderTable(shipments);
+
+    let activeFilters = { statuses: ['transit','delivered','pending'], minProgress: 0, destination: '' };
+
+    function getFilteredData() {
+      return shipments.filter(s => {
+        const statusOk = activeFilters.statuses.includes(s.status);
+        const progressOk = s.progress >= activeFilters.minProgress;
+        const destOk = s.destination.toLowerCase().includes(activeFilters.destination.toLowerCase());
+        return statusOk && progressOk && destOk;
+      });
+    }
+
+    function openFilters() {
+      document.querySelectorAll('.filter-status').forEach(cb => {
+        cb.checked = activeFilters.statuses.includes(cb.value);
+      });
+      document.getElementById('filter-progress').value = activeFilters.minProgress;
+      document.getElementById('progress-label').textContent = activeFilters.minProgress + '%';
+      document.getElementById('filter-destination').value = activeFilters.destination;
+
+      document.getElementById('filter-panel').classList.remove('hidden');
+      document.getElementById('filter-backdrop').classList.remove('hidden');
+      lucide.createIcons();
+    }
+
+    function closeFilters() {
+      document.getElementById('filter-panel').classList.add('hidden');
+      document.getElementById('filter-backdrop').classList.add('hidden');
+    }
+
+    function applyFilters() {
+      const checked = [...document.querySelectorAll('.filter-status:checked')].map(cb => cb.value);
+      activeFilters.statuses = checked;
+      activeFilters.minProgress = Number(document.getElementById('filter-progress').value);
+      activeFilters.destination = document.getElementById('filter-destination').value.trim();
+
+      renderTable(getFilteredData());
+      updateFilterBadge();
+      closeFilters();
+    }
+
+    function resetFilters() {
+      activeFilters = { statuses: ['transit','delivered','pending'], minProgress: 0, destination: '' };
+      document.querySelectorAll('.filter-status').forEach(cb => cb.checked = true);
+      document.getElementById('filter-progress').value = 0;
+      document.getElementById('progress-label').textContent = '0%';
+      document.getElementById('filter-destination').value = '';
+
+      renderTable(shipments);
+      updateFilterBadge();
+      closeFilters();
+    }
+
+    function updateFilterBadge() {
+      const btn = document.getElementById('btn-filters');
+      const isDefault =
+        activeFilters.statuses.length === 3 &&
+        activeFilters.minProgress === 0 &&
+        activeFilters.destination === '';
+
+      const existingBadge = btn.querySelector('.filter-count');
+      if (existingBadge) existingBadge.remove();
+
+      if (!isDefault) {
+        const count = (3 - activeFilters.statuses.length)
+          + (activeFilters.minProgress > 0 ? 1 : 0)
+          + (activeFilters.destination ? 1 : 0);
+        const badge = document.createElement('span');
+        badge.className = 'filter-count w-4 h-4 bg-blue-600 text-white text-[10px] font-bold rounded-full flex items-center justify-center';
+        badge.textContent = count;
+        btn.appendChild(badge);
+        btn.classList.add('border-blue-300', 'text-blue-600');
+      } else {
+        btn.classList.remove('border-blue-300', 'text-blue-600');
+      }
+    }
+
+    document.getElementById('btn-filters').addEventListener('click', openFilters);
+
+    document.getElementById('btn-export').addEventListener('click', () => {
+      const data = getFilteredData();
+      const statusLabels = { transit: 'En tránsito', delivered: 'Entregado', pending: 'Pendiente' };
+
+      const headers = ['ID de Envío', 'IP Nodo', 'Destino', 'Estado', 'Progreso (%)', 'ETA'];
+      const rows = data.map(s => [
+        s.id, s.ip, s.destination, statusLabels[s.status], s.progress, s.eta
+      ]);
+
+      const csv = [headers, ...rows]
+        .map(row => row.map(v => `"${String(v).replace(/"/g, '""')}"`).join(','))
+        .join('\n');
+
+      const blob = new Blob(['\uFEFF' + csv], { type: 'text/csv;charset=utf-8;' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `envios_${new Date().toISOString().slice(0,10)}.csv`;
+      a.click();
+      URL.revokeObjectURL(url);
+
+      const btn = document.getElementById('btn-export');
+      btn.innerHTML = '<i data-lucide="check" class="w-4 h-4"></i> Exportado';
+      lucide.createIcons();
+      setTimeout(() => {
+        btn.innerHTML = '<i data-lucide="download" class="w-4 h-4"></i> Exportar';
+        lucide.createIcons();
+      }, 2000);
+    });
+
+    const logs = [
+      { color: 'bg-green-500',  title: '#IC-8841-B: Entregado',       time: 'Hace 4 minutos — Confirmación vía Nodo-221' },
+      { color: 'bg-orange-500', title: '#IC-9928-X: Retraso detectado', time: 'Hace 12 minutos — Congestión en Nodo Central' },
+      { color: 'bg-blue-500',   title: 'Sistema: Backup iniciado',     time: 'Hace 32 minutos — Automatización rutinaria' },
+    ];
+
+    const logsContainer = document.getElementById('logs-container');
+    logs.forEach(log => {
+      logsContainer.insertAdjacentHTML('beforeend', `
+        <div class="flex items-start gap-3 pb-4 border-b border-gray-100">
+          <div class="w-1 self-stretch ${log.color} rounded-full mt-1"></div>
+          <div class="flex-1">
+            <p class="text-sm font-medium text-gray-900">${log.title}</p>
+            <p class="text-xs text-gray-500 mt-0.5">${log.time}</p>
+          </div>
+        </div>
+      `);
+    });
+
+    lucide.createIcons();
+
+  </script>
+
 </body>
 </html>

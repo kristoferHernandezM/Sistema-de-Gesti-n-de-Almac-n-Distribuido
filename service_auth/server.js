@@ -94,7 +94,6 @@ app.post("/login", async (req, res) => {
       mensaje: "Login correcto",
       usuario
     });
-
   } catch (error) {
     res.status(500).json({
       mensaje: "Error en login",
