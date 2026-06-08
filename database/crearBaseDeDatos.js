@@ -38,6 +38,8 @@ async function crearBaseDeDatos() {
         ip: "192.168.4.105",
         ubicacion: "La Paz, BCS",
         estado: "online",
+        latenciaMs: 5,
+        rol: "SECONDARY",
         ultimaSincronizacion: new Date()
       },
       {
@@ -46,6 +48,8 @@ async function crearBaseDeDatos() {
         ip: "192.168.4.101",
         ubicacion: "Nodo remoto",
         estado: "online",
+        latenciaMs: 5,
+        rol: "PRIMARY",
         ultimaSincronizacion: new Date()
       }
     ];

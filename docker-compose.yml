@@ -32,15 +32,6 @@ services:
     volumes:
       - mongo1_data:/data/db
 
-  mongo_arbiter:
-    image: mongo:7
-    container_name: mongo_arbiter
-    command: ["mongod", "--replSet", "rs0", "--bind_ip_all"]
-    ports:
-      - "27018:27017"
-    volumes:
-      - mongo_arbiter_data:/data/db
-
   service_auth:
     build: ./service_auth
     container_name: service_auth
@@ -64,17 +55,6 @@ services:
       PORT: 3002
     depends_on:
       - mongo1
-  
-  service_transactions:
-    build: ./service_transactions
-    container_name: service_transactions
-    ports:
-      - "${TRANSACCIONES_PORT}:3004"
-    environment:
-      MONGO_URI: ${MONGO_URI}
-      DB_NAME: ${DB_NAME}
-      PORT: 3004
 
 volumes:
   mongo1_data:
-  mongo_arbiter_data:
