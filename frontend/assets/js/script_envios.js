@@ -2,25 +2,15 @@ lucide.createIcons();
 
 const API_URL = `${CONFIG.API_ENVIOS}`;
 const API_RESUMEN_URL = `${CONFIG.API_ENVIOS_RESUMEN}`;
+const API_PRODUCTOS_URL = `${CONFIG.API_PRODUCTOS}`;
 
+let productosDisponibles = [];
 let shipments = [];
 
 const statusConfig = {
-  transit: {
-    label: "En tránsito",
-    icon: "truck",
-    classes: "bg-blue-100 text-blue-700"
-  },
-  delivered: {
-    label: "Entregado",
-    icon: "check-circle",
-    classes: "bg-green-100 text-green-700"
-  },
-  pending: {
-    label: "Pendiente",
-    icon: "clock",
-    classes: "bg-gray-100 text-gray-500"
-  }
+  transit: { label: "En tránsito", icon: "truck", classes: "bg-blue-100 text-blue-700" },
+  delivered: { label: "Entregado", icon: "check-circle", classes: "bg-green-100 text-green-700" },
+  pending: { label: "Pendiente", icon: "clock", classes: "bg-gray-100 text-gray-500" }
 };
 
 const progressColor = {
@@ -52,6 +42,61 @@ function calcularProgreso(estado) {
   return 0;
 }
 
+async function cargarProductosParaModal() {
+  try {
+    const res = await fetch(API_PRODUCTOS_URL);
+    const productos = await res.json();
+
+    productosDisponibles = Array.isArray(productos) ? productos : [];
+
+    const selectProducto = document.getElementById("form-producto-envio");
+    const selectDestino = document.getElementById("form-destino-envio");
+
+    selectProducto.innerHTML = `<option value="">Selecciona un producto</option>`;
+    selectDestino.innerHTML = `<option value="">Selecciona destino</option>`;
+
+    productosDisponibles.forEach(producto => {
+      const option = document.createElement("option");
+      option.value = producto.sku;
+      option.textContent = `${producto.nombre} - Stock: ${producto.stock} - ${producto.nodo}`;
+      selectProducto.appendChild(option);
+    });
+
+    const destinos = [...new Set(productosDisponibles.map(p => p.nodo).filter(Boolean))];
+
+    destinos.forEach(destino => {
+      const option = document.createElement("option");
+      option.value = destino;
+      option.textContent = destino;
+      selectDestino.appendChild(option);
+    });
+
+  } catch (error) {
+    console.error("Error cargando productos para modal:", error);
+  }
+}
+
+document.getElementById("form-producto-envio").addEventListener("change", function () {
+  const sku = this.value;
+  const producto = productosDisponibles.find(p => p.sku === sku);
+
+  const cantidadInput = document.getElementById("form-cantidad-envio");
+  const stockLabel = document.getElementById("stock-disponible-label");
+  const origenInput = document.getElementById("form-origen-envio");
+
+  if (!producto) {
+    cantidadInput.value = "";
+    cantidadInput.removeAttribute("max");
+    origenInput.value = "";
+    stockLabel.textContent = "Stock disponible: 0";
+    return;
+  }
+
+  cantidadInput.max = producto.stock;
+  cantidadInput.value = 1;
+  origenInput.value = producto.nodo || "";
+  stockLabel.textContent = `Stock disponible: ${producto.stock}`;
+});
 
 function renderTable(data) {
   const tbody = document.getElementById("shipments-table");
@@ -84,9 +129,8 @@ function renderTable(data) {
         <div class="flex flex-col gap-1">
           <div class="flex items-center gap-2">
             <div class="w-2 h-2 rounded-full ${nodeDot[s.nodeStatus] || "bg-gray-400"}"></div>
-            <code class="text-xs bg-gray-100 px-2 py-1 rounded text-gray-600 font-mono">${s.ip}</code>
+            <code class="text-xs bg-gray-100 px-2 py-1 rounded text-gray-600 font-mono">${s.origen}</code>
           </div>
-          <span class="text-xs text-gray-500">${s.origen}</span>
         </div>
       </td>
 
@@ -126,15 +170,18 @@ function renderTable(data) {
   lucide.createIcons();
 }
 
-
 async function cargarResumenEnvios() {
-  const res = await fetch(API_RESUMEN_URL);
-  const data = await res.json();
+  try {
+    const res = await fetch(API_RESUMEN_URL);
+    const data = await res.json();
 
-  document.getElementById("card-transito").textContent = data.enTransito;
-  document.getElementById("card-entregas").textContent = data.entregasEsteMes;
-  document.getElementById("card-latencia").textContent = `${data.latenciaMediaHoras}h`;
-  document.getElementById("card-alertas").textContent = data.alertasCriticas;
+    document.getElementById("card-transito").textContent = data.enTransito;
+    document.getElementById("card-entregas").textContent = data.entregasEsteMes;
+    document.getElementById("card-latencia").textContent = `${data.latenciaMediaHoras}h`;
+    document.getElementById("card-alertas").textContent = data.alertasCriticas;
+  } catch (error) {
+    console.error("Error cargando resumen:", error);
+  }
 }
 
 async function cargarEnvios() {
@@ -148,7 +195,6 @@ async function cargarEnvios() {
 
     shipments = data.map(e => ({
       id: e.codigoEnvio,
-      ip: e.ipOrigen,
       nodeStatus: e.estado === "Entregado" ? "green" : "amber",
       destination: e.destino,
       status: convertirEstado(e.estado),
@@ -173,7 +219,6 @@ function getFilteredData() {
     const statusOk = activeFilters.statuses.includes(s.status);
     const progressOk = s.progress >= activeFilters.minProgress;
     const destOk = s.destination.toLowerCase().includes(activeFilters.destination.toLowerCase());
-
     return statusOk && progressOk && destOk;
   });
 }
@@ -199,16 +244,25 @@ function closeFilters() {
 }
 
 function applyFilters() {
-  const checked = [...document.querySelectorAll(".filter-status:checked")].map(cb => cb.value);
-
-  activeFilters.statuses = checked;
+  activeFilters.statuses = [...document.querySelectorAll(".filter-status:checked")].map(cb => cb.value);
   activeFilters.minProgress = Number(document.getElementById("filter-progress").value);
   activeFilters.destination = document.getElementById("filter-destination").value.trim();
 
   renderTable(getFilteredData());
   closeFilters();
 }
+function actualizarNodoOrigenDetectado() {
+  const nodoActualTexto = document.getElementById("nodo-origen-actual");
 
+  if (!nodoActualTexto) return;
+
+  if (productosDisponibles.length > 0) {
+    const nodos = [...new Set(productosDisponibles.map(p => p.nodo).filter(Boolean))];
+    nodoActualTexto.textContent = nodos.join(" / ");
+  } else {
+    nodoActualTexto.textContent = "Sin nodos detectados";
+  }
+}
 function resetFilters() {
   activeFilters = {
     statuses: ["transit", "delivered", "pending"],
@@ -232,7 +286,6 @@ document.getElementById("btn-export").addEventListener("click", () => {
 
   const headers = [
     "ID de Envío",
-    "IP Nodo",
     "Origen",
     "Destino",
     "Estado",
@@ -243,7 +296,6 @@ document.getElementById("btn-export").addEventListener("click", () => {
 
   const rows = data.map(s => [
     s.id,
-    s.ip,
     s.origen,
     s.destination,
     statusConfig[s.status]?.label || "Pendiente",
@@ -268,9 +320,110 @@ document.getElementById("btn-export").addEventListener("click", () => {
   URL.revokeObjectURL(url);
 });
 
+const envioModal = document.getElementById("envio-modal");
+const envioForm = document.getElementById("envio-form");
+
+async function abrirModalEnvio() {
+  envioForm.reset();
+
+  await cargarProductosParaModal();
+  actualizarNodoOrigenDetectado();
+
+  document.getElementById("form-origen-envio").value = "";
+  document.getElementById("stock-disponible-label").textContent = "Stock disponible: 0";
+
+  envioModal.classList.remove("hidden");
+  lucide.createIcons();
+}
+
+function cerrarModalEnvio() {
+  envioModal.classList.add("hidden");
+  envioForm.reset();
+}
+
+envioForm.addEventListener("submit", async function(e) {
+  e.preventDefault();
+
+  const skuSeleccionado = document.getElementById("form-producto-envio").value;
+  const productoSeleccionado = productosDisponibles.find(p => p.sku === skuSeleccionado);
+  const cantidad = Number(document.getElementById("form-cantidad-envio").value);
+  const destino = document.getElementById("form-destino-envio").value;
+
+  if (!productoSeleccionado) {
+    alert("Selecciona un producto válido");
+    return;
+  }
+
+  if (!destino) {
+    alert("Selecciona un destino");
+    return;
+  }
+
+  if (destino === productoSeleccionado.nodo) {
+    alert("El destino no puede ser el mismo que el nodo origen.");
+    return;
+  }
+
+  if (cantidad < 1) {
+    alert("La cantidad debe ser mayor a 0");
+    return;
+  }
+
+  if (cantidad > productoSeleccionado.stock) {
+    alert(`La cantidad no puede ser mayor al stock disponible: ${productoSeleccionado.stock}`);
+    return;
+  }
+
+  const envio = {
+    productoSku: productoSeleccionado.sku,
+    producto: productoSeleccionado.nombre,
+    cantidad,
+    origen: productoSeleccionado.nodo,
+    destino
+  };
+
+  try {
+    console.log("POST creando envío a:", API_URL);
+
+const res = await fetch(API_URL, {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json"
+  },
+  body: JSON.stringify(envio)
+});
+
+const text = await res.text();
+
+let data;
+try {
+  data = JSON.parse(text);
+} catch {
+  throw new Error(`La API respondió HTML o texto. URL usada: ${API_URL}`);
+}
+
+if (!res.ok) {
+  throw new Error(data.mensaje || "Error creando envío");
+}
+
+cerrarModalEnvio();
+
+await cargarEnvios();
+await cargarResumenEnvios();
+
+  } catch (error) {
+    console.error("Error creando envío:", error);
+    alert(error.message);
+  }
+});
+
+document.getElementById("btn-nuevo-envio").addEventListener("click", abrirModalEnvio);
+
 window.closeFilters = closeFilters;
 window.applyFilters = applyFilters;
 window.resetFilters = resetFilters;
+window.cerrarModalEnvio = cerrarModalEnvio;
 
 cargarEnvios();
 cargarResumenEnvios();
+cargarProductosParaModal();

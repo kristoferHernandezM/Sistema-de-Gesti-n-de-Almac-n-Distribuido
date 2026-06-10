@@ -105,6 +105,64 @@ app.get("/envios/resumen", async (req, res) => {
   }
 });
 
+app.post("/envios", async (req, res) => {
+  try {
+    const {
+      productoSku,
+      producto,
+      cantidad,
+      origen,
+      destino
+    } = req.body;
+
+    if (!productoSku || !producto || !cantidad || !origen || !destino) {
+      return res.status(400).json({
+        mensaje: "Faltan datos obligatorios del envío"
+      });
+    }
+
+    if (origen === destino) {
+      return res.status(400).json({
+        mensaje: "El origen y el destino no pueden ser iguales"
+      });
+    }
+
+    const ultimoEnvio = await Envio.findOne().sort({ codigoEnvio: -1 });
+
+    let nuevoNumero = 1;
+
+    if (ultimoEnvio && ultimoEnvio.codigoEnvio) {
+      const numeroActual = Number(ultimoEnvio.codigoEnvio.replace("ENV-", ""));
+      nuevoNumero = numeroActual + 1;
+    }
+
+    const codigoEnvio = `ENV-${String(nuevoNumero).padStart(3, "0")}`;
+
+    const nuevoEnvio = await Envio.create({
+      codigoEnvio,
+      productoSku,
+      producto,
+      cantidad,
+      origen,
+      destino,
+      estado: "Pendiente",
+      fechaSalida: new Date(),
+      fechaEntregaEstimada: new Date(Date.now() + 2 * 24 * 60 * 60 * 1000)
+    });
+
+    res.status(201).json({
+      mensaje: "Envío creado correctamente",
+      envio: nuevoEnvio
+    });
+
+  } catch (error) {
+    res.status(500).json({
+      mensaje: "Error al crear envío",
+      error: error.message
+    });
+  }
+});
+
 const PORT = process.env.PORT || 3004;
 
 app.listen(PORT, () => {
