@@ -72,8 +72,18 @@ services:
     environment:
       MONGO_URI: ${MONGO_URI}
       DB_NAME: ${DB_NAME}
-      PORT: 3004
 
+  service_reports:
+    build: ./service_reports
+    container_name: service_reports
+    ports:
+      - "${REPORTES_PORT}:3005"
+    environment:
+      MONGO_URI: ${MONGO_URI}
+      DB_NAME: ${DB_NAME}
+    depends_on:
+      - mongo1
+ 
 volumes:
   mongo1_data:
   mongo_arbiter_data:

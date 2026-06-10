@@ -25,22 +25,39 @@ console.log({
 });
 
 async function obtenerClienteActivo() {
-  const todosLosNodos = [...mongoNodes, ...mongoArbiters];
-
-  for (const nodo of todosLosNodos) {
+  for (const nodo of mongoNodes) {
     try {
       const uri = `mongodb://${nodo}/?directConnection=true&serverSelectionTimeoutMS=3000`;
       const client = new MongoClient(uri);
       await client.connect();
 
-      console.log(`Nodo disponible: ${nodo}`);
+      console.log(`Nodo de datos disponible: ${nodo}`);
       return client;
     } catch (error) {
-      console.log(`Nodo no disponible: ${nodo}`);
+      console.log(`Nodo de datos no disponible: ${nodo}`);
     }
   }
 
-  throw new Error("Ningún nodo MongoDB está accesible.");
+  throw new Error("Ningún nodo de datos MongoDB está accesible.");
+}
+
+async function forzarEleccionPrimary(admin) {
+  try {
+    console.log("Solicitando elección de PRIMARY...");
+
+    await admin.command({
+      replSetFreeze: 0
+    });
+
+    await admin.command({
+      replSetStepUp: 60
+    });
+
+    console.log("Este nodo fue promovido a PRIMARY.");
+  } catch (error) {
+    console.log("No se pudo promover este nodo directamente:");
+    console.log(error.message);
+  }
 }
 
 function generarConfigReplica() {
@@ -52,7 +69,7 @@ function generarConfigReplica() {
       ...mongoNodes.map((host, index) => ({
         _id: id++,
         host,
-        priority: index === 0 ? 2 : 1,
+        priority: index === 0 ? 10 : 1,
         votes: 1
       })),
       ...mongoArbiters.map(host => ({
@@ -120,6 +137,8 @@ async function iniciarOReconfigurarReplica() {
         replSetInitiate: configEsperada
       });
 
+      await forzarEleccionPrimary(admin);
+
       console.log("Replica Set iniciado correctamente.");
       console.log(resultado);
 
@@ -153,6 +172,7 @@ async function iniciarOReconfigurarReplica() {
             replSetReconfig: nuevaConfig,
             force: true
           });
+          await forzarEleccionPrimary(admin);
 
           console.log("Replica Set reconfigurado correctamente.");
           console.log(resultadoReconfig);
@@ -183,5 +203,7 @@ async function iniciarOReconfigurarReplica() {
     console.log("Conexión cerrada.");
   }
 }
+
+
 
 iniciarOReconfigurarReplica();
